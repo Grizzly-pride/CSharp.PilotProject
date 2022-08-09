@@ -5,16 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
 
+
+
 namespace PilotProject.Pages
 {
     internal abstract class BasePage
     {
         protected int selectedItem;
-        protected MenuController controller;
+        protected PageController controller;
         protected InputHandler inputHandler;
-        protected string TitlePage { get; set; }
+        protected string[] itemsForm;
+        public abstract string TitlePage { get; }
 
-        public BasePage(MenuController controller)
+        public BasePage(PageController controller)
         {
             this.controller = controller;
             inputHandler = new();
@@ -44,13 +47,20 @@ namespace PilotProject.Pages
             ResetColor();
             WriteLine($"~-~-[{TitlePage}]-~-~\n");
             ForegroundColor = ConsoleColor.Green;
-
         }
 
         public virtual void Exit()
         {
+            controller.PreviousPage = GetThisValuePageCollection();
             inputHandler.ResetSelectIndex();
+            CursorVisible = false;
+            ResetColor();
             Clear();
+        }
+
+        private Page GetThisValuePageCollection()
+        {
+            return controller.PageCollection.FirstOrDefault(x => x.Value == this).Key;
         }
     }
 }

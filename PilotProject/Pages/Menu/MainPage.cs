@@ -9,9 +9,10 @@ namespace PilotProject.Pages.Menu
 {
     internal sealed class MainPage : BasePage
     {
-        public MainPage(MenuController controller) : base(controller)
+        public override string TitlePage => "MAIN MENU";
+
+        public MainPage(PageController controller) : base(controller)
         {
-            TitlePage = "MAIN MENU";
             inputHandler.ItemsMenu = new()
             {
                 "Autentification",
