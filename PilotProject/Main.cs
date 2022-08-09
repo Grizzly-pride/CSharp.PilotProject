@@ -11,7 +11,7 @@ namespace PilotProject
     {
         public static void Run()
         {
-            MenuController MenuController = new();
+            PageController MenuController = new();
             MenuController.InitializationPages();
             MenuController.SetPageByDefault(Page.Main);
         }

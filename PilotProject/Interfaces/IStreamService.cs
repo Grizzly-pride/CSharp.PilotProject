@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PilotProject.Interfaces
 {
-    internal interface ISerializeService<T>
+    internal interface IStreamService<T>
     {
-        string Serialize(T obj);
-        object Deserialize(string json);
+        void ReadFile(string path);
+        void WriteFile(T other);
     }
 }

@@ -3,34 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Console;
-using PhoneNumbers;
-using System.Text.RegularExpressions;
-using PilotProject.Pages;
 
 namespace PilotProject.Pages.Menu
 {
-    internal class AuthenticationPage : BasePage
+    internal class CrossPage : BasePage
     {
-        private string name;
-        private string password;
-        private string email;
-        private string phone;
-
-        public override string TitlePage => "AUTHENTICATION";
-
-        public AuthenticationPage(PageController controller) : base(controller)
+        public override string TitlePage => "Do you want to try again?";
+        public CrossPage(PageController controller) : base(controller)
         {
             inputHandler.ItemsMenu = new()
             {
-                "Login",
-                "Registration",
-                "Back"
+                "Yes",
+                "No"
             };
+
+            /*
+            switch (controller.PreviousPage)
+            {
+                case Page.Registration:
+
+                    break;
+            }
+            */
         }
 
         public override void Enter()
-        {          
+        {
             UpdateMenu();
         }
 
@@ -41,12 +39,9 @@ namespace PilotProject.Pages.Menu
             switch (selectedItem)
             {
                 case 0:
-                    //LoginForm();
+                    controller.TransitionToPage(controller.PreviousPage);
                     break;
                 case 1:
-                    controller.TransitionToPage(Page.Registration);
-                    break;
-                case 2:
                     controller.TransitionToPage(Page.Main);
                     break;
             }
@@ -55,6 +50,6 @@ namespace PilotProject.Pages.Menu
         public override void Exit()
         {
             base.Exit();
-        } 
+        }
     }
 }
