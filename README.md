@@ -1,2 +1,2 @@
 # CSharp.PilotProgect
-This is my final С# course project.
+IT Academy C# base course. This is my final course project.
