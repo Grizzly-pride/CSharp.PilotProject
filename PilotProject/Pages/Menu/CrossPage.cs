@@ -16,15 +16,6 @@ namespace PilotProject.Pages.Menu
                 "Yes",
                 "No"
             };
-
-            /*
-            switch (controller.PreviousPage)
-            {
-                case Page.Registration:
-
-                    break;
-            }
-            */
         }
 
         public override void Enter()
