@@ -7,8 +7,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="libphonenumber-csharp" Version="8.12.52" />
-  </ItemGroup>
-
 </Project>

@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using PhoneNumbers;
 using static System.Console;
+using PilotProject.Services;
+using System.IO;
 
 namespace PilotProject.Pages.Forms
 {
@@ -13,8 +14,7 @@ namespace PilotProject.Pages.Forms
     {       
         private string name;
         private string password;
-        private string email;
-        private string phone;       
+        private string email;       
         public override string TitlePage => "REGISTRATION";
 
         public RegistrationPage(PageController controller) : base(controller)
@@ -23,21 +23,14 @@ namespace PilotProject.Pages.Forms
             itemsForm = new string[]    
             {
                 "Name",
-                "Password",
                 "Email",
-                "Phone"  
+                "Password"
             };
 
-            inputHandler.ItemsMenu = new()
-            {
-                "Continue",
-                "Back"
-            };
         }
 
         public override void Enter()
         {
-            base.Enter();
             CursorVisible = true;
             UpdateForm();
         }
@@ -56,42 +49,42 @@ namespace PilotProject.Pages.Forms
                         name = ReadLine();
                         break;
                     case 1:
-                        password = ReadLine();
-                        break;
-                    case 2:
                         email = ReadLine();
                         break;
-                    case 3:
-                        phone = ReadLine();
+                    case 2:
+                        password = ReadLine();
                         break;
                 }
             }
             WriteLine();
 
-            bool isValid = false;
-            isValid = IsValidName(name);
-            isValid = IsValidPass(password);
-            isValid = IsValidEmail(email);
-            isValid = IsValidPhone(phone);
+            bool isValidName = IsValidName(name);
+            bool isValidEmail = IsValidEmail(email);
+            bool isValidPass = IsValidPass(password);
 
-            if (isValid)
+            if (isValidName && isValidEmail && isValidPass)
             {
+                ForegroundColor = ConsoleColor.Blue;
                 WriteLine("All fields is correctly");
+                ReadKey();
             }
             else
             {
                 ReadKey();
                 controller.TransitionToPage(Page.Cross);
             }
-
-            Client newClient = new(name, email, password, ParsToNumber(phone));
+            
+            ClientAccount newClient = new(name, email, password);
+            DataService.WriteToJesonFile(newClient, DataFile.Account);
 
             controller.TransitionToPage(Page.Authentication);
         }
 
         public override void Exit()
         {
+            controller.PreviousPage = Page.Registration;
             base.Exit();
+            
         }
 
         #region Validation Methods
@@ -100,7 +93,46 @@ namespace PilotProject.Pages.Forms
             if (name.Length.Equals(0))
             {
                 ForegroundColor = ConsoleColor.Red;
-                WriteLine("Invalid Name!");
+                WriteLine("Invalid Name! line is empty.");
+                return false;
+            }
+
+            char[] chars = name.ToCharArray();
+            foreach (var c in chars)
+            {
+                if (!char.IsLetter(c))
+                {
+                    ForegroundColor = ConsoleColor.Red;
+                    WriteLine("Invalid Name! Must contain only letters.");
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        /*
+        private bool IsValidPhone(string strNum)
+        {
+            int countNum = 9;
+            int counter = 0;
+            char[] chars = strNum.ToCharArray();
+
+            for (int i = 0; i < chars.Length;)
+            {
+                if (!char.IsDigit(chars[i]))
+                {
+                    ForegroundColor = ConsoleColor.Red;
+                    WriteLine("Invalid phone number! Must contain only digits.");
+                    return false;
+                }
+                i++;
+                counter = i;
+            }
+
+            if (!counter.Equals(countNum))
+            {
+                ForegroundColor = ConsoleColor.Red;
+                WriteLine("Invalid phone number! Must contain 9 digits.");
                 return false;
             }
             else
@@ -108,36 +140,7 @@ namespace PilotProject.Pages.Forms
                 return true;
             }
         }
-
-        private bool IsValidPhone(string strNum)
-        {
-            int countNum = 9;
-            bool isNum = false;
-            char[] chars = strNum.ToCharArray();
-
-            if (chars.Length < countNum)
-            {
-                ForegroundColor = ConsoleColor.Red;
-                WriteLine("Invalid number of digits!");
-                return false;
-            }
-
-            foreach (char c in chars)
-            {
-                if (char.IsDigit(c))
-                {
-                    isNum = true;
-                }
-                else
-                {
-                    ForegroundColor = ConsoleColor.Red;
-                    WriteLine("Invalid phone number! Enter NDC and SN for your country.");
-                    return false;
-                }
-            }
-            return isNum;
-        }
-
+        */
         private bool IsValidEmail(string email)
         {
             string pattern = "[.\\-_a-z0-9]+@([a-z0-9][\\-a-z0-9]+\\.)+[a-z]{2,6}";
@@ -170,7 +173,8 @@ namespace PilotProject.Pages.Forms
         }
         #endregion
 
-        #region Other Methods
+     
+        /*
         private string ParsToNumber(string numberPhone)
         {
             PhoneNumberUtil phoneUtil = PhoneNumberUtil.GetInstance();
@@ -178,6 +182,6 @@ namespace PilotProject.Pages.Forms
             String formattedPhone = phoneUtil.Format(numberProto, PhoneNumberFormat.INTERNATIONAL);
             return formattedPhone;
         }
-        #endregion
+        */       
     }
 }

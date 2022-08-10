@@ -25,7 +25,7 @@ namespace PilotProject.Pages
 
         public virtual void Enter()
         {
-            ResetColor();
+
         }
 
         public virtual void UpdateMenu()
@@ -51,16 +51,17 @@ namespace PilotProject.Pages
 
         public virtual void Exit()
         {
-            controller.PreviousPage = GetThisValuePageCollection();
             inputHandler.ResetSelectIndex();
             CursorVisible = false;
             ResetColor();
             Clear();
         }
 
+        /*
         private Page GetThisValuePageCollection()
         {
             return controller.PageCollection.FirstOrDefault(x => x.Value == this).Key;
         }
+        */
     }
 }

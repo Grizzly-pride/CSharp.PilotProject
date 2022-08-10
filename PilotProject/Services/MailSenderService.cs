@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
 
-namespace PilotProject
+namespace PilotProject.Services
 {
     internal sealed class MailSender
     {
         public MailAddress FromAddress { get; private set; }
         public MailAddress ToAddress { get; private set; }
-        public MailMessage Message { get; private set; }    
+        public MailMessage Message { get; private set; }
 
         public void SendMessage(string fromAddress, string fromName, string pass, string toAddress, string themaMessage, string textMessage)
         {

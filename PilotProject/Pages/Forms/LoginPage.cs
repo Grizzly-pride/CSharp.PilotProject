@@ -9,6 +9,8 @@ namespace PilotProject.Pages.Forms
 {
     internal class LoginPage : BasePage
     {
+        private string name;
+        private string password;
         public override string TitlePage => "LOGIN";
         public LoginPage(PageController controller) : base(controller)
         {
@@ -20,13 +22,26 @@ namespace PilotProject.Pages.Forms
         }
         public override void Enter()
         {
-            base.Enter();
+            
         }
         public override void UpdateForm()
         {           
             base.UpdateForm();
 
+            for (int i = 0; i < itemsForm.Length; i++)
+            {
+                Write($" {itemsForm[i]}: ");
 
+                switch (i)
+                {
+                    case 0:
+                        name = ReadLine();
+                        break;
+                    case 1:
+                        password = ReadLine();
+                        break;
+                }
+            }
         }
 
         public override void Exit()

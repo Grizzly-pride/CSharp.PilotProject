@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
-using PhoneNumbers;
 using System.Text.RegularExpressions;
 using PilotProject.Pages;
 
@@ -12,11 +11,6 @@ namespace PilotProject.Pages.Menu
 {
     internal class AuthenticationPage : BasePage
     {
-        private string name;
-        private string password;
-        private string email;
-        private string phone;
-
         public override string TitlePage => "AUTHENTICATION";
 
         public AuthenticationPage(PageController controller) : base(controller)
@@ -41,7 +35,7 @@ namespace PilotProject.Pages.Menu
             switch (selectedItem)
             {
                 case 0:
-                    //LoginForm();
+                    controller.TransitionToPage(Page.LoginPage);
                     break;
                 case 1:
                     controller.TransitionToPage(Page.Registration);
@@ -55,6 +49,7 @@ namespace PilotProject.Pages.Menu
         public override void Exit()
         {
             base.Exit();
+            
         } 
     }
 }
