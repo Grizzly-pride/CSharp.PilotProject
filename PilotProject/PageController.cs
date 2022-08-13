@@ -12,9 +12,10 @@ namespace PilotProject
     enum Page
     {
         Main,
-        Authentication,
+        Authorization,
         Registration,
         LoginPage,
+        OrderBasket,
         Cross
     }
 
@@ -29,9 +30,10 @@ namespace PilotProject
             PageCollection = new()
             {
                 [Page.Main] = new MainPage(this),
-                [Page.Authentication] = new AuthenticationPage(this),
+                [Page.Authorization] = new AuthorizationPage(this),
                 [Page.Registration] = new RegistrationPage(this),
                 [Page.LoginPage] = new LoginPage(this),
+                [Page.OrderBasket] = new OrderBasketPage(this),
                 [Page.Cross] = new CrossPage(this)
             };
         }

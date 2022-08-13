@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PilotProject.Interfaces
 {
-    internal interface ISerializeService<T>
+    internal interface ISerializeService<T1, T2>
     {
-        string Serialize(T obj);
-        object Deserialize(string json);
+        string Serialize(T1 obj);
+        T1 Deserialize(T2 jsonString);
     }
 }
