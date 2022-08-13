@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PilotProject.Interfaces
 {
-    internal interface IStreamService<T>
+    internal interface IFileService<T1, T2>
     {
-        void ReadFile(string path);
-        void WriteFile(T other);
+        string ReadFile(T1 fileName);
+        void WriteFile(T1 fileName, T2 jsonString);
     }
 }

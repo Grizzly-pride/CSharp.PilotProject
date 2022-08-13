@@ -9,11 +9,11 @@ using PilotProject.Pages;
 
 namespace PilotProject.Pages.Menu
 {
-    internal class AuthenticationPage : BasePage
+    internal class AuthorizationPage : BasePage
     {
-        public override string TitlePage => "AUTHENTICATION";
-
-        public AuthenticationPage(PageController controller) : base(controller)
+        public override string TitlePage => "AUTHORIZATION";
+     
+        public AuthorizationPage(PageController controller) : base(controller)
         {
             inputHandler.ItemsMenu = new()
             {
@@ -22,7 +22,7 @@ namespace PilotProject.Pages.Menu
                 "Back"
             };
         }
-
+        
         public override void Enter()
         {          
             UpdateMenu();

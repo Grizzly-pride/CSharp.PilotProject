@@ -15,7 +15,9 @@ namespace PilotProject.Pages
         protected PageController controller;
         protected InputHandler inputHandler;
         protected string[] itemsForm;
+        
         public abstract string TitlePage { get; }
+        
 
         public BasePage(PageController controller)
         {
@@ -32,7 +34,7 @@ namespace PilotProject.Pages
         {
             do
             {
-                WriteLine($"~-~-[{TitlePage}]-~-~\n");
+                WriteLine($"~-~-[{TitlePage}]-~-~ user: {OrderBasket.UserName}\n");
                 inputHandler.SelectionControl();
                 ResetColor();
                 Clear();
@@ -45,7 +47,7 @@ namespace PilotProject.Pages
         public virtual void UpdateForm()
         {
             ResetColor();
-            WriteLine($"~-~-[{TitlePage}]-~-~\n");
+            WriteLine($"~-~-[{TitlePage}]-~-~ user: {OrderBasket.UserName}\n");
             ForegroundColor = ConsoleColor.Green;
         }
 

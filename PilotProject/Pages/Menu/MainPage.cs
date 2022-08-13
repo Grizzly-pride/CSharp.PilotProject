@@ -4,25 +4,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Console;
 
 namespace PilotProject.Pages.Menu
 {
     internal sealed class MainPage : BasePage
     {
-        public override string TitlePage => "MAIN MENU";
+        public override string TitlePage => "MAIN MENU";       
 
         public MainPage(PageController controller) : base(controller)
-        {
+        {          
             inputHandler.ItemsMenu = new()
             {
-                "Autentification",
+                "Authorization",
                 "Exit"
-            };
+            };            
         }
 
         public override void Enter()
         {
-            Console.CursorVisible = false;
+            if (!inputHandler.ItemsMenu[0].Equals("Order Basket") && OrderBasket.IsAuthorization())
+            {
+                inputHandler.ItemsMenu.Insert(0, "Order Basket");                              
+            }
+
+            CursorVisible = false;
             UpdateMenu();
         }
 
@@ -30,20 +36,41 @@ namespace PilotProject.Pages.Menu
         {
             base.UpdateMenu();
 
-            switch (selectedItem)
+            if (OrderBasket.IsAuthorization())
             {
-                case 0:
-                    controller.TransitionToPage(Page.Authentication);
-                    break;
-                case 1:
-                    Environment.Exit(0);
-                    break;
+                switch (selectedItem)
+                {
+                    case 0:
+                        controller.TransitionToPage(Page.OrderBasket);
+                        break;
+                    case 1:
+                        controller.TransitionToPage(Page.Authorization);
+                        break;
+                    case 2:
+                        Environment.Exit(0);
+                        break;
+                }
+            }
+            else
+            {
+                switch (selectedItem)
+                {
+                    case 0:
+                        controller.TransitionToPage(Page.Authorization);
+                        break;
+                    case 1:
+                        Environment.Exit(0);
+                        break;
+
+                }
             }
         }
-
+       
         public override void Exit()
         {
             base.Exit();
         }
+
+        
     }
 }

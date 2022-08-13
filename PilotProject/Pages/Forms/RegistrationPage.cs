@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using static System.Console;
 using PilotProject.Services;
-using System.IO;
+using PilotProject.DBContext;
 
 namespace PilotProject.Pages.Forms
 {
@@ -14,25 +14,25 @@ namespace PilotProject.Pages.Forms
     {       
         private string name;
         private string password;
-        private string email;       
+        private string email;
+
         public override string TitlePage => "REGISTRATION";
 
         public RegistrationPage(PageController controller) : base(controller)
-        {
-            
+        {           
             itemsForm = new string[]    
             {
                 "Name",
                 "Email",
-                "Password"
+                "Password" 
             };
 
         }
 
         public override void Enter()
         {
-            CursorVisible = true;
-            UpdateForm();
+            CursorVisible = true;            
+            UpdateForm();           
         }
 
         public override void UpdateForm()
@@ -58,26 +58,59 @@ namespace PilotProject.Pages.Forms
             }
             WriteLine();
 
-            bool isValidName = IsValidName(name);
-            bool isValidEmail = IsValidEmail(email);
-            bool isValidPass = IsValidPass(password);
-
-            if (isValidName && isValidEmail && isValidPass)
+            if (CheckData())
             {
+                User newUser = new(name, email, password);
+                ApplicationContext db = new();
+                db.Add(newUser);
+                db.SaveChanges();
+
                 ForegroundColor = ConsoleColor.Blue;
-                WriteLine("All fields is correctly");
+                WriteLine("Registration successful.");
                 ReadKey();
+                controller.TransitionToPage(Page.Authorization);
+
             }
             else
             {
                 ReadKey();
                 controller.TransitionToPage(Page.Cross);
             }
-            
-            ClientAccount newClient = new(name, email, password);
-            DataService.WriteToJesonFile(newClient, DataFile.Account);
+        }
 
-            controller.TransitionToPage(Page.Authentication);
+        private bool CheckData()
+        {
+            bool isValid = true;
+            ForegroundColor = ConsoleColor.Red;
+
+            RegistrationService authenticServ = new();
+
+            if (!authenticServ.IsUniqueNameInDB(name))
+            {
+                isValid = false;
+                WriteLine("- Name taken! Please enter another name.");
+            }
+            if (!authenticServ.IsUniqueEmailInDB(email))
+            {
+                isValid = false;
+                WriteLine("- This email is used another user! Please enter another email.");
+            }
+            if (!authenticServ.IsValidName(name))
+            {
+                isValid = false;
+                WriteLine("- Invalid Name! Name not provided.");
+            }
+            if (!authenticServ.IsValidEmail(email))
+            {
+                isValid = false;
+                WriteLine("- Invalid Email! example@mail.com");
+            }
+            if (!authenticServ.IsValidPass(password))
+            {
+                isValid = false;
+                WriteLine("- Invalid Password! Password length is less than 7 symbols.");
+            }                         
+            return isValid; 
         }
 
         public override void Exit()
@@ -87,30 +120,20 @@ namespace PilotProject.Pages.Forms
             
         }
 
-        #region Validation Methods
-        private bool IsValidName(string name)
-        {
-            if (name.Length.Equals(0))
-            {
-                ForegroundColor = ConsoleColor.Red;
-                WriteLine("Invalid Name! line is empty.");
-                return false;
-            }
+ 
 
-            char[] chars = name.ToCharArray();
-            foreach (var c in chars)
-            {
-                if (!char.IsLetter(c))
-                {
-                    ForegroundColor = ConsoleColor.Red;
-                    WriteLine("Invalid Name! Must contain only letters.");
-                    return false;
-                }
-            }
-
-            return true;
-        }
+     
         /*
+        private string ParsToNumber(string numberPhone)
+        {
+            PhoneNumberUtil phoneUtil = PhoneNumberUtil.GetInstance();
+            PhoneNumber numberProto = phoneUtil.Parse(numberPhone, "BY");
+            String formattedPhone = phoneUtil.Format(numberProto, PhoneNumberFormat.INTERNATIONAL);
+            return formattedPhone;
+        }
+        */ 
+        
+         /*
         private bool IsValidPhone(string strNum)
         {
             int countNum = 9;
@@ -141,47 +164,5 @@ namespace PilotProject.Pages.Forms
             }
         }
         */
-        private bool IsValidEmail(string email)
-        {
-            string pattern = "[.\\-_a-z0-9]+@([a-z0-9][\\-a-z0-9]+\\.)+[a-z]{2,6}";
-            Match isMatch = Regex.Match(email, pattern, RegexOptions.IgnoreCase);
-            if (isMatch.Success)
-            {
-                return true;
-            }
-            else
-            {
-                ForegroundColor = ConsoleColor.Red;
-                WriteLine("Invalid email!");
-                return false;
-            }
-
-        }
-
-        private bool IsValidPass(string email)
-        {
-            if (email.Length > 0)
-            {
-                return true;
-            }
-            else
-            {
-                ForegroundColor = ConsoleColor.Red;
-                WriteLine("Invalid password!");
-                return false;
-            }
-        }
-        #endregion
-
-     
-        /*
-        private string ParsToNumber(string numberPhone)
-        {
-            PhoneNumberUtil phoneUtil = PhoneNumberUtil.GetInstance();
-            PhoneNumber numberProto = phoneUtil.Parse(numberPhone, "BY");
-            String formattedPhone = phoneUtil.Format(numberProto, PhoneNumberFormat.INTERNATIONAL);
-            return formattedPhone;
-        }
-        */       
     }
 }

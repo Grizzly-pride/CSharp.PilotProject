@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PilotProject.DBContext;
+using PilotProject.Services;
 using static System.Console;
 
 namespace PilotProject.Pages.Forms
@@ -22,7 +24,8 @@ namespace PilotProject.Pages.Forms
         }
         public override void Enter()
         {
-            
+            CursorVisible = true;
+            UpdateForm();
         }
         public override void UpdateForm()
         {           
@@ -42,10 +45,45 @@ namespace PilotProject.Pages.Forms
                         break;
                 }
             }
+            WriteLine();
+
+            if (Authentication())
+            {
+                ForegroundColor = ConsoleColor.Blue;
+                WriteLine("Successful login");
+                Console.WriteLine(OrderBasket.UserName);
+                ReadKey();
+                controller.TransitionToPage(Page.Main);
+            }
+            else
+            {
+                ForegroundColor = ConsoleColor.Red;
+                WriteLine("Invalid password or username!");
+                ReadKey();
+                controller.TransitionToPage(Page.Cross);
+
+            }
+        }
+
+        private bool Authentication()
+        {
+            ApplicationContext db = new();
+            List<User> users = db.Users.ToList();
+
+            foreach (var user in users)
+            {
+                if (user.Name.Equals(name) && user.Password.Equals(password))
+                {
+                    OrderBasket.UserName = user.Name;
+                    return true;
+                }
+            }         
+            return false;
         }
 
         public override void Exit()
         {
+            controller.PreviousPage = Page.LoginPage;
             base.Exit();
         }
 
