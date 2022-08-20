@@ -11,7 +11,7 @@ namespace PilotProject.Pages.Menu
         public override string TitlePage => "Do you want to try again?";
         public CrossPage(PageController controller) : base(controller)
         {
-            inputHandler.ItemsMenu = new()
+            menuBilder.ItemsMenu = new()
             {
                 "Yes",
                 "No"

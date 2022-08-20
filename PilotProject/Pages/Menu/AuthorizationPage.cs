@@ -15,7 +15,7 @@ namespace PilotProject.Pages.Menu
      
         public AuthorizationPage(PageController controller) : base(controller)
         {
-            inputHandler.ItemsMenu = new()
+            menuBilder.ItemsMenu = new()
             {
                 "Login",
                 "Registration",

@@ -16,6 +16,8 @@ namespace PilotProject
         Registration,
         LoginPage,
         OrderBasket,
+        Drinks,
+        Pizzas,
         Cross
     }
 
@@ -34,7 +36,9 @@ namespace PilotProject
                 [Page.Registration] = new RegistrationPage(this),
                 [Page.LoginPage] = new LoginPage(this),
                 [Page.OrderBasket] = new OrderBasketPage(this),
-                [Page.Cross] = new CrossPage(this)
+                [Page.Cross] = new CrossPage(this),
+                [Page.Drinks] = new DrinksPage(this),
+                [Page.Pizzas] = new PizzasPage(this)
             };
         }
 

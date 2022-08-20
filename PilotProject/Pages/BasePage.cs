@@ -13,16 +13,15 @@ namespace PilotProject.Pages
     {
         protected int selectedItem;
         protected PageController controller;
-        protected InputHandler inputHandler;
+        protected MenuBuilder menuBilder;
         protected string[] itemsForm;
         
         public abstract string TitlePage { get; }
         
-
         public BasePage(PageController controller)
         {
             this.controller = controller;
-            inputHandler = new();
+            menuBilder = new(2, 1);
         }
 
         public virtual void Enter()
@@ -32,16 +31,8 @@ namespace PilotProject.Pages
 
         public virtual void UpdateMenu()
         {
-            do
-            {
-                WriteLine($"~-~-[{TitlePage}]-~-~ user: {OrderBasket.UserName}\n");
-                inputHandler.SelectionControl();
-                ResetColor();
-                Clear();
-            }
-            while (!inputHandler.IsChose);
-
-            selectedItem = inputHandler.GetSelectIndex();
+            WriteLine($"~-~-[{TitlePage}]-~-~ user: {OrderBasket.UserName}\n");
+            selectedItem = menuBilder.RunMenu();
         }
 
         public virtual void UpdateForm()
@@ -53,7 +44,7 @@ namespace PilotProject.Pages
 
         public virtual void Exit()
         {
-            inputHandler.ResetSelectIndex();
+            menuBilder.ResetSelectIndex();
             CursorVisible = false;
             ResetColor();
             Clear();

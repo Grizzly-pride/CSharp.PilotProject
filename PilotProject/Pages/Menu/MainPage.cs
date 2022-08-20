@@ -14,8 +14,10 @@ namespace PilotProject.Pages.Menu
 
         public MainPage(PageController controller) : base(controller)
         {          
-            inputHandler.ItemsMenu = new()
-            {
+            menuBilder.ItemsMenu = new()
+            {               
+                "Pizzas",
+                "Drinks",
                 "Authorization",
                 "Exit"
             };            
@@ -23,9 +25,9 @@ namespace PilotProject.Pages.Menu
 
         public override void Enter()
         {
-            if (!inputHandler.ItemsMenu[0].Equals("Order Basket") && OrderBasket.IsAuthorization())
+            if (!menuBilder.ItemsMenu[0].Equals("Order Basket") && OrderBasket.IsAuthorization())
             {
-                inputHandler.ItemsMenu.Insert(0, "Order Basket");                              
+                menuBilder.ItemsMenu.Insert(0, "Order Basket");                              
             }
 
             CursorVisible = false;
@@ -44,9 +46,15 @@ namespace PilotProject.Pages.Menu
                         controller.TransitionToPage(Page.OrderBasket);
                         break;
                     case 1:
-                        controller.TransitionToPage(Page.Authorization);
+                        controller.TransitionToPage(Page.Pizzas);
                         break;
                     case 2:
+                        controller.TransitionToPage(Page.Drinks);
+                        break;
+                    case 3:
+                        controller.TransitionToPage(Page.Authorization);
+                        break;
+                    case 4:
                         Environment.Exit(0);
                         break;
                 }
@@ -56,12 +64,17 @@ namespace PilotProject.Pages.Menu
                 switch (selectedItem)
                 {
                     case 0:
-                        controller.TransitionToPage(Page.Authorization);
+                        controller.TransitionToPage(Page.Pizzas);
                         break;
                     case 1:
+                        controller.TransitionToPage(Page.Drinks);
+                        break;
+                    case 2:
+                        controller.TransitionToPage(Page.Authorization);
+                        break;
+                    case 3:
                         Environment.Exit(0);
                         break;
-
                 }
             }
         }
@@ -69,8 +82,6 @@ namespace PilotProject.Pages.Menu
         public override void Exit()
         {
             base.Exit();
-        }
-
-        
+        }       
     }
 }
