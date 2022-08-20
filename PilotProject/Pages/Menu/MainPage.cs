@@ -13,21 +13,15 @@ namespace PilotProject.Pages.Menu
         public override string TitlePage => "MAIN MENU";       
 
         public MainPage(PageController controller) : base(controller)
-        {          
-            menuBilder.ItemsMenu = new()
-            {               
-                "Pizzas",
-                "Drinks",
-                "Authorization",
-                "Exit"
-            };            
+        {
+            CreateWindow();
         }
 
         public override void Enter()
         {
-            if (!menuBilder.ItemsMenu[0].Equals("Order Basket") && OrderBasket.IsAuthorization())
+            if (!menu.ItemsMenu[0].Equals("Order Basket") && OrderBasket.IsAuthorization())
             {
-                menuBilder.ItemsMenu.Insert(0, "Order Basket");                              
+                menu.ItemsMenu.Insert(0, "Order Basket");                              
             }
 
             CursorVisible = false;
@@ -82,6 +76,20 @@ namespace PilotProject.Pages.Menu
         public override void Exit()
         {
             base.Exit();
-        }       
+            menu.ResetSelectIndex();
+        }
+
+        public override void CreateWindow()
+        {
+            moveTitle = 11;
+            menu = new(2, 11);
+            menu.ItemsMenu = new()
+            {
+                "Pizzas",
+                "Drinks",
+                "Authorization",
+                "Exit"
+            };           
+        }
     }
 }

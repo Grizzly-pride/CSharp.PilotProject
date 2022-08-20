@@ -16,11 +16,7 @@ namespace PilotProject.Pages.Forms
         public override string TitlePage => "LOGIN";
         public LoginPage(PageController controller) : base(controller)
         {
-            itemsForm = new string[]
-            {
-                "Name",
-                "Password"
-            };
+            CreateWindow();
         }
         public override void Enter()
         {
@@ -60,8 +56,17 @@ namespace PilotProject.Pages.Forms
                 WriteLine("Invalid password or username!");
                 ReadKey();
                 controller.TransitionToPage(Page.Cross);
-
             }
+        }
+
+        public override void CreateWindow()
+        {
+            moveTitle = 11;
+            itemsForm = new string[]
+            {
+                " Name",
+                " Password"
+            };
         }
 
         private bool Authentication()

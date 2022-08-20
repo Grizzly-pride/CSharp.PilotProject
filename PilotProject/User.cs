@@ -15,7 +15,7 @@ namespace PilotProject
         public string Password { get; private set; }
         
         public User(string name, string email, string password)
-        {            
+        {        
             Name = name;
             Email = email;
             Password = password;

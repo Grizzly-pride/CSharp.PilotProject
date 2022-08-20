@@ -19,14 +19,8 @@ namespace PilotProject.Pages.Forms
         public override string TitlePage => "REGISTRATION";
 
         public RegistrationPage(PageController controller) : base(controller)
-        {           
-            itemsForm = new string[]    
-            {
-                "Name",
-                "Email",
-                "Password" 
-            };
-
+        {
+            CreateWindow();
         }
 
         public override void Enter()
@@ -75,6 +69,17 @@ namespace PilotProject.Pages.Forms
                 ReadKey();
                 controller.TransitionToPage(Page.Cross);
             }
+        }
+
+        public override void CreateWindow()
+        {
+            moveTitle = 9;
+            itemsForm = new string[]
+            {
+                " Name",
+                " Email",
+                " Password"
+            };
         }
 
         private bool CheckData()

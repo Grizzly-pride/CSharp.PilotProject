@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Text;
 using static System.Console;
 using static System.String;
-using static PilotProject.StringMod;
+using static PilotProject.Extensions.StringExtension;
 using PilotProject.CustomExeptions;
 
 

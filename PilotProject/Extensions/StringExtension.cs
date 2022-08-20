@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PilotProject
+namespace PilotProject.Extensions
 {
-    public static class StringMod
+    public static class StringExtension
     {
         public static object StringCut(this string str, int value)
         {

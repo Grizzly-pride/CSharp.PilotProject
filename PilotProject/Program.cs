@@ -1,4 +1,5 @@
 ﻿using PilotProject;
+
 using PilotProject.DBContext;
 using PilotProject.FoodMenu;
 using System.Text;
@@ -57,113 +58,11 @@ db.Add(soda22);
 db.SaveChanges();
 */
 
-/*
-ApplicationContext db = new();
-List<Drink> list = db.Drinks.ToList();
-Console.OutputEncoding = Encoding.Unicode;
-
-for (int i = 0; i < list.Count; i++)
-{
-    Console.Write(list[i].Name);
-    Console.WriteLine(list[i].Id);
-} 
-*/
-
-/*
-const int A = -17;
-const int B = -7;
-const int C = -10;
-const int D = -12;
-
-const string NameColA = "Name";
-const string NameColB = "Volume";
-const string NameColC = "Price";
-const string NameColD = "Subcategory";
-
-int ColA = $"│{list[0].Name,A}".Length;
-int ColB = $"│{list[0].Volume,B}".Length;
-int ColC = $"│{list[0].Price,C}".Length;
-int ColD = $"│{list[0].Subcategory,D}│".Length;
-int lengthStr = ColA + ColB + ColC + ColD;
-
-Console.Write(new string('┌', 1));
-Console.Write(new string('─', ColA - 1));
-Console.Write(new string('┬', 1));
-Console.Write(new string('─', ColB - 1));
-Console.Write(new string('┬', 1));
-Console.Write(new string('─', ColC - 1));
-Console.Write(new string('┬', 1));
-Console.Write(new string('─', ColD - 2));
-Console.WriteLine(new string('┐', 1));
 
 
-Console.Write($"│{NameColA,A}");
-Console.Write($"│{NameColB,B}");
-Console.Write($"│{NameColC,C}");
-Console.WriteLine($"│{NameColD,D}│");
-
-
-Console.Write(new string('├', 1));
-Console.Write(new string('─', ColA - 1));
-Console.Write(new string('┼', 1));
-Console.Write(new string('─', ColB - 1));
-Console.Write(new string('┼', 1));
-Console.Write(new string('─', ColC - 1));
-Console.Write(new string('┼', 1));
-Console.Write(new string('─', ColD - 2));
-Console.WriteLine(new string('┤', 1));
-
-
-for (int i = 0; i < list.Count; i++)
-{   
-    Console.Write($"│{list[i].Name,A}");
-    Console.Write($"│{list[i].Volume,B}");
-    Console.Write($"│{list[i].Price,C}");
-    Console.WriteLine($"│{list[i].Subcategory,D}│");
-}
-
-Console.Write(new string('└', 1));
-Console.Write(new string('─', ColA - 1));
-Console.Write(new string('┴', 1));
-Console.Write(new string('─', ColB - 1));
-Console.Write(new string('┴', 1));
-Console.Write(new string('─', ColC - 1));
-Console.Write(new string('┴', 1));
-Console.Write(new string('─', ColD - 2));
-Console.WriteLine(new string('┘', 1));
-
-Console.WriteLine(lengthStr);
-*/
-
-//Main.Run();
 
 
 /*
-TestTable table = new();
-table.TableWidth = 65;
-Console.Clear();
-table.PrintLine();
-table.PrintRow("Column 1", "Column 2", "Column 3", "Column 4", "Column5");
-table.PrintLine();
-table.PrintRow("qeweqweqwe", "qweew", "we", "qweqwe");
-table.PrintRow("wew", "qweqweqwe", "ee", "e");
-table.PrintRow("qeweqweqwe", "qweew", "we", "qweqwe");
-table.PrintRow("qeweqweqwe", "qweew", "we", "qweqwe");
-table.PrintRow("qeweqweqwe", "qweew", "we", "qweqwe");
-table.PrintLine();
-Console.ReadLine();
-*/
-
-
-/*
-
-using (var connection = new SqliteConnection(@"Data Source=C:\Users\alexandr.medved\Desktop\C#\Pilot_project\PilotProject\DataBase\dotnetpizza.db"))
-{
-    connection.Open();
-    SqliteCommand command = connection.CreateCommand();
-}
-*/
-
 MenuBuilder menu = new(1, 1, 3, 1);
 menu.ItemsMenu = new();
 ApplicationContext db = new();
@@ -189,6 +88,11 @@ menu.ItemsMenu.Add(table.AddEndLine());
 int index = menu.RunMenu();
 Console.WriteLine(index);
 
+*/
+
+
+
+
 
 
 /*
@@ -206,10 +110,12 @@ foreach (var s in column1)
 
 }
 
-
 int n
 Console.WriteLine("{0,"+n + "}|{1,"+ n + "}", Variable1, Variable2);
 */
+
+
+Main.Run();
 
 
 
