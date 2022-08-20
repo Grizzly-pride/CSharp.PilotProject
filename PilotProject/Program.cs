@@ -164,7 +164,7 @@ using (var connection = new SqliteConnection(@"Data Source=C:\Users\alexandr.med
 }
 */
 
-MenuBuilder menu = new(2, 1, 3, 2, 1);
+MenuBuilder menu = new(1, 1, 3, 1);
 menu.ItemsMenu = new();
 ApplicationContext db = new();
 List<Drink> drink = db.Drinks.ToList();
@@ -175,13 +175,6 @@ table.Headers = headers;
 int[] size = { -3, -18, -5, -5, -8};
 table.ColumnSizes = size;
 
-
-/*
-Console.WriteLine(table.AddTopLine());
-Console.WriteLine(table.AddHeader());
-Console.WriteLine(table.AddMiddleLine());
-*/
-
 menu.ItemsMenu.Add(table.AddTopLine());
 menu.ItemsMenu.Add(table.AddHeader());
 menu.ItemsMenu.Add(table.AddMiddleLine());
@@ -189,14 +182,12 @@ menu.ItemsMenu.Add(table.AddMiddleLine());
 for (int i = 0; i < drink.Count; i++)
 {
     menu.ItemsMenu.Add(table.AddRow(drink[i].Id, drink[i].Name, drink[i].Volume, drink[i].Price, drink[i].Category));
-    //Console.WriteLine(table.AddRow(drink[i].Id, drink[i].Name, drink[i].Volume, drink[i].Price, drink[i].Category));        
+ 
 }
-//Console.WriteLine(table.AddEndLine()); 
-
-//Console.WriteLine(table.PrintRow(drink[0].Id, drink[0].Name, drink[0].Volume, drink[0].Price, drink[0].Category));
 
 menu.ItemsMenu.Add(table.AddEndLine());
-menu.RunMenu();
+int index = menu.RunMenu();
+Console.WriteLine(index);
 
 
 
