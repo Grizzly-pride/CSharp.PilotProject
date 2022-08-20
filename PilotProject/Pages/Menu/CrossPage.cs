@@ -11,11 +11,7 @@ namespace PilotProject.Pages.Menu
         public override string TitlePage => "Do you want to try again?";
         public CrossPage(PageController controller) : base(controller)
         {
-            menuBilder.ItemsMenu = new()
-            {
-                "Yes",
-                "No"
-            };
+            CreateWindow();
         }
 
         public override void Enter()
@@ -41,6 +37,18 @@ namespace PilotProject.Pages.Menu
         public override void Exit()
         {
             base.Exit();
+            menu.ResetSelectIndex();
+        }
+
+        public override void CreateWindow()
+        {
+            moveTitle = 5;
+            menu = new(2, 13);
+            menu.ItemsMenu = new()
+            {
+                "Yes",
+                "No"
+            };
         }
     }
 }

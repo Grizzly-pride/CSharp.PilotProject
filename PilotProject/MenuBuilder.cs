@@ -13,8 +13,8 @@ namespace PilotProject
         private int _limitUp;
         private int _limitDown;
 
-        private readonly int drawMenuColumnPos;
-        private readonly int drawMenuRowPos;
+        private readonly int _posY;
+        private readonly int _posX;
         public List<object> ItemsMenu { get; set; }
 
         public MenuBuilder(int row, int col, int limitUp, int limitDown)
@@ -22,18 +22,18 @@ namespace PilotProject
             _limitUp = limitUp;
             _limitDown = limitDown;
             _selectedIndex = limitUp;
-            drawMenuRowPos = row;
-            drawMenuColumnPos = col;
+            _posX = row;
+            _posY = col;
             
         }
 
-        public MenuBuilder(int row, int col)
+        public MenuBuilder(int posX, int posY)
         {
             _limitUp = 0;
             _limitDown = 0;
             _selectedIndex = 0;
-            drawMenuRowPos = row;
-            drawMenuColumnPos = col;
+            _posX = posX;
+            _posY = posY;
         }
 
         public void ResetCursorVisible()
@@ -60,7 +60,7 @@ namespace PilotProject
 
             for (int i = 0; i < ItemsMenu.Count; i++)
             {
-                SetCursorPosition(drawMenuRowPos + i, drawMenuColumnPos);
+                SetCursorPosition(_posX + i, _posY);
                 ForegroundColor = ConsoleColor.Green;
                 if (i == _selectedIndex)
                 {

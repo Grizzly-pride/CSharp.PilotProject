@@ -15,12 +15,7 @@ namespace PilotProject.Pages.Menu
      
         public AuthorizationPage(PageController controller) : base(controller)
         {
-            menuBilder.ItemsMenu = new()
-            {
-                "Login",
-                "Registration",
-                "Back"
-            };
+            CreateWindow();
         }
         
         public override void Enter()
@@ -49,7 +44,19 @@ namespace PilotProject.Pages.Menu
         public override void Exit()
         {
             base.Exit();
-            
-        } 
+            menu.ResetSelectIndex();
+        }
+
+        public override void CreateWindow()
+        {
+            moveTitle = 9;
+            menu = new(2, 11);
+            menu.ItemsMenu = new()
+            {
+                "Login",
+                "Registration",
+                "Back"
+            };
+        }
     }
 }

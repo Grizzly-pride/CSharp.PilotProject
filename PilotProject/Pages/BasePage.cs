@@ -13,38 +13,43 @@ namespace PilotProject.Pages
     {
         protected int selectedItem;
         protected PageController controller;
-        protected MenuBuilder menuBilder;
+        protected MenuBuilder menu;
         protected string[] itemsForm;
-        
+        protected int moveTitle;
+
         public abstract string TitlePage { get; }
         
         public BasePage(PageController controller)
         {
             this.controller = controller;
-            menuBilder = new(2, 1);
         }
 
         public virtual void Enter()
         {
-
+           
         }
 
         public virtual void UpdateMenu()
         {
-            WriteLine($"~-~-[{TitlePage}]-~-~ user: {OrderBasket.UserName}\n");
-            selectedItem = menuBilder.RunMenu();
+            
+            WriteLine($"{new String(' ', moveTitle)}~[{TitlePage}]~  user: {OrderBasket.UserName}\n");
+            selectedItem = menu.RunMenu();
         }
 
         public virtual void UpdateForm()
-        {
-            ResetColor();
-            WriteLine($"~-~-[{TitlePage}]-~-~ user: {OrderBasket.UserName}\n");
+        {           
+            WriteLine($"{new String(' ', moveTitle)}~[{TitlePage}]~  user: {OrderBasket.UserName}\n");
             ForegroundColor = ConsoleColor.Green;
         }
 
-        public virtual void Exit()
+        public virtual void CreateWindow()
         {
-            menuBilder.ResetSelectIndex();
+
+        }
+
+
+        public virtual void Exit()
+        {            
             CursorVisible = false;
             ResetColor();
             Clear();
