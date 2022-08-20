@@ -12,7 +12,7 @@ namespace PilotProject
         private int selectedIndex = 0;
         private ConsoleKey keyPressed;
         public bool IsChose { get; private set; }
-        public List<String> ItemsMenu { get; set; } 
+        public List<object> ItemsMenu { get; set; } 
 
         private void UpdateItems()
         {
@@ -66,6 +66,7 @@ namespace PilotProject
             {
                 IsChose = true;
             }
+            
         }
 
         public int GetSelectIndex()

@@ -8,31 +8,37 @@ using System.Net;
 
 namespace PilotProject.Services
 {
-    internal sealed class MailSender
+    internal sealed class MailSenderService
     {
+        private string name = "DotNet Pizza";
+        private string email = "dotnetpizza@rambler.ru";
+        private string password = "Alexander1991";
+        private string smtpServer = "smtp.rambler.ru";
+        private int port = 465;
         public MailAddress FromAddress { get; private set; }
         public MailAddress ToAddress { get; private set; }
-        public MailMessage Message { get; private set; }
-
-        public void SendMessage(string fromAddress, string fromName, string pass, string toAddress, string themaMessage, string textMessage)
+             
+        public void SendMessage(string toAddress, string themaMessage, string textMessage)
         {
-            FromAddress = new MailAddress(fromAddress, fromName);
+            FromAddress = new MailAddress(email, name);
             ToAddress = new(toAddress);
 
-            Message = new(FromAddress, ToAddress)
+            MailMessage message = new(FromAddress, ToAddress)
             {
                 Subject = themaMessage,
                 Body = textMessage,
                 IsBodyHtml = true,
             };
 
-            SmtpClient smtp = new("smtp.gmail.com", 587)
-            {
-                Credentials = new NetworkCredential(fromAddress, pass),
-                EnableSsl = true
+            SmtpClient smtp = new(smtpServer, port)
+            {               
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(email, password)
             };
 
-            smtp.Send(Message);
+            smtp.Send(message);
             Console.Read();
         }
     }

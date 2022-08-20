@@ -50,8 +50,7 @@ namespace PilotProject.Pages.Forms
             if (Authentication())
             {
                 ForegroundColor = ConsoleColor.Blue;
-                WriteLine("Successful login");
-                Console.WriteLine(OrderBasket.UserName);
+                WriteLine("Successful login");             
                 ReadKey();
                 controller.TransitionToPage(Page.Main);
             }
@@ -86,6 +85,5 @@ namespace PilotProject.Pages.Forms
             controller.PreviousPage = Page.LoginPage;
             base.Exit();
         }
-
     }
 }

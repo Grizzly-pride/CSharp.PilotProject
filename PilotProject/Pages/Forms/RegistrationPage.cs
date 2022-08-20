@@ -64,12 +64,11 @@ namespace PilotProject.Pages.Forms
                 ApplicationContext db = new();
                 db.Add(newUser);
                 db.SaveChanges();
-
+              
                 ForegroundColor = ConsoleColor.Blue;
                 WriteLine("Registration successful.");
                 ReadKey();
                 controller.TransitionToPage(Page.Authorization);
-
             }
             else
             {
