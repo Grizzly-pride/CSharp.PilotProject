@@ -17,21 +17,21 @@ namespace PilotProject
         private readonly int drawMenuRowPos;
         public List<object> ItemsMenu { get; set; }
 
-        public MenuBuilder(int row, int col, int selectedIndex, int limitUp, int limitDown)
+        public MenuBuilder(int row, int col, int limitUp, int limitDown)
         {
-
-            _selectedIndex = selectedIndex;
             _limitUp = limitUp;
             _limitDown = limitDown;
+            _selectedIndex = limitUp;
             drawMenuRowPos = row;
             drawMenuColumnPos = col;
+            
         }
 
         public MenuBuilder(int row, int col)
         {
-            _selectedIndex = 0;
-            _limitUp = -1;
+            _limitUp = 0;
             _limitDown = 0;
+            _selectedIndex = 0;
             drawMenuRowPos = row;
             drawMenuColumnPos = col;
         }
@@ -79,40 +79,7 @@ namespace PilotProject
         {
             bool IsChose = false;
             DrawMenu();
-            /*
-            while (!IsChose)
-            {
-                ConsoleKeyInfo keyInfo = ReadKey(true);
-                ConsoleKey keyPressed = keyInfo.Key;
 
-                if (keyPressed.Equals(ConsoleKey.UpArrow))
-                {
-                    selectedIndex--;
-
-                    if (selectedIndex.Equals(-1))
-                    {
-                        selectedIndex = ItemsMenu.Count - 1;
-                    }
-
-                }
-                else if (keyPressed.Equals(ConsoleKey.DownArrow))  
-                {
-                    selectedIndex++;
-
-                    if (selectedIndex.Equals(ItemsMenu.Count))
-                    {
-                        selectedIndex = 0;
-                    }
-                }
-                else if (keyPressed.Equals(ConsoleKey.Enter)) 
-                {
-                    IsChose = true;
-                }
-                DrawMenu();
-            }
-
-            return selectedIndex;
-            */
             int limUp = Math.Abs(_limitUp);
             int limDown = Math.Abs(_limitDown);
 
@@ -125,7 +92,7 @@ namespace PilotProject
                 {
                     _selectedIndex--;
 
-                    if (_selectedIndex.Equals(limUp))
+                    if (_selectedIndex < limUp)
                     {
                         _selectedIndex = ItemsMenu.Count - (1 + limDown);
                     }
@@ -137,7 +104,7 @@ namespace PilotProject
 
                     if (_selectedIndex.Equals(ItemsMenu.Count - limDown))
                     {
-                        _selectedIndex = limUp + 1;
+                        _selectedIndex = limUp;
                     }
                 }
                 else if (keyPressed.Equals(ConsoleKey.Enter))
@@ -147,9 +114,9 @@ namespace PilotProject
                 DrawMenu();
             }
 
-            return _selectedIndex;
+            return _selectedIndex - limUp;
         }
 
-        public void ResetSelectIndex() => _selectedIndex = 0;
+        public void ResetSelectIndex() => _selectedIndex = _limitUp;
     }
 }
