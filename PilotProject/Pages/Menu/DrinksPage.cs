@@ -6,28 +6,66 @@ using System.Threading.Tasks;
 using PilotProject.DBContext;
 using PilotProject.FoodMenu;
 using PilotProject.Services;
+using PilotProject.Builders;
 using static System.Console;
+
 
 namespace PilotProject.Pages.Menu
 {
+    enum CategoryDrink
+    {
+        Soda,
+        Juice,
+        Water,
+        Energy,
+        All
+    }
+
+
     internal class DrinksPage : BasePage
-    {      
+    {
+        private bool _isShowTable = false;       
+        private readonly List<Drink> _drinks;
+        private IEnumerable<Drink> _filterDrinks;
+        private CategoryDrink _filter;
         public override string TitlePage => "DRINKS";
 
         public DrinksPage(PageController controller) : base(controller)
         {
-            CreateWindow();
+            dataBase = new();
+            _drinks = dataBase.Drinks.ToList();
         }
 
         public override void Enter()
         {
+            Clear();
+            CreateWindow();
             UpdateMenu();
         }
 
         public override void UpdateMenu()
         {                       
             base.UpdateMenu();
-            //TODO
+
+            if (_isShowTable)
+            {
+                switch (selectedItem)
+                {
+                    case -1: _isShowTable = false; Enter(); break;
+                }
+            }
+            else
+            {
+                switch (selectedItem)
+                {
+                    case 0: _isShowTable = true; _filter = CategoryDrink.Soda; Enter(); break;
+                    case 1: _isShowTable = true; _filter = CategoryDrink.Juice; Enter(); break;
+                    case 2: _isShowTable = true; _filter = CategoryDrink.Water; Enter(); break;
+                    case 3: _isShowTable = true; _filter = CategoryDrink.Energy; Enter(); break;
+                    case 4: _isShowTable = true; _filter = CategoryDrink.All; Enter(); break;
+                    case 5: controller.TransitionToPage(Page.Main); break;
+                }
+            }       
         }
 
         public override void Exit()
@@ -38,15 +76,35 @@ namespace PilotProject.Pages.Menu
 
         public override void CreateWindow()
         {
-            ApplicationContext db = new();
-            List<Drink> drink = db.Drinks.ToList();
+            moveTitle = 12;
 
-            TableBuilder table = new(5);
-            table.Headers = new string[] { "Id", "Name", "Value", "Price", "Category" };
-            table.ColumnSizes = new int[] { -3, -18, -5, -5, -8 };
+            if (_isShowTable)
+            {
+                CreateTable();
+            }
+            else
+            {
+                menu = new(2,11,false);
+                menu.ItemsMenu = new()
+                {
+                    "Soda",
+                    "Juice",
+                    "Water",
+                    "Energy",
+                    "All drinks",
+                    "Back"
+                };
+            }
+        }
 
-            moveTitle = 20;
-            menu = new(2, 1, 3, 1);
+        private void CreateTable()
+        {
+            table = new(4);
+            table.Headers = new string[] { "Name", "Value", "Price", "Category" };
+            table.ColumnSizes = new int[] { -17, -5, -5, -8 };
+
+            moveTitle = 18;
+            menu = new(2, 1, 3, 1, true);
             menu.ItemsMenu = new()
             {
                 table.AddTopLine(),
@@ -54,13 +112,27 @@ namespace PilotProject.Pages.Menu
                 table.AddMiddleLine()
             };
 
-            for (int i = 0; i < drink.Count; i++)
+            _filterDrinks = _filter switch
             {
-                menu.ItemsMenu.Add(table.AddRow(drink[i].Id, drink[i].Name, drink[i].Volume, drink[i].Price, drink[i].Category));
+                CategoryDrink.All => _drinks,
+                CategoryDrink.Soda => ShowSoda(),
+                CategoryDrink.Juice => ShowJuice(),
+                CategoryDrink.Water => ShowWater(),
+                CategoryDrink.Energy => ShowEnergy(),
+                _ => throw new NotImplementedException()
+            };
 
+            foreach (var drink in _filterDrinks)
+            {
+                menu.ItemsMenu.Add(table.AddRow(drink.Name, drink.Volume, drink.Price, drink.Subcategory));
             }
 
             menu.ItemsMenu.Add(table.AddEndLine());
         }
+   
+        private IEnumerable<Drink> ShowSoda() => _drinks.Where(drink => drink.Subcategory == "Soda");
+        private IEnumerable<Drink> ShowJuice() => _drinks.Where(drink => drink.Subcategory == "Juice");
+        private IEnumerable<Drink> ShowWater() => _drinks.Where(drink => drink.Subcategory == "Water");
+        private IEnumerable<Drink> ShowEnergy() => _drinks.Where(drink => drink.Subcategory == "Energy");
     }
 }

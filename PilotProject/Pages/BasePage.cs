@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PilotProject.Builders;
+using PilotProject.DBContext;
+using PilotProject.FoodMenu;
 using static System.Console;
 
 
@@ -11,11 +14,14 @@ namespace PilotProject.Pages
 {
     internal abstract class BasePage
     {
-        protected int selectedItem;
-        protected PageController controller;
-        protected MenuBuilder menu;
-        protected string[] itemsForm;
         protected int moveTitle;
+        protected int selectedItem;
+        protected string[] itemsForm;
+        protected MenuBuilder menu;
+        protected TableBuilder table;
+        protected PageController controller;
+        protected OrderBasketRepository orderBasket;
+        protected ApplicationContext dataBase;
 
         public abstract string TitlePage { get; }
         
@@ -32,13 +38,13 @@ namespace PilotProject.Pages
         public virtual void UpdateMenu()
         {
             
-            WriteLine($"{new String(' ', moveTitle)}~[{TitlePage}]~  user: {OrderBasket.UserName}\n");
+            WriteLine($"{new String(' ', moveTitle)}~[{TitlePage}]~  user: {OrderBasketRepository.UserName}\n");
             selectedItem = menu.RunMenu();
         }
 
         public virtual void UpdateForm()
         {           
-            WriteLine($"{new String(' ', moveTitle)}~[{TitlePage}]~  user: {OrderBasket.UserName}\n");
+            WriteLine($"{new String(' ', moveTitle)}~[{TitlePage}]~  user: {OrderBasketRepository.UserName}\n");
             ForegroundColor = ConsoleColor.Green;
         }
 
@@ -47,10 +53,9 @@ namespace PilotProject.Pages
 
         }
 
-
         public virtual void Exit()
-        {            
-            CursorVisible = false;
+        {
+            CursorVisible = false;  
             ResetColor();
             Clear();
         }

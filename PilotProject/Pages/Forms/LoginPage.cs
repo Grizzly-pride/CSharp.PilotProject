@@ -11,8 +11,8 @@ namespace PilotProject.Pages.Forms
 {
     internal class LoginPage : BasePage
     {
-        private string name;
-        private string password;
+        private string _name;
+        private string _password;
         public override string TitlePage => "LOGIN";
         public LoginPage(PageController controller) : base(controller)
         {
@@ -33,12 +33,8 @@ namespace PilotProject.Pages.Forms
 
                 switch (i)
                 {
-                    case 0:
-                        name = ReadLine();
-                        break;
-                    case 1:
-                        password = ReadLine();
-                        break;
+                    case 0: _name = ReadLine(); break;
+                    case 1: _password = ReadLine(); break;
                 }
             }
             WriteLine();
@@ -76,9 +72,9 @@ namespace PilotProject.Pages.Forms
 
             foreach (var user in users)
             {
-                if (user.Name.Equals(name) && user.Password.Equals(password))
+                if (user.Name.Equals(_name) && user.Password.Equals(_password))
                 {
-                    OrderBasket.UserName = user.Name;
+                    OrderBasketRepository.UserName = user.Name;
                     return true;
                 }
             }         
