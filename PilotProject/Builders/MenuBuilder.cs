@@ -5,42 +5,42 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
 
-namespace PilotProject
+namespace PilotProject.Builders
 {
     internal class MenuBuilder
     {
         private int _selectedIndex;
         private int _limitUp;
         private int _limitDown;
+        private bool _quitOn;
 
         private readonly int _posY;
         private readonly int _posX;
         public List<object> ItemsMenu { get; set; }
 
-        public MenuBuilder(int row, int col, int limitUp, int limitDown)
+        public MenuBuilder(int row, int col, int limitUp, int limitDown, bool quitOn)
         {
             _limitUp = limitUp;
             _limitDown = limitDown;
             _selectedIndex = limitUp;
+            _quitOn = quitOn;
             _posX = row;
             _posY = col;
             
         }
 
-        public MenuBuilder(int posX, int posY)
+        public MenuBuilder(int posX, int posY, bool quitOn)
         {
             _limitUp = 0;
             _limitDown = 0;
             _selectedIndex = 0;
+            _quitOn = quitOn;
             _posX = posX;
             _posY = posY;
         }
 
-        public void ResetCursorVisible()
-        {
-            CursorVisible = CursorVisible != true;
-        }
-        
+        public void SetCursorVisible(bool visible) => CursorVisible = visible;
+       
         public void SetCursorPosition(int row, int column)
         {
             if (row > 0)
@@ -88,7 +88,7 @@ namespace PilotProject
                 ConsoleKeyInfo keyInfo = ReadKey(true);
                 ConsoleKey keyPressed = keyInfo.Key;
 
-                if (keyPressed.Equals(ConsoleKey.UpArrow))
+                if (keyPressed.Equals(ConsoleKey.UpArrow)) // move up
                 {
                     _selectedIndex--;
 
@@ -98,7 +98,7 @@ namespace PilotProject
                     }
 
                 }
-                else if (keyPressed.Equals(ConsoleKey.DownArrow))
+                else if (keyPressed.Equals(ConsoleKey.DownArrow)) //move down
                 {
                     _selectedIndex++;
 
@@ -107,7 +107,12 @@ namespace PilotProject
                         _selectedIndex = limUp;
                     }
                 }
-                else if (keyPressed.Equals(ConsoleKey.Enter))
+                else if (keyPressed.Equals(ConsoleKey.Escape) && _quitOn) // quit
+                {
+                    _selectedIndex = -1 + limUp;
+                    IsChose = true;
+                }
+                else if (keyPressed.Equals(ConsoleKey.Enter)) // choise
                 {
                     IsChose = true;
                 }

@@ -18,8 +18,8 @@ namespace PilotProject.Pages.Menu
         }
 
         public override void Enter()
-        {
-            if (!menu.ItemsMenu[0].Equals("Order Basket") && OrderBasket.IsAuthorization())
+        {           
+            if (!menu.ItemsMenu[0].Equals("Order Basket") && OrderBasketRepository.IsAuthorization())
             {
                 menu.ItemsMenu.Insert(0, "Order Basket");                              
             }
@@ -32,44 +32,26 @@ namespace PilotProject.Pages.Menu
         {
             base.UpdateMenu();
 
-            if (OrderBasket.IsAuthorization())
+            if (OrderBasketRepository.IsAuthorization())
             {
                 switch (selectedItem)
                 {
-                    case 0:
-                        controller.TransitionToPage(Page.OrderBasket);
-                        break;
-                    case 1:
-                        controller.TransitionToPage(Page.Pizzas);
-                        break;
-                    case 2:
-                        controller.TransitionToPage(Page.Drinks);
-                        break;
-                    case 3:
-                        controller.TransitionToPage(Page.Authorization);
-                        break;
-                    case 4:
-                        Environment.Exit(0);
-                        break;
+                    case 0: controller.TransitionToPage(Page.OrderBasket); break;
+                    case 1: controller.TransitionToPage(Page.Pizzas); break;
+                    case 2: controller.TransitionToPage(Page.Drinks); break;
+                    case 3: controller.TransitionToPage(Page.Authorization); break;
+                    case 4: Environment.Exit(0); break;
                 }
             }
             else
-            {
+            {                               
                 switch (selectedItem)
                 {
-                    case 0:
-                        controller.TransitionToPage(Page.Pizzas);
-                        break;
-                    case 1:
-                        controller.TransitionToPage(Page.Drinks);
-                        break;
-                    case 2:
-                        controller.TransitionToPage(Page.Authorization);
-                        break;
-                    case 3:
-                        Environment.Exit(0);
-                        break;
-                }
+                    case 0: controller.TransitionToPage(Page.Pizzas); break;
+                    case 1: controller.TransitionToPage(Page.Drinks); break;
+                    case 2: controller.TransitionToPage(Page.Authorization); break;
+                    case 3: Environment.Exit(0); break;
+                }                
             }
         }
        
@@ -82,7 +64,7 @@ namespace PilotProject.Pages.Menu
         public override void CreateWindow()
         {
             moveTitle = 11;
-            menu = new(2, 11);
+            menu = new(2, 11, false);
             menu.ItemsMenu = new()
             {
                 "Pizzas",

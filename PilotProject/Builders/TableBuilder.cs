@@ -10,7 +10,7 @@ using static PilotProject.Extensions.StringExtension;
 using PilotProject.CustomExeptions;
 
 
-namespace PilotProject
+namespace PilotProject.Builders
 {
     internal class TableBuilder
     {
@@ -87,8 +87,7 @@ namespace PilotProject
             {
                 string text = head switch
                 {
-                    int i when i == 0 => Concat(VerticalLine, Format("{0," + _columnSizes[head] + "}",
-                    _headers[head].StringCut(Math.Abs(_columnSizes[head]))), VerticalLine),
+                    int i when i == 0 => Concat(VerticalLine, Format("{0," + _columnSizes[head] + "}",_headers[head].StringCut(Math.Abs(_columnSizes[head]))), VerticalLine),
 
                     int i when i == _headers.Length - 1 => Concat(Format("{0," + _columnSizes[head] + "}",
                     _headers[head]).StringCut(Math.Abs(_columnSizes[head])), VerticalLine),

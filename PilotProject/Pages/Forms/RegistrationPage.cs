@@ -12,9 +12,9 @@ namespace PilotProject.Pages.Forms
 {
     internal class RegistrationPage : BasePage
     {       
-        private string name;
-        private string password;
-        private string email;
+        private string _name;
+        private string _password;
+        private string _email;
 
         public override string TitlePage => "REGISTRATION";
 
@@ -39,22 +39,16 @@ namespace PilotProject.Pages.Forms
 
                 switch (i)
                 {
-                    case 0:
-                        name = ReadLine();
-                        break;
-                    case 1:
-                        email = ReadLine();
-                        break;
-                    case 2:
-                        password = ReadLine();
-                        break;
+                    case 0: _name = ReadLine(); break;
+                    case 1: _email = ReadLine(); break;
+                    case 2: _password = ReadLine(); break;
                 }
             }
             WriteLine();
 
             if (CheckData())
             {
-                User newUser = new(name, email, password);
+                User newUser = new(_name, _email, _password);
                 ApplicationContext db = new();
                 db.Add(newUser);
                 db.SaveChanges();
@@ -89,27 +83,27 @@ namespace PilotProject.Pages.Forms
 
             RegistrationService authenticServ = new();
 
-            if (!authenticServ.IsUniqueNameInDB(name))
+            if (!authenticServ.IsUniqueNameInDB(_name))
             {
                 isValid = false;
                 WriteLine("- Name taken! Please enter another name.");
             }
-            if (!authenticServ.IsUniqueEmailInDB(email))
+            if (!authenticServ.IsUniqueEmailInDB(_email))
             {
                 isValid = false;
                 WriteLine("- This email is used another user! Please enter another email.");
             }
-            if (!authenticServ.IsValidName(name))
+            if (!authenticServ.IsValidName(_name))
             {
                 isValid = false;
                 WriteLine("- Invalid Name! Name not provided.");
             }
-            if (!authenticServ.IsValidEmail(email))
+            if (!authenticServ.IsValidEmail(_email))
             {
                 isValid = false;
                 WriteLine("- Invalid Email! example@mail.com");
             }
-            if (!authenticServ.IsValidPass(password))
+            if (!authenticServ.IsValidPass(_password))
             {
                 isValid = false;
                 WriteLine("- Invalid Password! Password length is less than 7 symbols.");

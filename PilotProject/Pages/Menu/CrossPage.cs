@@ -25,12 +25,8 @@ namespace PilotProject.Pages.Menu
 
             switch (selectedItem)
             {
-                case 0:
-                    controller.TransitionToPage(controller.PreviousPage);
-                    break;
-                case 1:
-                    controller.TransitionToPage(Page.Main);
-                    break;
+                case 0: controller.TransitionToPage(controller.PreviousPage); break;
+                case 1: controller.TransitionToPage(Page.Main); break;
             }
         }
 
@@ -43,7 +39,7 @@ namespace PilotProject.Pages.Menu
         public override void CreateWindow()
         {
             moveTitle = 5;
-            menu = new(2, 13);
+            menu = new(2, 13, false);
             menu.ItemsMenu = new()
             {
                 "Yes",
