@@ -7,6 +7,7 @@ using PilotProject.DBContext;
 using PilotProject.FoodMenu;
 using PilotProject.Services;
 using PilotProject.Builders;
+using PilotProject.Interfaces;
 using static System.Console;
 
 
@@ -21,7 +22,7 @@ namespace PilotProject.Pages.Menu
         All
     }
 
-    internal class PizzasPage : BasePage
+    internal class PizzasPage : BasePage, IFilterProduct<Pizza, CategoryPizzas>
     {
         private bool _isShowTable = false;
         private readonly List<Pizza> _pizzas;
@@ -75,14 +76,13 @@ namespace PilotProject.Pages.Menu
 
         public override void CreateWindow()
         {
-            moveTitle = 12;
-
             if (_isShowTable)
             {
                 CreateTable();
             }
             else
             {
+                moveTitle = 12;
                 menu = new(2, 11, false);
                 menu.ItemsMenu = new()
                 {
@@ -100,7 +100,7 @@ namespace PilotProject.Pages.Menu
         {
             table = new(5);
             table.Headers = new string[] { "Name", "Size/cm", "Dough", "Price", "Category" };
-            table.ColumnSizes = new int[] { -17, -7, -11, -5, -10 };
+            table.ColumnSizes = new int[] { -18, -7, -11, -5, -10 };
 
             moveTitle = 23;
             menu = new(2, 1, 3, 1, true);
@@ -114,24 +114,21 @@ namespace PilotProject.Pages.Menu
             _filterPizzas = _filter switch
             {
                 CategoryPizzas.All => _pizzas,
-                CategoryPizzas.Spice => FindSpice(),
-                CategoryPizzas.Veggie => FindVeggie(),
-                CategoryPizzas.Mushrooms => FindMushrooms(),
-                CategoryPizzas.Meat => FindMeat(),
+                CategoryPizzas.Spice => CategorySearch(CategoryPizzas.Spice),
+                CategoryPizzas.Veggie => CategorySearch(CategoryPizzas.Veggie),
+                CategoryPizzas.Mushrooms => CategorySearch(CategoryPizzas.Mushrooms),
+                CategoryPizzas.Meat => CategorySearch(CategoryPizzas.Meat),
                 _ => throw new NotImplementedException()
             };
 
             foreach (var pizza in _filterPizzas)
-            {
+            {                
                 menu.ItemsMenu.Add(table.AddRow(pizza.Name, pizza.Size, pizza.Dough, pizza.Price, pizza.Subcategory));
             }
 
             menu.ItemsMenu.Add(table.AddEndLine());
         }
 
-        private IEnumerable<Pizza> FindSpice() => _pizzas.Where(pizza => pizza.Subcategory == "Spice");
-        private IEnumerable<Pizza> FindVeggie() => _pizzas.Where(pizza => pizza.Subcategory == "Veggie");
-        private IEnumerable<Pizza> FindMushrooms() => _pizzas.Where(pizza => pizza.Subcategory == "Mushrooms");
-        private IEnumerable<Pizza> FindMeat() => _pizzas.Where(pizza => pizza.Subcategory == "Meat");
+        public IEnumerable<Pizza> CategorySearch(CategoryPizzas category) => _pizzas.Where(pizza => pizza.Subcategory.Equals(category.ToString(), StringComparison.OrdinalIgnoreCase));
     }
 }

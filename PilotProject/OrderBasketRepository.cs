@@ -9,34 +9,31 @@ using PilotProject.DBContext;
 
 namespace PilotProject
 {
-    internal sealed class OrderBasketRepository: IOrderBasketRepository<Product>
+    internal sealed class OrderBasketRepository: IOrderBasketRepository<Product, uint>
     {
+        private static Dictionary<Product, uint> _products = new();
+         
         public static string UserName { get; set; } = string.Empty;
-        private static List<Pizza> Pizzas { get; set; } = new List<Pizza>();
-        private static List<Drink> Drinks { get; set; } = new List<Drink>();
-
 
         public static bool IsAuthorization() => !UserName.Equals(string.Empty);
 
-        public void AddProduct(Product product)
+        public void AddProduct(Product product, uint count = 1) 
         {
-            throw new NotImplementedException();
+            if (_products.ContainsKey(product))
+            {
+                _products[product] += count;
+            }
+            else
+            {
+                _products.Add(product, count);
+            }
         }
 
-        public void DeleteProduct(Product product)
-        {
-            throw new NotImplementedException();
-        }
+        public void DeleteProduct(Product product, uint count = 1) => _products.Remove(product);
 
-        public List<Product> GetProduct()
-        {
-            throw new NotImplementedException();
-        }
 
-        public Product GetProductByID(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public Dictionary<Product, uint> GetProducts() => _products;    
+  
 
         public void UpdateProduct(Product product)
         {
