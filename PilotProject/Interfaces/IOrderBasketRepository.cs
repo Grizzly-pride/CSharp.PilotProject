@@ -7,12 +7,11 @@ using PilotProject.FoodMenu;
 
 namespace PilotProject.Interfaces
 {
-    internal interface IOrderBasketRepository<T> where T : Product
+    internal interface IOrderBasketRepository<Tk,Tv> where Tk : Product
     {
-        List<T> GetProduct();
-        T GetProductByID(int id);
-        void AddProduct(T product);
-        void DeleteProduct(T product);
-        void UpdateProduct(T product);
+        Dictionary<Tk,Tv> GetProducts();
+        void AddProduct(Tk product, Tv count);
+        void DeleteProduct(Tk product, Tv count);
+        void UpdateProduct(Tk product);
     }
 }

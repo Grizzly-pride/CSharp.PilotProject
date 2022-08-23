@@ -7,6 +7,7 @@ using PilotProject.DBContext;
 using PilotProject.FoodMenu;
 using PilotProject.Services;
 using PilotProject.Builders;
+using PilotProject.Interfaces;
 using static System.Console;
 
 
@@ -21,8 +22,7 @@ namespace PilotProject.Pages.Menu
         All
     }
 
-
-    internal class DrinksPage : BasePage
+    internal class DrinksPage : BasePage, IFilterProduct<Drink, CategoryDrink>
     {
         private bool _isShowTable = false;       
         private readonly List<Drink> _drinks;
@@ -52,6 +52,14 @@ namespace PilotProject.Pages.Menu
                 switch (selectedItem)
                 {
                     case -1: _isShowTable = false; Enter(); break;
+                    default:
+                        //TODO
+                        Drink addDrink = _filterDrinks.ElementAt(selectedItem);
+                        Console.WriteLine(addDrink.Name);
+                        Console.ReadKey();
+                        ReadKey();
+                        Enter();
+                        break;
                 }
             }
             else
@@ -75,15 +83,14 @@ namespace PilotProject.Pages.Menu
         }
 
         public override void CreateWindow()
-        {
-            moveTitle = 12;
-
+        {           
             if (_isShowTable)
             {
                 CreateTable();
             }
             else
             {
+                moveTitle = 12;
                 menu = new(2,11,false);
                 menu.ItemsMenu = new()
                 {
@@ -115,24 +122,22 @@ namespace PilotProject.Pages.Menu
             _filterDrinks = _filter switch
             {
                 CategoryDrink.All => _drinks,
-                CategoryDrink.Soda => ShowSoda(),
-                CategoryDrink.Juice => ShowJuice(),
-                CategoryDrink.Water => ShowWater(),
-                CategoryDrink.Energy => ShowEnergy(),
+                CategoryDrink.Soda => CategorySearch(CategoryDrink.Soda),
+                CategoryDrink.Juice => CategorySearch(CategoryDrink.Juice),
+                CategoryDrink.Water => CategorySearch(CategoryDrink.Water),
+                CategoryDrink.Energy => CategorySearch(CategoryDrink.Energy),
                 _ => throw new NotImplementedException()
             };
-
+          
             foreach (var drink in _filterDrinks)
             {
                 menu.ItemsMenu.Add(table.AddRow(drink.Name, drink.Volume, drink.Price, drink.Subcategory));
             }
-
+           
             menu.ItemsMenu.Add(table.AddEndLine());
         }
    
-        private IEnumerable<Drink> ShowSoda() => _drinks.Where(drink => drink.Subcategory == "Soda");
-        private IEnumerable<Drink> ShowJuice() => _drinks.Where(drink => drink.Subcategory == "Juice");
-        private IEnumerable<Drink> ShowWater() => _drinks.Where(drink => drink.Subcategory == "Water");
-        private IEnumerable<Drink> ShowEnergy() => _drinks.Where(drink => drink.Subcategory == "Energy");
+        public IEnumerable<Drink> CategorySearch(CategoryDrink category) => _drinks.Where(drink => drink.Subcategory.Equals(category.ToString(), StringComparison.OrdinalIgnoreCase));
+
     }
 }

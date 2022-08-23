@@ -8,6 +8,7 @@ namespace PilotProject.FoodMenu
 {
     internal abstract class Product
     {
+        
         public int Id { get; private set; }
         public string Name { get; private set; }
         public double Price { get; private set; }

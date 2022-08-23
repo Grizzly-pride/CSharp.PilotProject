@@ -12,6 +12,7 @@ namespace PilotProject.Pages.Menu
 
         public OrderBasketPage(PageController controller) : base(controller)
         {
+
         }
 
         public override void Enter()
@@ -27,6 +28,11 @@ namespace PilotProject.Pages.Menu
         public override void Exit()
         {
             base.Exit();
+        }
+
+        public override void CreateWindow()
+        {
+            
         }
     }
 }
