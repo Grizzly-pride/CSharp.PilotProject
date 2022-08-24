@@ -41,17 +41,10 @@ namespace PilotProject.Builders
 
         public void SetCursorVisible(bool visible) => CursorVisible = visible;
        
-        public void SetCursorPosition(int row, int column)
+        public void SetCursorPosition(int posX, int posY)
         {
-            if (row > 0)
-            {
-                CursorTop = row;
-            }
-
-            if (column > 0)
-            {
-                CursorLeft = column;
-            }
+            CursorTop = Math.Abs(posX);
+            CursorLeft = Math.Abs(posY);
         }
         
         private void DrawMenu()
@@ -96,7 +89,6 @@ namespace PilotProject.Builders
                     {
                         _selectedIndex = ItemsMenu.Count - (1 + limDown);
                     }
-
                 }
                 else if (keyPressed.Equals(ConsoleKey.DownArrow)) //move down
                 {

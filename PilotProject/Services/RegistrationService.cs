@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using PilotProject.Interfaces;
 using System.Text.RegularExpressions;
-using static System.Console;
 using PilotProject.DBContext;
+using static System.Console;
 
 namespace PilotProject.Services
 {

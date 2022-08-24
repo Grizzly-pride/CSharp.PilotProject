@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PilotProject.Pages.Menu;
-using PilotProject.Pages.Forms;
 using PilotProject.Pages;
 
 namespace PilotProject
@@ -18,14 +16,12 @@ namespace PilotProject
         OrderBasket,
         Drinks,
         Pizzas,
-        Cross
     }
 
     internal sealed class PageController
     {
         public BasePage? CurrentPage { get; private set; }
         public Dictionary<Page, BasePage> PageCollection { get; private set; } 
-        public Page PreviousPage { get; set; }  
 
         public void InitializationPages()
         {
@@ -36,7 +32,6 @@ namespace PilotProject
                 [Page.Registration] = new RegistrationPage(this),
                 [Page.LoginPage] = new LoginPage(this),
                 [Page.OrderBasket] = new OrderBasketPage(this),
-                [Page.Cross] = new CrossPage(this),
                 [Page.Drinks] = new DrinksPage(this),
                 [Page.Pizzas] = new PizzasPage(this)
             };

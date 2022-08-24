@@ -13,9 +13,6 @@ namespace PilotProject
     {
         private static Dictionary<Product, uint> _products = new();
          
-        public static string UserName { get; set; } = string.Empty;
-
-        public static bool IsAuthorization() => !UserName.Equals(string.Empty);
 
         public void AddProduct(Product product, uint count = 1) 
         {

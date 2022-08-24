@@ -11,7 +11,7 @@ using PilotProject.Interfaces;
 using static System.Console;
 
 
-namespace PilotProject.Pages.Menu
+namespace PilotProject.Pages
 {
     enum CategoryPizzas
     {
@@ -64,13 +64,13 @@ namespace PilotProject.Pages.Menu
                     case 3: _isShowTable = true; _filter = CategoryPizzas.Meat; Enter(); break;
                     case 4: _isShowTable = true; _filter = CategoryPizzas.All; Enter(); break;
                     case 5: controller.TransitionToPage(Page.Main); break;
-                }               
+                }
             }
         }
 
         public override void Exit()
         {
-            base.Exit();           
+            base.Exit();
             menu.ResetSelectIndex();
         }
 
@@ -122,7 +122,7 @@ namespace PilotProject.Pages.Menu
             };
 
             foreach (var pizza in _filterPizzas)
-            {                
+            {
                 menu.ItemsMenu.Add(table.AddRow(pizza.Name, pizza.Size, pizza.Dough, pizza.Price, pizza.Subcategory));
             }
 

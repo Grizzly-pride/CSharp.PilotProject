@@ -11,7 +11,8 @@ using PilotProject.Interfaces;
 using static System.Console;
 
 
-namespace PilotProject.Pages.Menu
+
+namespace PilotProject.Pages
 {
     enum CategoryDrink
     {
@@ -24,7 +25,7 @@ namespace PilotProject.Pages.Menu
 
     internal class DrinksPage : BasePage, IFilterProduct<Drink, CategoryDrink>
     {
-        private bool _isShowTable = false;       
+        private bool _isShowTable = false;
         private readonly List<Drink> _drinks;
         private IEnumerable<Drink> _filterDrinks;
         private CategoryDrink _filter;
@@ -44,22 +45,40 @@ namespace PilotProject.Pages.Menu
         }
 
         public override void UpdateMenu()
-        {                       
+        {
             base.UpdateMenu();
 
             if (_isShowTable)
             {
-                switch (selectedItem)
+                if(selectedItem == -1)
                 {
-                    case -1: _isShowTable = false; Enter(); break;
-                    default:
-                        //TODO
-                        Drink addDrink = _filterDrinks.ElementAt(selectedItem);
-                        Console.WriteLine(addDrink.Name);
-                        Console.ReadKey();
-                        ReadKey();
+                    _isShowTable = false;
+                    Enter();
+                }
+                else
+                {                   
+                    Clear();
+                    Drink selDrink = _filterDrinks.ElementAt(selectedItem);
+                    CrossPage.Title($"Add {selDrink.Name} to cart?", 7, ConsoleColor.White);
+                    if(CrossPage.YesOrNo(2, 12))
+                    {
+                        if (Account.IsAuthorization())
+                        {
+                            //TODO
+                        }
+                        else
+                        {
+                            Clear();
+                            CrossPage.Title("You must be logged in to add to cart.", 7, ConsoleColor.Red);
+                            CrossPage.Title("Press enter to continue.", 12, ConsoleColor.White);
+                            ReadKey();
+                            Enter();
+                        }                     
+                    }
+                    else
+                    {
                         Enter();
-                        break;
+                    }
                 }
             }
             else
@@ -73,7 +92,7 @@ namespace PilotProject.Pages.Menu
                     case 4: _isShowTable = true; _filter = CategoryDrink.All; Enter(); break;
                     case 5: controller.TransitionToPage(Page.Main); break;
                 }
-            }       
+            }
         }
 
         public override void Exit()
@@ -83,7 +102,7 @@ namespace PilotProject.Pages.Menu
         }
 
         public override void CreateWindow()
-        {           
+        {
             if (_isShowTable)
             {
                 CreateTable();
@@ -91,7 +110,7 @@ namespace PilotProject.Pages.Menu
             else
             {
                 moveTitle = 12;
-                menu = new(2,11,false);
+                menu = new(2, 11, false);
                 menu.ItemsMenu = new()
                 {
                     "Soda",
@@ -128,16 +147,15 @@ namespace PilotProject.Pages.Menu
                 CategoryDrink.Energy => CategorySearch(CategoryDrink.Energy),
                 _ => throw new NotImplementedException()
             };
-          
+
             foreach (var drink in _filterDrinks)
             {
                 menu.ItemsMenu.Add(table.AddRow(drink.Name, drink.Volume, drink.Price, drink.Subcategory));
             }
-           
+
             menu.ItemsMenu.Add(table.AddEndLine());
         }
-   
-        public IEnumerable<Drink> CategorySearch(CategoryDrink category) => _drinks.Where(drink => drink.Subcategory.Equals(category.ToString(), StringComparison.OrdinalIgnoreCase));
 
+        public IEnumerable<Drink> CategorySearch(CategoryDrink category) => _drinks.Where(drink => drink.Subcategory.Equals(category.ToString(), StringComparison.OrdinalIgnoreCase));
     }
 }
