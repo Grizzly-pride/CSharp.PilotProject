@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Console;
+using System.Text.RegularExpressions;
 
-namespace PilotProject.Pages.Menu
+namespace PilotProject.Pages
 {
-    internal class CrossPage : BasePage
+    internal class AuthorizationPage : BasePage
     {
-        public override string TitlePage => "Do you want to try again?";
-        public CrossPage(PageController controller) : base(controller)
+        public override string TitlePage => "AUTHORIZATION";
+
+        public AuthorizationPage(PageController controller) : base(controller)
         {
             CreateWindow();
         }
@@ -25,8 +28,9 @@ namespace PilotProject.Pages.Menu
 
             switch (selectedItem)
             {
-                case 0: controller.TransitionToPage(controller.PreviousPage); break;
-                case 1: controller.TransitionToPage(Page.Main); break;
+                case 0: controller.TransitionToPage(Page.LoginPage); break;
+                case 1: controller.TransitionToPage(Page.Registration); break;
+                case 2: controller.TransitionToPage(Page.Main); break;
             }
         }
 
@@ -38,12 +42,13 @@ namespace PilotProject.Pages.Menu
 
         public override void CreateWindow()
         {
-            moveTitle = 5;
-            menu = new(2, 13, false);
+            moveTitle = 9;
+            menu = new(2, 11, false);
             menu.ItemsMenu = new()
             {
-                "Yes",
-                "No"
+                "Login",
+                "Registration",
+                "Back"
             };
         }
     }

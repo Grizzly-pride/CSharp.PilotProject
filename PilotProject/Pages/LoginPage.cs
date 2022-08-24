@@ -7,7 +7,7 @@ using PilotProject.DBContext;
 using PilotProject.Services;
 using static System.Console;
 
-namespace PilotProject.Pages.Forms
+namespace PilotProject.Pages
 {
     internal class LoginPage : BasePage
     {
@@ -21,10 +21,11 @@ namespace PilotProject.Pages.Forms
         public override void Enter()
         {
             CursorVisible = true;
+            Clear();
             UpdateForm();
         }
         public override void UpdateForm()
-        {           
+        {
             base.UpdateForm();
 
             for (int i = 0; i < itemsForm.Length; i++)
@@ -42,7 +43,7 @@ namespace PilotProject.Pages.Forms
             if (Authentication())
             {
                 ForegroundColor = ConsoleColor.Blue;
-                WriteLine("Successful login");             
+                WriteLine("Successful login");
                 ReadKey();
                 controller.TransitionToPage(Page.Main);
             }
@@ -51,7 +52,15 @@ namespace PilotProject.Pages.Forms
                 ForegroundColor = ConsoleColor.Red;
                 WriteLine("Invalid password or username!");
                 ReadKey();
-                controller.TransitionToPage(Page.Cross);
+                Clear();
+
+                CrossPage.Title("Do you want to try again?", 5, ConsoleColor.White);
+
+                switch (CrossPage.YesOrNo(2, 12))
+                {
+                    case true: Enter(); break;
+                    case false: controller.TransitionToPage(Page.Authorization); break;
+                }
             }
         }
 
@@ -74,16 +83,15 @@ namespace PilotProject.Pages.Forms
             {
                 if (user.Name.Equals(_name) && user.Password.Equals(_password))
                 {
-                    OrderBasketRepository.UserName = user.Name;
+                    Account.UserName = user.Name;
                     return true;
                 }
-            }         
+            }
             return false;
         }
 
         public override void Exit()
         {
-            controller.PreviousPage = Page.LoginPage;
             base.Exit();
         }
     }

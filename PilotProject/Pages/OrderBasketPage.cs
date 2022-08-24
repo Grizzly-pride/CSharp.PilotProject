@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PilotProject.Pages.Menu
+namespace PilotProject.Pages
 {
     internal class OrderBasketPage : BasePage
     {
@@ -32,7 +32,7 @@ namespace PilotProject.Pages.Menu
 
         public override void CreateWindow()
         {
-            
+
         }
     }
 }

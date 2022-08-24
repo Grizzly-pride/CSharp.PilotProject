@@ -8,10 +8,10 @@ using static System.Console;
 using PilotProject.Services;
 using PilotProject.DBContext;
 
-namespace PilotProject.Pages.Forms
+namespace PilotProject.Pages
 {
     internal class RegistrationPage : BasePage
-    {       
+    {
         private string _name;
         private string _password;
         private string _email;
@@ -25,8 +25,9 @@ namespace PilotProject.Pages.Forms
 
         public override void Enter()
         {
-            CursorVisible = true;            
-            UpdateForm();           
+            CursorVisible = true;
+            Clear();
+            UpdateForm();
         }
 
         public override void UpdateForm()
@@ -52,7 +53,7 @@ namespace PilotProject.Pages.Forms
                 ApplicationContext db = new();
                 db.Add(newUser);
                 db.SaveChanges();
-              
+
                 ForegroundColor = ConsoleColor.Blue;
                 WriteLine("Registration successful.");
                 ReadKey();
@@ -61,7 +62,15 @@ namespace PilotProject.Pages.Forms
             else
             {
                 ReadKey();
-                controller.TransitionToPage(Page.Cross);
+                Clear();
+
+                CrossPage.Title("Do you want to try again?", 5, ConsoleColor.White);
+
+                switch (CrossPage.YesOrNo(2, 12))
+                {
+                    case true: Enter(); break;
+                    case false: controller.TransitionToPage(Page.Authorization); break;
+                }
             }
         }
 
@@ -107,20 +116,17 @@ namespace PilotProject.Pages.Forms
             {
                 isValid = false;
                 WriteLine("- Invalid Password! Password length is less than 7 symbols.");
-            }                         
-            return isValid; 
+            }
+            return isValid;
         }
 
         public override void Exit()
         {
-            controller.PreviousPage = Page.Registration;
             base.Exit();
-            
         }
 
- 
 
-     
+
         /*
         private string ParsToNumber(string numberPhone)
         {
@@ -129,38 +135,38 @@ namespace PilotProject.Pages.Forms
             String formattedPhone = phoneUtil.Format(numberProto, PhoneNumberFormat.INTERNATIONAL);
             return formattedPhone;
         }
-        */ 
-        
-         /*
-        private bool IsValidPhone(string strNum)
-        {
-            int countNum = 9;
-            int counter = 0;
-            char[] chars = strNum.ToCharArray();
-
-            for (int i = 0; i < chars.Length;)
-            {
-                if (!char.IsDigit(chars[i]))
-                {
-                    ForegroundColor = ConsoleColor.Red;
-                    WriteLine("Invalid phone number! Must contain only digits.");
-                    return false;
-                }
-                i++;
-                counter = i;
-            }
-
-            if (!counter.Equals(countNum))
-            {
-                ForegroundColor = ConsoleColor.Red;
-                WriteLine("Invalid phone number! Must contain 9 digits.");
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
         */
+
+        /*
+       private bool IsValidPhone(string strNum)
+       {
+           int countNum = 9;
+           int counter = 0;
+           char[] chars = strNum.ToCharArray();
+
+           for (int i = 0; i < chars.Length;)
+           {
+               if (!char.IsDigit(chars[i]))
+               {
+                   ForegroundColor = ConsoleColor.Red;
+                   WriteLine("Invalid phone number! Must contain only digits.");
+                   return false;
+               }
+               i++;
+               counter = i;
+           }
+
+           if (!counter.Equals(countNum))
+           {
+               ForegroundColor = ConsoleColor.Red;
+               WriteLine("Invalid phone number! Must contain 9 digits.");
+               return false;
+           }
+           else
+           {
+               return true;
+           }
+       }
+       */
     }
 }

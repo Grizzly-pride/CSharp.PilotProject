@@ -20,7 +20,6 @@ namespace PilotProject.Pages
         protected MenuBuilder menu;
         protected TableBuilder table;
         protected PageController controller;
-        protected OrderBasketRepository orderBasket;
         protected ApplicationContext dataBase;
 
         public abstract string TitlePage { get; }
@@ -38,13 +37,13 @@ namespace PilotProject.Pages
         public virtual void UpdateMenu()
         {
             
-            WriteLine($"{new String(' ', moveTitle)}~[{TitlePage}]~  user: {OrderBasketRepository.UserName}\n");
+            WriteLine($"{new String(' ', moveTitle)}~[{TitlePage}]~  user: {Account.UserName}\n");
             selectedItem = menu.RunMenu();
         }
 
         public virtual void UpdateForm()
         {           
-            WriteLine($"{new String(' ', moveTitle)}~[{TitlePage}]~  user: {OrderBasketRepository.UserName}\n");
+            WriteLine($"{new String(' ', moveTitle)}~[{TitlePage}]~  user: {Account.UserName}\n");
             ForegroundColor = ConsoleColor.Green;
         }
 
