@@ -9,12 +9,11 @@ using PilotProject.DBContext;
 
 namespace PilotProject
 {
-    internal sealed class OrderBasketRepository: IOrderBasketRepository<Product, uint>
+    internal sealed class OrderBasketRepository: IOrderBasketRepository<Product, int>
     {
-        private static Dictionary<Product, uint> _products = new();
+        private static Dictionary<Product, int> _products = new();
          
-
-        public void AddProduct(Product product, uint count = 1) 
+        public void AddProduct(Product product, int count = 1) 
         {
             if (_products.ContainsKey(product))
             {
@@ -26,10 +25,10 @@ namespace PilotProject
             }
         }
 
-        public void DeleteProduct(Product product, uint count = 1) => _products.Remove(product);
+        public void DeleteProduct(Product product, int count = 1) => _products.Remove(product);
 
 
-        public Dictionary<Product, uint> GetProducts() => _products;    
+        public Dictionary<Product, int> GetProducts() => _products;    
   
 
         public void UpdateProduct(Product product)

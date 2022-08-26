@@ -43,14 +43,14 @@ namespace PilotProject.Pages
             if (Authentication())
             {
                 ForegroundColor = ConsoleColor.Blue;
-                WriteLine("Successful login");
+                WriteLine("- Successful login");
                 ReadKey();
                 controller.TransitionToPage(Page.Main);
             }
             else
             {
                 ForegroundColor = ConsoleColor.Red;
-                WriteLine("Invalid password or username!");
+                WriteLine("- Invalid password or username!");
                 ReadKey();
                 Clear();
 
@@ -76,8 +76,9 @@ namespace PilotProject.Pages
 
         private bool Authentication()
         {
-            ApplicationContext db = new();
-            List<User> users = db.Users.ToList();
+            dataBase = new();
+            List<User> users = dataBase.Users.ToList();
+            dataBase.Dispose();
 
             foreach (var user in users)
             {

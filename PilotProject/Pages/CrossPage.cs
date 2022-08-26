@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
 using PilotProject.Builders;
+using PilotProject.FoodMenu;
 
 namespace PilotProject.Pages
 {
@@ -16,12 +17,12 @@ namespace PilotProject.Pages
             WriteLine($"{new string(' ', moveTitle)} {title}\n");
         }
 
-        public static bool YesOrNo(int y, int x)
+        public static bool YesOrNo(int posX, int posY)
         {
             ResetColor();
             CursorVisible = false;
 
-            MenuBuilder menu = new(y, x, false)
+            MenuBuilder menu = new(posX, posY, false)
             {
                 ItemsMenu = new(2) { "Yes", "No" }
             };
@@ -30,17 +31,43 @@ namespace PilotProject.Pages
         }
 
 
-        public static int EnterNumber(int posX, int posY)
+        public static int EnterNumber(int posX, int posY, bool horizont)
         {
-            CursorTop = Math.Abs(posX);
-            CursorLeft = Math.Abs(posY);
+            NumericBuilder numeric = new(posX, posY, false)
+            {
+                ItemsRange = new(1, int.MaxValue)
+            };
 
-            ResetColor();
-            CursorVisible = true;
-
-            return Read();
+            return numeric.RunNumeric(false);
         }
 
+        public static void AddingProductToCart(Product product)
+        {
+            Clear();
+            Title($"Add {product.Name} to cart?", 7, ConsoleColor.White);
 
+            if (YesOrNo(2, 12))
+            {
+                if (Account.IsAuthorization())
+                {
+                    Clear();
+                    Title($"How many {product.Name} to add to cart?", 7, ConsoleColor.White);
+                    int count = EnterNumber(2, 10, false);
+
+                    Account.OrderBasket.AddProduct(product, count);
+                    Title($"{count} {product.Name} have been added to your cart.", 7, ConsoleColor.Blue);
+                    ReadKey();
+                }
+                else
+                {
+                    Clear();
+                    Title("You must be logged in to add to cart.", 7, ConsoleColor.Red);
+                    Title("Press enter to continue.", 12, ConsoleColor.White);
+                    ReadKey();
+                }
+            }
+
+        }
+ 
     }
 }

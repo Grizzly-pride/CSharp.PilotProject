@@ -22,7 +22,7 @@ namespace PilotProject.Pages
         All
     }
 
-    internal class PizzasPage : BasePage, IFilterProduct<Pizza, CategoryPizzas>
+    internal sealed class PizzasPage : BasePage, IFilterProduct<Pizza, CategoryPizzas>
     {
         private bool _isShowTable = false;
         private readonly List<Pizza> _pizzas;

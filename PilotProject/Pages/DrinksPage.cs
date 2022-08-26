@@ -23,7 +23,7 @@ namespace PilotProject.Pages
         All
     }
 
-    internal class DrinksPage : BasePage, IFilterProduct<Drink, CategoryDrink>
+    internal sealed class DrinksPage : BasePage, IFilterProduct<Drink, CategoryDrink>
     {
         private bool _isShowTable = false;
         private readonly List<Drink> _drinks;
@@ -35,6 +35,7 @@ namespace PilotProject.Pages
         {
             dataBase = new();
             _drinks = dataBase.Drinks.ToList();
+            dataBase.Dispose();
         }
 
         public override void Enter()
@@ -56,29 +57,9 @@ namespace PilotProject.Pages
                     Enter();
                 }
                 else
-                {                   
-                    Clear();
-                    Drink selDrink = _filterDrinks.ElementAt(selectedItem);
-                    CrossPage.Title($"Add {selDrink.Name} to cart?", 7, ConsoleColor.White);
-                    if(CrossPage.YesOrNo(2, 12))
-                    {
-                        if (Account.IsAuthorization())
-                        {
-                            //TODO
-                        }
-                        else
-                        {
-                            Clear();
-                            CrossPage.Title("You must be logged in to add to cart.", 7, ConsoleColor.Red);
-                            CrossPage.Title("Press enter to continue.", 12, ConsoleColor.White);
-                            ReadKey();
-                            Enter();
-                        }                     
-                    }
-                    else
-                    {
-                        Enter();
-                    }
+                {                                      
+                    CrossPage.AddingProductToCart(_filterDrinks.ElementAt(selectedItem));
+                    Enter();
                 }
             }
             else

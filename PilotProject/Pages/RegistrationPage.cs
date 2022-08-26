@@ -50,12 +50,13 @@ namespace PilotProject.Pages
             if (CheckData())
             {
                 User newUser = new(_name, _email, _password);
-                ApplicationContext db = new();
-                db.Add(newUser);
-                db.SaveChanges();
+                dataBase = new();
+                dataBase.Add(newUser);
+                dataBase.SaveChanges();
+                dataBase.Dispose();
 
                 ForegroundColor = ConsoleColor.Blue;
-                WriteLine("Registration successful.");
+                WriteLine("- Registration successful.");
                 ReadKey();
                 controller.TransitionToPage(Page.Authorization);
             }

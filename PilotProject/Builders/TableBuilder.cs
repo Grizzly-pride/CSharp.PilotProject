@@ -12,7 +12,7 @@ using PilotProject.CustomExeptions;
 
 namespace PilotProject.Builders
 {
-    internal class TableBuilder
+    sealed class TableBuilder
     {
         #region Line items
         private const string TopLeftJoint = "┌";

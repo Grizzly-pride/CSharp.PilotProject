@@ -10,9 +10,14 @@ namespace PilotProject.Extensions
     {
         public static object StringCut(this string str, int value)
         {
-            return
-                value > 3 && str.Length > value ?
-                str.Substring(0, value - 3) + "..." : str;
+            if(value > 3 && str.Length > value)
+            {
+                return string.Concat(str.AsSpan(0, value - 3), "...");
+            }
+            else
+            {
+                return str;
+            }
         }
     }
 }
