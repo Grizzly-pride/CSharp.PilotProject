@@ -12,6 +12,7 @@ namespace PilotProject.DBContext
     internal sealed class ApplicationContext : DbContext
     {
         private string _dataBasePath = @"Data Source=D:\IT Academy Project\PilotProject\DataBase\dotnetpizza.db";
+
         public DbSet<User> Users => Set<User>();
         public DbSet<Drink> Drinks => Set<Drink>();
         public DbSet<Pizza> Pizzas => Set<Pizza>();

@@ -7,67 +7,30 @@ using static System.Console;
 
 namespace PilotProject.Builders
 {
-    internal class MenuBuilder
+    public sealed class MenuBuilder : ControlHandlerBuilder
     {
-        private int _selectedIndex;
-        private int _limitUp;
-        private int _limitDown;
-        private bool _quitOn;
+        private readonly int _limitUp;
+        private readonly int _limitDown;
 
-        private readonly int _posY;
-        private readonly int _posX;
         public List<object> ItemsMenu { get; set; }
 
-        public MenuBuilder(int row, int col, int limitUp, int limitDown, bool quitOn)
-        {
-            _limitUp = limitUp;
-            _limitDown = limitDown;
-            _selectedIndex = limitUp;
-            _quitOn = quitOn;
-            _posX = row;
-            _posY = col;
-            
-        }
-
-        public MenuBuilder(int posX, int posY, bool quitOn)
+        public MenuBuilder(int posX, int posY, bool quitOn) : base(posX, posY, quitOn)
         {
             _limitUp = 0;
             _limitDown = 0;
             _selectedIndex = 0;
-            _quitOn = quitOn;
-            _posX = posX;
-            _posY = posY;
         }
-
-        public void SetCursorVisible(bool visible) => CursorVisible = visible;
        
-        public void SetCursorPosition(int posX, int posY)
+        public MenuBuilder(int posX, int posY, int limitUp, int limitDown, bool quitOn) : base(posX, posY, quitOn) 
         {
-            CursorTop = Math.Abs(posX);
-            CursorLeft = Math.Abs(posY);
-        }
-        
-        private void DrawMenu()
-        {
-            char pointer = ' ';
-
-            for (int i = 0; i < ItemsMenu.Count; i++)
-            {
-                SetCursorPosition(_posX + i, _posY);
-                ForegroundColor = ConsoleColor.Green;
-                if (i == _selectedIndex)
-                {
-                    ForegroundColor = ConsoleColor.Yellow;
-                    pointer = '►';
-                }
-
-                WriteLine($"{pointer}  {ItemsMenu[i]}");
-                pointer = ' ';
-
-                ResetColor();
-            }
+            _limitUp = limitUp;
+            _limitDown = limitDown;
+            _selectedIndex = limitUp;        
         }
 
+        public override void ResetSelectIndex() => _selectedIndex = _limitUp;
+
+  
         public int RunMenu()
         {
             bool IsChose = false;
@@ -112,8 +75,29 @@ namespace PilotProject.Builders
             }
 
             return _selectedIndex - limUp;
-        }
+        }       
 
-        public void ResetSelectIndex() => _selectedIndex = _limitUp;
+        private void DrawMenu()
+        {
+            char pointer = ' ';
+
+            for (int i = 0; i < ItemsMenu.Count; i++)
+            {
+                SetCursorPosition(_posX + i, _posY);
+                ForegroundColor = ConsoleColor.Green;
+                if (i == _selectedIndex)
+                {
+                    ForegroundColor = ConsoleColor.Yellow;
+                    pointer = '►';
+                }
+
+                WriteLine($"{pointer}  {ItemsMenu[i]}");
+                pointer = ' ';
+
+                ResetColor();
+            }
+        
+        }
+        
     }
 }

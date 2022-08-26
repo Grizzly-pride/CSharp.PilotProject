@@ -8,6 +8,7 @@ using System.Text;
 using System;
 using System.Data;
 using Microsoft.Data.Sqlite;
+using PilotProject.Builders;
 
 #region Drink
 /*
@@ -218,6 +219,13 @@ Console.WriteLine("{0,"+n + "}|{1,"+ n + "}", Variable1, Variable2);
 
 Main.Run();
 
+
+/*
+NumericBuilder numeric = new(5, 7, false);
+numeric.ItemsRange = new(0, int.MaxValue);
+numeric.SetCursorVisible(false);
+numeric.RunNumeric(true);
+*/
 
 
 
