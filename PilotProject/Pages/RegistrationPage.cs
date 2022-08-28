@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using static System.Console;
 using PilotProject.Services;
 using PilotProject.DBContext;
+using static PilotProject.Pages.PageItems;
 
 namespace PilotProject.Pages
 {
@@ -25,8 +26,8 @@ namespace PilotProject.Pages
 
         public override void Enter()
         {
+            base.Enter();
             CursorVisible = true;
-            Clear();
             UpdateForm();
         }
 
@@ -55,8 +56,7 @@ namespace PilotProject.Pages
                 dataBase.SaveChanges();
                 dataBase.Dispose();
 
-                ForegroundColor = ConsoleColor.Blue;
-                WriteLine("- Registration successful.");
+                WriteText("- Registration successful.", 1, ConsoleColor.Blue);
                 ReadKey();
                 controller.TransitionToPage(Page.Authorization);
             }
@@ -65,9 +65,9 @@ namespace PilotProject.Pages
                 ReadKey();
                 Clear();
 
-                CrossPage.Title("Do you want to try again?", 5, ConsoleColor.White);
+                WriteText("Do you want to try again?", 5, ConsoleColor.White);
 
-                switch (CrossPage.YesOrNo(2, 12))
+                switch (YesOrNo(2, 12))
                 {
                     case true: Enter(); break;
                     case false: controller.TransitionToPage(Page.Authorization); break;
@@ -80,50 +80,49 @@ namespace PilotProject.Pages
             moveTitle = 9;
             itemsForm = new string[]
             {
-                " Name",
-                " Email",
-                " Password"
+                ReturnText("Name",3),
+                ReturnText("Email",3),
+                ReturnText("Password",3),
             };
         }
 
         private bool CheckData()
         {
             bool isValid = true;
-            ForegroundColor = ConsoleColor.Red;
-
+            int moveText = 2;
             RegistrationService authenticServ = new();
 
             if (!authenticServ.IsUniqueNameInDB(_name))
             {
                 isValid = false;
-                WriteLine("- Name taken! Please enter another name.");
+                WriteText("- Name taken! Please enter another name.", moveText, ConsoleColor.Red);
             }
             if (!authenticServ.IsUniqueEmailInDB(_email))
             {
                 isValid = false;
-                WriteLine("- This email is used another user! Please enter another email.");
+                WriteText("- This email is used another user! Please enter another email.", moveText, ConsoleColor.Red);
             }
             if (!authenticServ.IsValidName(_name))
             {
                 isValid = false;
-                WriteLine("- Invalid Name! Name not provided.");
+                WriteText("- Invalid Name! Name not provided.", moveText, ConsoleColor.Red);
             }
             if (!authenticServ.IsValidEmail(_email))
             {
                 isValid = false;
-                WriteLine("- Invalid Email! example@mail.com");
+                WriteText("- Invalid Email! example@mail.com", moveText, ConsoleColor.Red);
             }
             if (!authenticServ.IsValidPass(_password))
             {
                 isValid = false;
-                WriteLine("- Invalid Password! Password length is less than 7 symbols.");
+                WriteText("- Invalid Password! Password length is less than 7 symbols.", moveText, ConsoleColor.Red);
             }
             return isValid;
         }
 
         public override void Exit()
         {
-            base.Exit();
+            //base.Exit();
         }
 
 

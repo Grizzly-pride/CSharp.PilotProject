@@ -68,15 +68,14 @@ namespace PilotProject.Builders
             }
         }
 
-   
-        private StringBuilder _sb = new();     
-
+        private StringBuilder _sb = new();
+       
         public TableBuilder(int columnsCount)
         {
             _headers = new string[columnsCount]; 
             _columnSizes = new int[columnsCount];
+            _sb.Capacity = Math.Abs(_columnSizes.Sum());
         }
-
 
         #region Return string
         public string AddHeader()
@@ -100,7 +99,6 @@ namespace PilotProject.Builders
             return _sb.ToString();
         }
 
-
         public string AddRow(params object[] items)
         {
             _sb.Clear();
@@ -122,9 +120,24 @@ namespace PilotProject.Builders
         public string AddTopLine() => Line(TopLeftJoint, TopJoint, TopRightJoint);
         public string AddMiddleLine() => Line(LeftJoint, MiddleJoint, RightJoint);
         public string AddEndLine() => Line(BottomLeftJoint, BottomJoint, BottomRightJoint);
+        public string AddCrossSmoothLine() => Line(LeftJoint, BottomJoint, RightJoint);
+        public string AddSmootMiddleLine() => Line(LeftJoint, HorizontalLine, RightJoint);
+        public string AddSmoothTopLine() => Line(TopLeftJoint, HorizontalLine, TopRightJoint);
+        public string AddSmoothEndLine() => Line(BottomLeftJoint, HorizontalLine, BottomRightJoint);
+        public string AddTextLine(string text, int moveRight = 0)
+        {
+            _sb.Clear();
+            int countSimbols = Math.Abs(_columnSizes.Sum()) + _columnSizes.Length - 1;
+            _sb.Append(VerticalLine);
+            _sb.Append(' ', moveRight);
+            _sb.Append(text);
+            _sb.Append(' ', countSimbols - (text.Length + moveRight));
+            _sb.Append(VerticalLine);
+            return _sb.ToString();
+        }
         #endregion
 
-        #region Print
+        #region Print           
         public void PrintHeader()
         {
             WriteLine(AddTopLine(), "\n");
@@ -147,7 +160,6 @@ namespace PilotProject.Builders
 
             WriteLine(AddMiddleLine());
         }
-
 
         public void PrintRow(params object[] items)
         {
@@ -172,6 +184,7 @@ namespace PilotProject.Builders
         private string Line(string leftJoint, string midleJoint, string rightJoint)
         {
             _sb.Clear();
+            _sb.Capacity = Math.Abs(_columnSizes.Sum());
             
             for (int column = 0; column < _columnSizes.Length; column++)
             {
@@ -207,6 +220,6 @@ namespace PilotProject.Builders
                 }
             }
             return _sb.ToString();
-        }
+        }            
     }
 }

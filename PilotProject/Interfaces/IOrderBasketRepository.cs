@@ -11,7 +11,7 @@ namespace PilotProject.Interfaces
     {
         Dictionary<Tk,Tv> GetProducts();
         void AddProduct(Tk product, Tv count);
-        void DeleteProduct(Tk product, Tv count);
-        void UpdateProduct(Tk product);
+        void DeleteProduct(Tk product);
+        void ModifyCountProduct(Tk product, Tv count);
     }
 }

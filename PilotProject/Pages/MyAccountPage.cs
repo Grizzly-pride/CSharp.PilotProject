@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Console;
-using System.Text.RegularExpressions;
 
 namespace PilotProject.Pages
 {
-    internal class AuthorizationPage : BasePage
+    internal class MyAccountPage : BasePage
     {
-        public override string TitlePage => "AUTHORIZATION";
+        public override string TitlePage => "My Account";
 
-        public AuthorizationPage(PageController controller) : base(controller)
+        public MyAccountPage(PageController controller) : base(controller)
         {
             CreateWindow();
         }
@@ -29,8 +27,8 @@ namespace PilotProject.Pages
 
             switch (selectedItem)
             {
-                case 0: controller.TransitionToPage(Page.LoginPage); break;
-                case 1: controller.TransitionToPage(Page.Registration); break;
+                case 0: controller.TransitionToPage(Page.OrderBasket); break;
+                case 1: controller.TransitionToPage(Page.MakeOrder); break;
                 case 2: controller.TransitionToPage(Page.Main); break;
             }
         }
@@ -46,8 +44,8 @@ namespace PilotProject.Pages
             menu = new(2, 11, false);
             menu.ItemsMenu = new()
             {
-                "Login",
-                "Registration",
+                "Order basket",
+                "Make an order",
                 "Back"
             };
         }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PilotProject.DBContext;
 using PilotProject.Services;
 using static System.Console;
+using static PilotProject.Pages.PageItems;
 
 namespace PilotProject.Pages
 {
@@ -20,8 +21,8 @@ namespace PilotProject.Pages
         }
         public override void Enter()
         {
+            base.Enter();
             CursorVisible = true;
-            Clear();
             UpdateForm();
         }
         public override void UpdateForm()
@@ -42,21 +43,19 @@ namespace PilotProject.Pages
 
             if (Authentication())
             {
-                ForegroundColor = ConsoleColor.Blue;
-                WriteLine("- Successful login");
+                WriteText(" - Successful login", 1, ConsoleColor.Blue);
                 ReadKey();
                 controller.TransitionToPage(Page.Main);
             }
             else
             {
-                ForegroundColor = ConsoleColor.Red;
-                WriteLine("- Invalid password or username!");
+                WriteText("- Invalid password or username!", 1, ConsoleColor.Red);
                 ReadKey();
                 Clear();
 
-                CrossPage.Title("Do you want to try again?", 5, ConsoleColor.White);
+                WriteText("Do you want to try again?", 5, ConsoleColor.White);
 
-                switch (CrossPage.YesOrNo(2, 12))
+                switch (YesOrNo(2, 12))
                 {
                     case true: Enter(); break;
                     case false: controller.TransitionToPage(Page.Authorization); break;
@@ -69,8 +68,8 @@ namespace PilotProject.Pages
             moveTitle = 11;
             itemsForm = new string[]
             {
-                " Name",
-                " Password"
+                ReturnText("Name", 3),
+                ReturnText("Password", 3),
             };
         }
 
@@ -93,7 +92,7 @@ namespace PilotProject.Pages
 
         public override void Exit()
         {
-            base.Exit();
+           
         }
     }
 }

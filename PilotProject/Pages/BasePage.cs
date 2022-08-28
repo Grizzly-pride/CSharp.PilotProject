@@ -31,7 +31,9 @@ namespace PilotProject.Pages
 
         public virtual void Enter()
         {
-           
+            CursorVisible = false;
+            ResetColor();
+            Clear();
         }
 
         public virtual void UpdateMenu()
@@ -54,9 +56,7 @@ namespace PilotProject.Pages
 
         public virtual void Exit()
         {
-            CursorVisible = false;  
-            ResetColor();
-            Clear();
+
         }
 
         /*

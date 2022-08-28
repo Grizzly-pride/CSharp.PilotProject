@@ -16,6 +16,8 @@ namespace PilotProject
         OrderBasket,
         Drinks,
         Pizzas,
+        MyAccount,
+        MakeOrder
     }
 
     internal sealed class PageController
@@ -33,7 +35,10 @@ namespace PilotProject
                 [Page.LoginPage] = new LoginPage(this),
                 [Page.OrderBasket] = new OrderBasketPage(this),
                 [Page.Drinks] = new DrinksPage(this),
-                [Page.Pizzas] = new PizzasPage(this)
+                [Page.Pizzas] = new PizzasPage(this),
+                [Page.MyAccount] = new MyAccountPage(this),
+                [Page.MakeOrder] = new MakeOrder(this),
+
             };
         }
 

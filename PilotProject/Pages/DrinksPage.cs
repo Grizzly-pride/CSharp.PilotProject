@@ -9,6 +9,7 @@ using PilotProject.Services;
 using PilotProject.Builders;
 using PilotProject.Interfaces;
 using static System.Console;
+using static PilotProject.Pages.PageItems;
 
 
 
@@ -40,7 +41,7 @@ namespace PilotProject.Pages
 
         public override void Enter()
         {
-            Clear();
+            base.Enter();
             CreateWindow();
             UpdateMenu();
         }
@@ -57,8 +58,27 @@ namespace PilotProject.Pages
                     Enter();
                 }
                 else
-                {                                      
-                    CrossPage.AddingProductToCart(_filterDrinks.ElementAt(selectedItem));
+                {
+                    Product addProduct = _filterDrinks.ElementAt(selectedItem);
+
+                    Clear();
+                    WriteText($"Add {addProduct.Name} to cart?", 7, ConsoleColor.White);
+
+                    if (YesOrNo(2, 12))
+                    {
+                        if (Account.IsAuthorization())
+                        {
+                            Clear();
+                            AddingToCart(addProduct);
+                        }
+                        else
+                        {
+                            Clear();
+                            WriteText("You must be logged in to add to cart.", 7, ConsoleColor.Red);
+                            WriteText("Press enter to continue.", 12, ConsoleColor.White);
+                            ReadKey();
+                        }
+                    }
                     Enter();
                 }
             }
@@ -78,7 +98,6 @@ namespace PilotProject.Pages
 
         public override void Exit()
         {
-            base.Exit();
             menu.ResetSelectIndex();
         }
 
