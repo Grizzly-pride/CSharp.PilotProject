@@ -18,9 +18,11 @@ namespace PilotProject.Pages
 
         public override void Enter()
         {
-            if (!menu.ItemsMenu[0].Equals("Order Basket") && Account.IsAuthorization())
+            base.Enter();
+            if (Account.IsAuthorization() && menu.ItemsMenu.Contains("Authorization"))
             {
-                menu.ItemsMenu.Insert(0, "Order Basket");
+                int index = menu.ItemsMenu.FindIndex(i => i.Equals("Authorization"));
+                menu.ItemsMenu[index] = "My Account";
             }
 
             CursorVisible = false;
@@ -35,20 +37,19 @@ namespace PilotProject.Pages
             {
                 switch (selectedItem)
                 {
-                    case 0: controller.TransitionToPage(Page.OrderBasket); break;
+                    case 0: controller.TransitionToPage(Page.MyAccount); break;
                     case 1: controller.TransitionToPage(Page.Pizzas); break;
                     case 2: controller.TransitionToPage(Page.Drinks); break;
-                    case 3: controller.TransitionToPage(Page.Authorization); break;
-                    case 4: Environment.Exit(0); break;
+                    case 3: Environment.Exit(0); break;
                 }
             }
             else
             {
                 switch (selectedItem)
                 {
-                    case 0: controller.TransitionToPage(Page.Pizzas); break;
+                    case 0: controller.TransitionToPage(Page.Authorization); break;
                     case 1: controller.TransitionToPage(Page.Drinks); break;
-                    case 2: controller.TransitionToPage(Page.Authorization); break;
+                    case 2: controller.TransitionToPage(Page.Pizzas); break;
                     case 3: Environment.Exit(0); break;
                 }
             }
@@ -56,7 +57,6 @@ namespace PilotProject.Pages
 
         public override void Exit()
         {
-            base.Exit();
             menu.ResetSelectIndex();
         }
 
@@ -66,9 +66,9 @@ namespace PilotProject.Pages
             menu = new(2, 11, false);
             menu.ItemsMenu = new()
             {
+                "Authorization",
                 "Pizzas",
                 "Drinks",
-                "Authorization",
                 "Exit"
             };
         }

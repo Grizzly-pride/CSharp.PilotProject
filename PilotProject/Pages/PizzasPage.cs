@@ -9,6 +9,7 @@ using PilotProject.Services;
 using PilotProject.Builders;
 using PilotProject.Interfaces;
 using static System.Console;
+using static PilotProject.Pages.PageItems;
 
 
 namespace PilotProject.Pages
@@ -38,7 +39,7 @@ namespace PilotProject.Pages
 
         public override void Enter()
         {
-            Clear();
+            base.Enter();           
             CreateWindow();
             UpdateMenu();
         }
@@ -49,9 +50,34 @@ namespace PilotProject.Pages
 
             if (_isShowTable)
             {
-                switch (selectedItem)
+                if (selectedItem == -1)
                 {
-                    case -1: _isShowTable = false; Enter(); break;
+                    _isShowTable = false;
+                    Enter();
+                }
+                else
+                {
+                    Product addProduct = _filterPizzas.ElementAt(selectedItem);
+
+                    Clear();
+                    WriteText($"Add {addProduct.Name} to cart?", 7, ConsoleColor.White);
+
+                    if (YesOrNo(2, 12))
+                    {
+                        if (Account.IsAuthorization())
+                        {
+                            Clear();
+                            AddingToCart(addProduct);
+                        }
+                        else
+                        {
+                            Clear();
+                            WriteText("You must be logged in to add to cart.", 7, ConsoleColor.Red);
+                            WriteText("Press enter to continue.", 12, ConsoleColor.White);
+                            ReadKey();
+                        }
+                    }
+                    Enter();
                 }
             }
             else
@@ -99,7 +125,7 @@ namespace PilotProject.Pages
         private void CreateTable()
         {
             table = new(5);
-            table.Headers = new string[] { "Name", "Size/cm", "Dough", "Price", "Category" };
+            table.Headers = new string[] { "Name", "Size/cm", "Crust", "Price", "Category" };
             table.ColumnSizes = new int[] { -18, -7, -11, -5, -10 };
 
             moveTitle = 23;
@@ -123,7 +149,7 @@ namespace PilotProject.Pages
 
             foreach (var pizza in _filterPizzas)
             {
-                menu.ItemsMenu.Add(table.AddRow(pizza.Name, pizza.Size, pizza.Dough, pizza.Price, pizza.Subcategory));
+                menu.ItemsMenu.Add(table.AddRow(pizza.Name, pizza.Size, pizza.Crust, pizza.Price, pizza.Subcategory));
             }
 
             menu.ItemsMenu.Add(table.AddEndLine());

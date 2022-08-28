@@ -4,11 +4,12 @@ using PilotProject.FoodMenu;
 using System.Text;
 
 
-
 using System;
 using System.Data;
 using Microsoft.Data.Sqlite;
 using PilotProject.Builders;
+using System.Collections;
+using System.Collections.Specialized;
 
 #region Drink
 /*
@@ -117,7 +118,7 @@ Pizza pizza2111 = new Pizza("Chicken ranch", "Meat", "Thin", 30, 31.70);
 Pizza pizza2222 = new Pizza("Chicken ranch", "Meat", "Thin", 40, 44.90);
 
 
-ApplicationContext db = new();
+//ApplicationContext db = new();
 db.Add(pizza1);
 db.Add(pizza2);
 db.Add(pizza111);
@@ -168,7 +169,7 @@ db.SaveChanges();
 
 
 /*
-MenuBuilder menu = new(1, 1,4,1);
+MenuBuilder menu = new(1, 1,3,1,false);
 menu.ItemsMenu = new();
 ApplicationContext db = new();
 List<Drink> drink = db.Drinks.ToList();
@@ -189,7 +190,9 @@ for (int i = 0; i < drink.Count; i++)
  
 }
 
-menu.ItemsMenu.Add(table.AddEndLine());
+menu.ItemsMenu.Add(table.AddSmootMiddleLine());
+menu.ItemsMenu.Add(table.AddTextLine("Total: 3333", 15));
+menu.ItemsMenu.Add(table.AddSmoothEndLine());
 int index = menu.RunMenu();
 Console.WriteLine(index);
 */
@@ -212,20 +215,31 @@ foreach (var s in column1)
 
 }
 
-int n
+int n;
 Console.WriteLine("{0,"+n + "}|{1,"+ n + "}", Variable1, Variable2);
-*/
 
 
-Main.Run();
 
 
-/*
 NumericBuilder numeric = new(5, 7, false);
-numeric.ItemsRange = new(0, int.MaxValue);
+numeric.ItemsRange = new(1, int.MaxValue);
 numeric.SetCursorVisible(false);
 numeric.RunNumeric(true);
 */
 
+Main.Run();
+
+/*
+OrderedDictionary myOrdered = new OrderedDictionary();
+myOrdered.Add("1Key", 1);
+myOrdered.Add("2Key", 2);
+myOrdered.Add("3Key", 3);
+myOrdered.Add("4Key", 4);
+myOrdered.Add("5Key", 5);
 
 
+foreach (var item in collection)
+{
+
+}
+*/
