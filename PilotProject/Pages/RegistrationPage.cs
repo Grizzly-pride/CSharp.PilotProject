@@ -31,7 +31,7 @@ namespace PilotProject.Pages
             UpdateForm();
         }
 
-        public override void UpdateForm()
+        public override async void UpdateForm()
         {
             base.UpdateForm();
 
@@ -49,14 +49,20 @@ namespace PilotProject.Pages
             WriteLine();
 
             if (CheckData())
-            {
+            {                
                 User newUser = new(_name, _email, _password);
+
+                FileDataService fd = new();
+                string time = DateTime.UtcNow.ToString("MM/dd/yyyy HH:mm:ss UTC");
+                await fd.ObjectToJsonAsync(DataFile.RegistrationUser, time);
+                await fd.ObjectToJsonAsync(DataFile.RegistrationUser, newUser);
+
                 dataBase = new();
                 dataBase.Add(newUser);
                 dataBase.SaveChanges();
                 dataBase.Dispose();
 
-                WriteText("- Registration successful.", 1, ConsoleColor.Blue);
+                WriteText("- Registration successful.", 5,  ConsoleColor.Blue);
                 ReadKey();
                 controller.TransitionToPage(Page.Authorization);
             }
@@ -67,7 +73,7 @@ namespace PilotProject.Pages
 
                 WriteText("Do you want to try again?", 5, ConsoleColor.White);
 
-                switch (YesOrNo(2, 12))
+                switch (YesOrNo(10, 2))
                 {
                     case true: Enter(); break;
                     case false: controller.TransitionToPage(Page.Authorization); break;
@@ -77,52 +83,58 @@ namespace PilotProject.Pages
 
         public override void CreateWindow()
         {
-            moveTitle = 9;
+            moveTitle = 11;
             itemsForm = new string[]
             {
-                ReturnText("Name",3),
-                ReturnText("Email",3),
-                ReturnText("Password",3),
+                ReturnText("Name",5),
+                ReturnText("Email",5),
+                ReturnText("Password",5),
             };
         }
 
         private bool CheckData()
         {
             bool isValid = true;
-            int moveText = 2;
+            int posX = 5;
+            int posY = 6;
             RegistrationService authenticServ = new();
 
             if (!authenticServ.IsUniqueNameInDB(_name))
             {
+                WriteText("- Name taken! Please enter another name.", posX, posY, ConsoleColor.Red);
                 isValid = false;
-                WriteText("- Name taken! Please enter another name.", moveText, ConsoleColor.Red);
+                posY += 1;
             }
             if (!authenticServ.IsUniqueEmailInDB(_email))
             {
+                WriteText("- This email is used another user! Please enter another email.", posX, posY, ConsoleColor.Red);
                 isValid = false;
-                WriteText("- This email is used another user! Please enter another email.", moveText, ConsoleColor.Red);
+                posY += 1;
             }
             if (!authenticServ.IsValidName(_name))
             {
+                WriteText("- Invalid Name! Name not provided.", posX, posY, ConsoleColor.Red);
                 isValid = false;
-                WriteText("- Invalid Name! Name not provided.", moveText, ConsoleColor.Red);
+                posY += 1;
             }
             if (!authenticServ.IsValidEmail(_email))
             {
+                WriteText("- Invalid Email! example@mail.com", posX, posY, ConsoleColor.Red);
                 isValid = false;
-                WriteText("- Invalid Email! example@mail.com", moveText, ConsoleColor.Red);
+                posY += 1;
             }
             if (!authenticServ.IsValidPass(_password))
             {
+                WriteText("- Invalid Password! Password length is less than 7 symbols.", posX, posY, ConsoleColor.Red);
                 isValid = false;
-                WriteText("- Invalid Password! Password length is less than 7 symbols.", moveText, ConsoleColor.Red);
             }
+            
             return isValid;
         }
 
         public override void Exit()
         {
-            //base.Exit();
+            
         }
 
 

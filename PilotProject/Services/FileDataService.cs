@@ -11,18 +11,45 @@ namespace PilotProject.Services
 {
     enum DataFile
     {
-        Account,
-        Pizza
+        RegistrationUser,
+        Sessions
     }
 
-    internal sealed class FileDataService : ISerializeService<Object, String>, IFileService<DataFile, String>
+    internal sealed class FileDataService : ISerializeService<DataFile, object>
     {
-        public static Dictionary<DataFile, String> Files = new()
+        public Dictionary<DataFile, String> Files = new()
         {
-            [DataFile.Account] = @"D:\IT Academy Project\PilotProject\Data\AccountData.json",
-            [DataFile.Pizza] = @"D:\IT Academy Project\PilotProject\Data\PizzaData.json"
+            [DataFile.RegistrationUser] = @"D:\IT Academy Project\PilotProject\DataJson\RegistrationUserData.json",
+            [DataFile.Sessions] = @"D:\IT Academy Project\PilotProject\DataJson\SessionsData.json",
         };
 
+       
+        public async Task ObjectToJsonAsync(DataFile fileName, object obj)
+        {
+            using FileStream fs = new(Files[fileName], FileMode.Append);
+            JsonSerializerOptions options = new()
+            {
+                WriteIndented = true,
+                AllowTrailingCommas = true
+            };          
+            await JsonSerializer.SerializeAsync(fs, obj, options);
+        }
+
+
+        public async Task<object> JsonToObjectAsync(DataFile fileName)
+        {
+            using FileStream fs = new(Files[fileName], FileMode.OpenOrCreate);
+            return await JsonSerializer.DeserializeAsync<object>(fs);
+        }
+        
+
+
+
+
+
+
+
+        /*
         #region JsonAndFile
         public void OjectToJsonFile(object obj, DataFile fileName)
         {
@@ -61,5 +88,6 @@ namespace PilotProject.Services
             return File.ReadAllText(Files[fileName]);
         }
         #endregion
+        */
     }
 }

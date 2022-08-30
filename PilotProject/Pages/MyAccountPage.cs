@@ -28,8 +28,9 @@ namespace PilotProject.Pages
             switch (selectedItem)
             {
                 case 0: controller.TransitionToPage(Page.OrderBasket); break;
-                case 1: controller.TransitionToPage(Page.MakeOrder); break;
-                case 2: controller.TransitionToPage(Page.Main); break;
+                case 1: controller.TransitionToPage(Page.OrderNow); break;
+                case 2: controller.TransitionToPage(Page.Main); break; //TODO
+                case 3: controller.TransitionToPage(Page.Main); break;
             }
         }
 
@@ -40,12 +41,13 @@ namespace PilotProject.Pages
 
         public override void CreateWindow()
         {
-            moveTitle = 9;
-            menu = new(2, 11, false);
+            moveTitle = 11;
+            menu = new(10, 2, false);
             menu.ItemsMenu = new()
             {
                 "Order basket",
-                "Make an order",
+                "Order now",
+                "leave account",
                 "Back"
             };
         }

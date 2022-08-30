@@ -12,9 +12,9 @@ namespace PilotProject.Builders
         protected int _selectedIndex;
         protected bool _quitOn;
 
-        protected int _posY;
         protected int _posX;
-
+        protected int _posY;
+        
         public ControlHandlerBuilder(int posX, int posY, bool quitOn)
         {
             _posX = posX;
@@ -22,17 +22,14 @@ namespace PilotProject.Builders
             _quitOn = quitOn;
         }
 
-       
-        public void SetCursorVisible(bool visible) => CursorVisible = visible;
-
-        public void SetCursorPosition(int posX, int posY)
-        {
-            CursorTop = Math.Abs(posX);
-            CursorLeft = Math.Abs(posY);
-        }
-
         public abstract void ResetSelectIndex();
 
+        public void SetCursorVisible(bool visible) => CursorVisible = visible;
 
+        protected void SetCursorPosition(int posX, int posY)
+        {            
+            CursorLeft = Math.Abs(posX);
+            CursorTop = Math.Abs(posY);           
+        }
     }
 }

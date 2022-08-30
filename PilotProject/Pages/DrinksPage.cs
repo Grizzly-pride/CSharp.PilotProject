@@ -62,9 +62,9 @@ namespace PilotProject.Pages
                     Product addProduct = _filterDrinks.ElementAt(selectedItem);
 
                     Clear();
-                    WriteText($"Add {addProduct.Name} to cart?", 7, ConsoleColor.White);
+                    WriteText($"Add {addProduct.Name} to cart?", 11, 0, ConsoleColor.White);
 
-                    if (YesOrNo(2, 12))
+                    if (YesOrNo(14, 2))
                     {
                         if (Account.IsAuthorization())
                         {
@@ -74,8 +74,8 @@ namespace PilotProject.Pages
                         else
                         {
                             Clear();
-                            WriteText("You must be logged in to add to cart.", 7, ConsoleColor.Red);
-                            WriteText("Press enter to continue.", 12, ConsoleColor.White);
+                            WriteText("You must be logged in to add to cart.", 11, 0, ConsoleColor.Red);
+                            WriteText("Press enter to continue.", 15, 2, ConsoleColor.White);
                             ReadKey();
                         }
                     }
@@ -86,13 +86,15 @@ namespace PilotProject.Pages
             {
                 switch (selectedItem)
                 {
-                    case 0: _isShowTable = true; _filter = CategoryDrink.Soda; Enter(); break;
-                    case 1: _isShowTable = true; _filter = CategoryDrink.Juice; Enter(); break;
-                    case 2: _isShowTable = true; _filter = CategoryDrink.Water; Enter(); break;
-                    case 3: _isShowTable = true; _filter = CategoryDrink.Energy; Enter(); break;
-                    case 4: _isShowTable = true; _filter = CategoryDrink.All; Enter(); break;
+                    case 0: _filter = CategoryDrink.Soda; break;
+                    case 1: _filter = CategoryDrink.Juice; break;
+                    case 2: _filter = CategoryDrink.Water; break;
+                    case 3: _filter = CategoryDrink.Energy; break;
+                    case 4: _filter = CategoryDrink.All; break;
                     case 5: controller.TransitionToPage(Page.Main); break;
                 }
+                _isShowTable = true;
+                Enter();
             }
         }
 
@@ -109,8 +111,8 @@ namespace PilotProject.Pages
             }
             else
             {
-                moveTitle = 12;
-                menu = new(2, 11, false);
+                moveTitle = 11;
+                menu = new(10, 2, false);
                 menu.ItemsMenu = new()
                 {
                     "Soda",
@@ -129,8 +131,8 @@ namespace PilotProject.Pages
             table.Headers = new string[] { "Name", "Value", "Price", "Category" };
             table.ColumnSizes = new int[] { -17, -5, -5, -8 };
 
-            moveTitle = 18;
-            menu = new(2, 1, 3, 1, true);
+            moveTitle = 25;
+            menu = new(1, 2, 3, 1, true);
             menu.ItemsMenu = new()
             {
                 table.AddTopLine(),

@@ -77,7 +77,7 @@ namespace PilotProject.Builders
         {
             for (int i = 0; i < 3; i++)
             {
-                SetCursorPosition(_posX + i, _posY);
+                SetCursorPosition(_posX, _posY + i);
                 switch (i)
                 {
                     case 0: ForegroundColor = ConsoleColor.Green; WriteLine('▲'); break;

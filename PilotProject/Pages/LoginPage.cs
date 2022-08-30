@@ -25,7 +25,7 @@ namespace PilotProject.Pages
             CursorVisible = true;
             UpdateForm();
         }
-        public override void UpdateForm()
+        public override async void UpdateForm()
         {
             base.UpdateForm();
 
@@ -41,21 +41,21 @@ namespace PilotProject.Pages
             }
             WriteLine();
 
-            if (Authentication())
+            if (await Authentication())
             {
-                WriteText(" - Successful login", 1, ConsoleColor.Blue);
+                WriteText(" - Successful login", 5, 5, ConsoleColor.Blue);
                 ReadKey();
                 controller.TransitionToPage(Page.Main);
             }
             else
             {
-                WriteText("- Invalid password or username!", 1, ConsoleColor.Red);
+                WriteText("- Invalid password or username!", 5, 5, ConsoleColor.Red);
                 ReadKey();
                 Clear();
 
-                WriteText("Do you want to try again?", 5, ConsoleColor.White);
+                WriteText("Do you want to try again?", 5, 0, ConsoleColor.White);
 
-                switch (YesOrNo(2, 12))
+                switch (YesOrNo(10, 2))
                 {
                     case true: Enter(); break;
                     case false: controller.TransitionToPage(Page.Authorization); break;
@@ -63,17 +63,22 @@ namespace PilotProject.Pages
             }
         }
 
+        public override void Exit()
+        {
+
+        }
+
         public override void CreateWindow()
         {
             moveTitle = 11;
             itemsForm = new string[]
             {
-                ReturnText("Name", 3),
-                ReturnText("Password", 3),
+                ReturnText("Name", 5),
+                ReturnText("Password", 5),
             };
         }
 
-        private bool Authentication()
+        private async Task<bool> Authentication()
         {
             dataBase = new();
             List<User> users = dataBase.Users.ToList();
@@ -83,16 +88,15 @@ namespace PilotProject.Pages
             {
                 if (user.Name.Equals(_name) && user.Password.Equals(_password))
                 {
+                    //FileDataService fd = new();
+                    //Account.ActivUser = user;
+                    //await fd.ObjectToJsonAsync(DataFile.Sessions, user);
+
                     Account.UserName = user.Name;
                     return true;
                 }
             }
             return false;
-        }
-
-        public override void Exit()
-        {
-           
         }
     }
 }

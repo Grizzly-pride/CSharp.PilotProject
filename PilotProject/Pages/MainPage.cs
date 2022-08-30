@@ -48,8 +48,8 @@ namespace PilotProject.Pages
                 switch (selectedItem)
                 {
                     case 0: controller.TransitionToPage(Page.Authorization); break;
-                    case 1: controller.TransitionToPage(Page.Drinks); break;
-                    case 2: controller.TransitionToPage(Page.Pizzas); break;
+                    case 1: controller.TransitionToPage(Page.Pizzas); break;
+                    case 2: controller.TransitionToPage(Page.Drinks); break;
                     case 3: Environment.Exit(0); break;
                 }
             }
@@ -63,7 +63,7 @@ namespace PilotProject.Pages
         public override void CreateWindow()
         {
             moveTitle = 11;
-            menu = new(2, 11, false);
+            menu = new(10, 2, false);
             menu.ItemsMenu = new()
             {
                 "Authorization",
