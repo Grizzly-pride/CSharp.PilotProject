@@ -218,9 +218,6 @@ foreach (var s in column1)
 int n;
 Console.WriteLine("{0,"+n + "}|{1,"+ n + "}", Variable1, Variable2);
 
-
-
-
 NumericBuilder numeric = new(5, 7, false);
 numeric.ItemsRange = new(1, int.MaxValue);
 numeric.SetCursorVisible(false);
@@ -228,18 +225,24 @@ numeric.RunNumeric(true);
 */
 
 Main.Run();
-
 /*
-OrderedDictionary myOrdered = new OrderedDictionary();
-myOrdered.Add("1Key", 1);
-myOrdered.Add("2Key", 2);
-myOrdered.Add("3Key", 3);
-myOrdered.Add("4Key", 4);
-myOrdered.Add("5Key", 5);
+Drink soda1 = new("Sprite", "Soda", 0.5, 3.10);
+Drink soda2 = new("Sprite", "Soda", 1, 3.80);
+Drink soda3 = new("Coca-Cola", "Soda", 0.5, 3.10);
+Drink soda4 = new("Coca-Cola", "Soda", 1, 3.80);
 
+//OrderedDictionary order = new();
 
-foreach (var item in collection)
-{
+Dictionary<Product, int> product = new();
+product.Add(soda1, 1);
+product.Add(soda2, 3);
+product.Add(soda3, 5);
+product.Add(soda4, 2);
 
-}
+var key = product.ElementAt(1).Key; // Product
+var value = product.ElementAt(2).Value; // Int32
+var element = product.ElementAt(1); // KayValuePair
+
+Console.WriteLine(key.Name);
 */
+

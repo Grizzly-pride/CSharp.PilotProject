@@ -42,8 +42,8 @@ namespace PilotProject.Pages
 
         public override void CreateWindow()
         {
-            moveTitle = 9;
-            menu = new(2, 11, false);
+            moveTitle = 11;
+            menu = new(10, 2, false);
             menu.ItemsMenu = new()
             {
                 "Login",

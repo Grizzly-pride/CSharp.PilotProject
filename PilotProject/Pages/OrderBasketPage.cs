@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PilotProject.FoodMenu;
+using static System.Console;
 using static PilotProject.Pages.PageItems;
 
 namespace PilotProject.Pages
@@ -11,8 +12,10 @@ namespace PilotProject.Pages
     internal class OrderBasketPage : BasePage
     {
         private bool _isShowTable = true;
+        private bool _isEmptyTable;
         private int _productIndex;
         private Dictionary<Product, int> _products;
+        
         public override string TitlePage => "ORDER BASKET";
 
         public OrderBasketPage(PageController controller) : base(controller)
@@ -32,28 +35,32 @@ namespace PilotProject.Pages
 
             if (_isShowTable)
             {
-                switch (selectedItem)
+                if(selectedItem == -1)
                 {
-                    case -1: controller.TransitionToPage(Page.MyAccount); break;
-                    default:
+                    controller.TransitionToPage(Page.MyAccount);
+                }
+                else
+                {
+                    if (!_isEmptyTable)
+                    {
                         _isShowTable = false;
                         _productIndex = selectedItem;
-                        Enter();
-                        break;
+                    }
+                    Enter();
                 }
             }
             else
             {
+                var element = _products.ElementAt(_productIndex);
+                Clear();
                 switch (selectedItem)
                 {
-                    //case 0: PageItems.RemoveFromCart(_products.ElementAt(_productIndex))
-                }
-
-            }
-
-
-
-   
+                    case 0: PageItems.RemoveFromCart(element.Key); break;
+                    case 1: PageItems.ModifyCountInCart(element.Key, element.Value); break;
+                }              
+                _isShowTable = true;
+                Enter();
+            }             
         }
 
         public override void Exit()
@@ -69,12 +76,13 @@ namespace PilotProject.Pages
             }
             else
             {
-                moveTitle = 12;
-                menu = new(2,11,false);
+                moveTitle = 11;
+                menu = new(10,2,false);
                 menu.ItemsMenu = new()
                 {
                     "Delete",
-                    "Modify count"
+                    "Modify count",
+                    "Back"
                 };
             }
         }
@@ -85,8 +93,8 @@ namespace PilotProject.Pages
             table.Headers = new string[] {"Product", "Count", "Price" };
             table.ColumnSizes = new int[] {-55, -5, -8 };
 
-            moveTitle = 9;
-            menu = new(2, 1, 3, 3, true);
+            moveTitle = 25;
+            menu = new(1, 2, 3, 3, true);
             menu.ItemsMenu = new()
             {
                 table.AddTopLine(),
@@ -96,23 +104,34 @@ namespace PilotProject.Pages
 
             _products = Account.OrderBasket.GetProducts();
 
-            double totalPrice = 0;
+            double totalPrice = default;
 
-            foreach (var product in _products)
+            if (_products.Count != 0)
             {
-                if(product.Key is Pizza pizza)
+                _isEmptyTable = false;
+
+                foreach (var product in _products)
                 {
-                    menu.ItemsMenu.Add(table.AddRow($"{pizza.Crust} crust pizza {pizza.Name} size {pizza.Size}cm.",product.Value, Math.Round(product.Value * pizza.Price, 2)));
+                    double price = product.Value * product.Key.Price;
+                    totalPrice += price;
+
+                    if (product.Key is Pizza pizza)
+                    {
+                        menu.ItemsMenu.Add(table.AddRow($"{pizza.Crust} crust pizza {pizza.Name} size {pizza.Size}cm.", product.Value, string.Format("{0:0.0}", price)));
+                    }
+                    else if (product.Key is Drink drink)
+                    {
+                        menu.ItemsMenu.Add(table.AddRow($"Drink {drink.Name} valume {drink.Volume}l.", product.Value, string.Format("{0:0.0}", price)));
+                    }
                 }
-                else if(product.Key is Drink drink)
-                {
-                    menu.ItemsMenu.Add(table.AddRow($"Drink {drink.Name} valume {drink.Volume}l.", product.Value, Math.Round(product.Value * drink.Price, 2)));
-                }
-                totalPrice += Math.Round(product.Value * product.Key.Price);
             }
-            
+            else
+            {
+                _isEmptyTable = true;
+                menu.ItemsMenu.Add(table.AddRow(" ", " ", " "));
+            }
             menu.ItemsMenu.Add(table.AddCrossSmoothLine());
-            menu.ItemsMenu.Add(table.AddTextLine($"Total: {totalPrice} $", 20));
+            menu.ItemsMenu.Add(table.AddTextLine($"Total: {string.Format("{0:0.0}",totalPrice)} $", 20));
             menu.ItemsMenu.Add(table.AddSmoothEndLine());           
         }
     }

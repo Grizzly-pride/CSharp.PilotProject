@@ -83,7 +83,7 @@ namespace PilotProject.Builders
 
             for (int i = 0; i < ItemsMenu.Count; i++)
             {
-                SetCursorPosition(_posX + i, _posY);
+                SetCursorPosition(_posX, _posY + i);
                 ForegroundColor = ConsoleColor.Green;
                 if (i == _selectedIndex)
                 {
