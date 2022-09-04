@@ -10,6 +10,11 @@ using Microsoft.Data.Sqlite;
 using PilotProject.Builders;
 using System.Collections;
 using System.Collections.Specialized;
+using PilotProject.Services;
+//using System.Text.Json;
+
+
+
 
 #region Drink
 /*
@@ -225,6 +230,7 @@ numeric.RunNumeric(true);
 */
 
 Main.Run();
+
 /*
 Drink soda1 = new("Sprite", "Soda", 0.5, 3.10);
 Drink soda2 = new("Sprite", "Soda", 1, 3.80);
@@ -246,3 +252,81 @@ var element = product.ElementAt(1); // KayValuePair
 Console.WriteLine(key.Name);
 */
 
+
+//-----------------test---------------------------------------------------
+//private Dictionary<Product, int> _saveOrder;
+//public List<KeyValuePair<Product, int>> SaveOrder
+//{
+//    get { return _saveOrder.ToList(); }
+//    set { _saveOrder = value.ToDictionary(x => x.Key, x => x.Value); }
+//}
+//------------------------------------------------------------------------
+
+//Drink soda1 = new("Sprite", "Soda", 0.5, 3.10);
+//Drink soda2 = new("Sprite", "Soda", 1, 3.80);
+//Drink soda3 = new("Coca-Cola", "Soda", 0.5, 3.10);
+//Drink soda4 = new("Coca-Cola", "Soda", 1, 3.80);
+
+
+//Dictionary<Product, int> testToSerialize = new()
+//{
+//    [soda1] = 1,
+//    [soda2] = 2,
+//    [soda3] = 3,
+//    [soda4] = 4,
+//};
+
+
+//Session.StaticProperty().SaveOrder = new(testToSerialize);
+
+//Session.StaticProperty().SaveOrder.Add(testToSerialize.ElementAt(1));
+
+//foreach (var item in Session.StaticProperty().SaveOrder)
+//{
+//    Console.WriteLine(item.Key.Name);
+//}
+
+
+//Session.StaticProperty().SaveOrder = new(testToSerialize);
+//string jsonStr = JsonConvert.SerializeObject(Session.StaticProperty().SaveOrder, Formatting.Indented);
+//Console.WriteLine(jsonStr);
+
+
+
+//Session.StaticProperty().SaveOrder = new(testToSerialize);
+//string jsonStr = JsonConvert.SerializeObject(Session.StaticProperty().SaveOrder, Formatting.Indented);
+//Console.WriteLine(jsonStr);
+//Session.StaticProperty().SaveOrder.Clear();
+
+//List<KeyValuePair<Product, int>> SaveOrder = JsonConvert.DeserializeObject(jsonStr);
+
+//Session.StaticPropery().SaveOrder = new(testToSerialize);
+//string jsonStr = JsonConvert.SerializeObject(Session.Instance.SaveOrder, Formatting.Indented);
+
+//Console.WriteLine(jsonStr);
+
+//List<Product> testToDeserialize = new();
+
+
+//string path = @"C:\Users\alexandr.medved\Desktop\C#\Pilot_project\PilotProject\DataJson";
+//string result = JsonConvert.SerializeObject(Session.Instance.SaveOrder.ToArray(), Formatting.Indented);
+//Console.WriteLine(result);
+
+//await Messenger.SendMessage("medved1991alexander@gmail.com", "dotNet Pizza", "Test");
+
+//string path = @"D:\IT Academy Project\PilotProject\DataJson\TemplateMessages\Registering.json";
+//Letter letter1 = new("Test", "this is test message");
+
+
+////NewtonFileService.SerilizationToFile(path, letter1);
+
+//Letter letter2 = NewtonFileService.DeserializeFromFile<Letter>(path);
+
+//Console.WriteLine(letter2.Theme);
+//Console.WriteLine(letter2.Message);
+
+//using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+//{
+//    await JsonSerializer.SerializeAsync<Letter>(fs, letter1);
+//    Console.WriteLine("Data has been saved to file");
+//}

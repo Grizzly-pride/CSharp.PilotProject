@@ -57,7 +57,8 @@ namespace PilotProject.Pages
             WriteText($"Add:", 7, 2, ConsoleColor.Green);
             int count = EnterNumber(14, 2, true);
 
-            Account.OrderBasket.AddProduct(product, count);
+            OrderBasketRepository orderBasket = new();
+            orderBasket.AddProduct(product, count);
 
             if (product is Pizza pizza)
             {
@@ -92,7 +93,8 @@ namespace PilotProject.Pages
             WriteText($"New count:", 7, 3, ConsoleColor.Green);
 
             int count = EnterNumber(18, 3, true);
-            Account.OrderBasket.ModifyCountProduct(product, count);
+            OrderBasketRepository orderBasket = new();
+            orderBasket.ModifyCountProduct(product, count);
 
             WriteText($"Count changed successfully.", 7, 5, ConsoleColor.Blue);
             ReadKey();
@@ -104,7 +106,8 @@ namespace PilotProject.Pages
 
             if (YesOrNo(7,2))
             {
-                Account.OrderBasket.DeleteProduct(product);
+                OrderBasketRepository orderBasket = new();
+                orderBasket.DeleteProduct(product);
                 WriteText($"The {product.Category.ToLower()} {product.Name} has been successfully removed from the cart.", 7, 5, ConsoleColor.Blue);
                 ReadKey();
             }           

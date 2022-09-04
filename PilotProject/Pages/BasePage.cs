@@ -39,13 +39,13 @@ namespace PilotProject.Pages
         public virtual void UpdateMenu()
         {
             
-            WriteLine($"{new String(' ', moveTitle)}~[{TitlePage}]~  user: {Account.UserName}\n");
+            WriteLine($"{new String(' ', moveTitle)}~[{TitlePage}]~  user: {Session.GetStatic().GetUserName()}\n");
             selectedItem = menu.RunMenu();
         }
 
         public virtual void UpdateForm()
         {           
-            WriteLine($"{new String(' ', moveTitle)}~[{TitlePage}]~  user: {Account.UserName}\n");
+            WriteLine($"{new String(' ', moveTitle)}~[{TitlePage}]~  user: {Session.GetStatic().GetUserName()}\n");
             ForegroundColor = ConsoleColor.Green;
         }
 

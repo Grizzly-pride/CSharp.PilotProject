@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace PilotProject
 {
-    [Serializable]
     internal class User
     {
         [JsonIgnore]

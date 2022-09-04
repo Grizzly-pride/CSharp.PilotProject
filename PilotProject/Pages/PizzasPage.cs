@@ -64,7 +64,7 @@ namespace PilotProject.Pages
 
                     if (YesOrNo(14, 2))
                     {
-                        if (Account.IsAuthorization())
+                        if (Session.GetStatic().IsAuthorization())
                         {
                             Clear();
                             AddingToCart(addProduct);

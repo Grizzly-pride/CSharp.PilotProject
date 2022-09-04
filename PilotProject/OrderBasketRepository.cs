@@ -12,8 +12,7 @@ namespace PilotProject
 {
     internal sealed class OrderBasketRepository: IOrderBasketRepository<Product, int>
     {
-        private static Dictionary<Product, int> _products = new();
-
+        private static readonly Dictionary<Product, int> _products = new();
             
         public void AddProduct(Product product, int count)
         {
@@ -25,17 +24,13 @@ namespace PilotProject
             else
             {
                 _products.Add(product, count);
-            }
-            
+            }           
         }
 
         public void DeleteProduct(Product product) => _products.Remove(product);
 
-
         public Dictionary<Product, int> GetProducts() => _products;
 
         public void ModifyCountProduct(Product product, int count) => _products[product] = count;
-
-
     }
 }

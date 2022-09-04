@@ -14,8 +14,8 @@ namespace PilotProject.Pages
         private bool _isShowTable = true;
         private bool _isEmptyTable;
         private int _productIndex;
-        private Dictionary<Product, int> _products;
         
+        private readonly OrderBasketRepository _orderBasket = new();
         public override string TitlePage => "ORDER BASKET";
 
         public OrderBasketPage(PageController controller) : base(controller)
@@ -51,7 +51,7 @@ namespace PilotProject.Pages
             }
             else
             {
-                var element = _products.ElementAt(_productIndex);
+                var element = _orderBasket.GetProducts().ElementAt(_productIndex);
                 Clear();
                 switch (selectedItem)
                 {
@@ -102,15 +102,14 @@ namespace PilotProject.Pages
                 table.AddMiddleLine()
             };
 
-            _products = Account.OrderBasket.GetProducts();
 
             double totalPrice = default;
 
-            if (_products.Count != 0)
+            if (_orderBasket.GetProducts().Count != 0)
             {
                 _isEmptyTable = false;
 
-                foreach (var product in _products)
+                foreach (var product in _orderBasket.GetProducts())
                 {
                     double price = product.Value * product.Key.Price;
                     totalPrice += price;
