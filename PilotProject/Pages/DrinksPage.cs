@@ -34,7 +34,7 @@ namespace PilotProject.Pages
 
         public DrinksPage(PageController controller) : base(controller)
         {
-            dataBase = new();
+            dataBase = new();          
             _drinks = dataBase.Drinks.ToList();
             dataBase.Dispose();
         }
@@ -66,7 +66,7 @@ namespace PilotProject.Pages
 
                     if (YesOrNo(14, 2))
                     {
-                        if (Account.IsAuthorization())
+                        if (Session.GetStatic().IsAuthorization())
                         {
                             Clear();
                             AddingToCart(addProduct);

@@ -1,0 +1,55 @@
+{
+  "session id": "33496df8-1e25-4e80-b7c8-3367d7c9f69d",
+  "session status": "LogIn",
+  "time status change": "09/02/2022 06:15:43 UTC",
+  "user": "Alexander",
+  "email": "medved1991alexander@gmail.com"
+}{
+  "session id": "33496df8-1e25-4e80-b7c8-3367d7c9f69d",
+  "session status": "logout",
+  "time status change": "09/02/2022 06:15:46 UTC",
+  "user": "Alexander",
+  "email": "medved1991alexander@gmail.com"
+}{
+  "session id": "530b976d-0eed-4fa4-8b75-da1bd372b275",
+  "session status": "LogIn",
+  "time status change": "09/02/2022 06:21:28 UTC",
+  "user": "Alexander",
+  "email": "medved1991alexander@gmail.com"
+}{
+  "session id": "5a43992b-79fa-44c2-806d-df05e88ddd2c",
+  "session status": "LogIn",
+  "time status change": "09/02/2022 06:23:04 UTC",
+  "user": "Alexander",
+  "email": "medved1991alexander@gmail.com"
+}{
+  "session id": "5a43992b-79fa-44c2-806d-df05e88ddd2c",
+  "session status": "LogOut",
+  "time status change": "09/02/2022 06:23:07 UTC",
+  "user": "Alexander",
+  "email": "medved1991alexander@gmail.com"
+}{
+  "session id": "1b2ad1d2-8d56-49e6-ac14-f9e9b9ec8e69",
+  "session status": "LogIn",
+  "time status change": "09.03.2022 10:02:45 UTC",
+  "username": "Alexander",
+  "email": "medved1991alexander@gmail.com"
+}{
+  "session id": "1b2ad1d2-8d56-49e6-ac14-f9e9b9ec8e69",
+  "session status": "LogOut",
+  "time status change": "09.03.2022 10:02:49 UTC",
+  "username": "Alexander",
+  "email": "medved1991alexander@gmail.com"
+}{
+  "session id": "7a8afaa1-aea9-453a-9e00-34ce1e0feea8",
+  "session status": "LogIn",
+  "time status change": "09.04.2022 11:28:44 UTC",
+  "username": "Alexander",
+  "email": "medved1991alexander@gmail.com"
+}{
+  "session id": "7a8afaa1-aea9-453a-9e00-34ce1e0feea8",
+  "session status": "LogOut",
+  "time status change": "09.04.2022 11:28:49 UTC",
+  "username": "Alexander",
+  "email": "medved1991alexander@gmail.com"
+}

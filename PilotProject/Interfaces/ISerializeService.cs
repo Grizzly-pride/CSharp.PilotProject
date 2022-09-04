@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PilotProject.Interfaces
 {
-    internal interface ISerializeService<T1, T2>
+    internal interface ISerializeService<T1>
     {
-        Task ObjectToJsonAsync(T1 file, T2 obj);
-        Task<T2> JsonToObjectAsync(T1 file);
+        Task ObjectToJsonAsync<T2>(T1 file, T2 obj);
+        Task<T2> JsonToObjectAsync<T2>(T1 file);
     }
 }

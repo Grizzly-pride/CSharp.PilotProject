@@ -19,11 +19,19 @@ namespace PilotProject.Pages
         public override void Enter()
         {
             base.Enter();
-            if (Account.IsAuthorization() && menu.ItemsMenu.Contains("Authorization"))
+
+            
+            if (Session.GetStatic().IsAuthorization() && menu.ItemsMenu.Contains("Authorization"))
             {
                 int index = menu.ItemsMenu.FindIndex(i => i.Equals("Authorization"));
                 menu.ItemsMenu[index] = "My Account";
             }
+            else if(!Session.GetStatic().IsAuthorization() && menu.ItemsMenu.Contains("My Account"))
+            {
+                int index = menu.ItemsMenu.FindIndex(i => i.Equals("My Account"));
+                menu.ItemsMenu[index] = "Authorization";
+            }
+            
 
             CursorVisible = false;
             UpdateMenu();
@@ -33,7 +41,7 @@ namespace PilotProject.Pages
         {
             base.UpdateMenu();
 
-            if (Account.IsAuthorization())
+            if (Session.GetStatic().IsAuthorization())
             {
                 switch (selectedItem)
                 {

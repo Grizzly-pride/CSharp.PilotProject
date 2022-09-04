@@ -88,11 +88,14 @@ namespace PilotProject.Pages
             {
                 if (user.Name.Equals(_name) && user.Password.Equals(_password))
                 {
-                    //FileDataService fd = new();
-                    //Account.ActivUser = user;
-                    //await fd.ObjectToJsonAsync(DataFile.Sessions, user);
-
-                    Account.UserName = user.Name;
+                    Session.GetStatic().SessionId = Guid.NewGuid();
+                    Session.GetStatic().Status = SessionStatus.LogIn.ToString();
+                    Session.GetStatic().Time = DateTime.UtcNow.ToString("MM/dd/yyyy HH:mm:ss UTC");
+                    Session.GetStatic().UserName = user.Name;
+                    Session.GetStatic().Email = user.Email;
+                    
+                    SerializerFileService fd = new();
+                    await fd.ObjectToJsonAsync(DataFile.Sessions, Session.GetStatic());
                     return true;
                 }
             }
