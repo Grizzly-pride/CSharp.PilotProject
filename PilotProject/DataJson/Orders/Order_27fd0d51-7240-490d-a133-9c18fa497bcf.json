@@ -1,0 +1,53 @@
+{
+  "order id": "27fd0d51-7240-490d-a133-9c18fa497bcf",
+  "time": "09.09.2022 16:19:30 UTC",
+  "buyer name": "Alexander",
+  "delivery address": "Mazurova st., 12 - 61",
+  "total price": 259.4,
+  "order list": [
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 45,
+        "Name": "Greek",
+        "Price": 23.6,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 3,
+      "PriceItem": 70.80000000000001
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 49,
+        "Name": "Big Bonanza",
+        "Price": 37.3,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 2,
+      "PriceItem": 74.6
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 77,
+        "Name": "Meat Delight",
+        "Price": 34.9,
+        "Subcategory": "Meat"
+      },
+      "CountItem": 3,
+      "PriceItem": 104.69999999999999
+    },
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 43,
+        "Name": "Sprite",
+        "Price": 3.1,
+        "Subcategory": "Soda"
+      },
+      "CountItem": 3,
+      "PriceItem": 9.3
+    }
+  ]
+}

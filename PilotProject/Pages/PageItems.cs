@@ -48,7 +48,7 @@ namespace PilotProject.Pages
             {
                 ItemsRange = new(1, int.MaxValue)
             };
-            return numeric.RunNumeric(true);
+            return numeric.RunNumeric(false);
         }
 
 
@@ -60,7 +60,7 @@ namespace PilotProject.Pages
             int count = EnterNumber(14, 2, true);
             OrderBasketRepository orderBasket = new();
 
-            if(count > 0) {orderBasket.AddOrderItem(new(product, count));}
+            if (count > 0) { orderBasket.AddOrderItem(new(product, count)); }
 
             if (product is Pizza pizza)
             {
@@ -85,8 +85,46 @@ namespace PilotProject.Pages
                 }
             }
 
-            if(count != 0) { ReadKey(); }
+            if (count != 0) { ReadKey(); }
         }
+
+
+        public static void AddingToCart(Product product, int posX, int posY)
+        {
+            CursorVisible = false;
+
+            WriteText($"Add:", posX, posY, ConsoleColor.Green);
+            int count = EnterNumber(posX + 5, posY - 1, true);
+
+            OrderBasketRepository orderBasket = new();
+            if (count > 0) { orderBasket.AddOrderItem(new(product, count)); }
+
+            if (product is Pizza pizza)
+            {
+                if (count > 1)
+                {
+                    WriteText($"{count} {pizza.Crust.ToLower()} crust pizzas {pizza.Name} size {pizza.Size}сm. have been added to your cart.", 1, 3, ConsoleColor.Blue);
+                }
+                else if (count == 1)
+                {
+                    WriteText($"{count} {pizza.Crust.ToLower()} crust pizza {pizza.Name} size {pizza.Size}сm. have been added to your cart.", 1, 3, ConsoleColor.Blue);
+                }
+            }
+            else if (product is Drink drink)
+            {
+                if (count > 1)
+                {
+                    WriteText($"{count} drinks {drink.Name} valume {drink.Volume}l. have been added to your cart.", 1, 3, ConsoleColor.Blue);
+                }
+                else if (count == 1)
+                {
+                    WriteText($"{count} drink {drink.Name} valume {drink.Volume}l. have been added to your cart.", 1, 3, ConsoleColor.Blue);
+                }
+            }
+
+            if (count != 0) { ReadKey(); }
+        }
+
 
         public static void ModifyCountInCart(OrderItem orderItem, int currentCount)
         {

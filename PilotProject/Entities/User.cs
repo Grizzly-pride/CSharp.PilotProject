@@ -21,7 +21,6 @@ namespace PilotProject.Entities
             Name = name;
             Email = email;
             Password = password;
-            Balance = 1000;
         }       
     }
 }
