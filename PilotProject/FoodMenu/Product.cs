@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace PilotProject.FoodMenu
 {
-    internal abstract class Product
-    {
-        
+    internal class Product
+    {       
         public int Id { get; private set; }
         public string Name { get; private set; }
         public double Price { get; private set; }
         public string Subcategory { get; private set; }
-        public abstract string Category { get; set; }
+        public virtual string Category { get; set; }
 
-        protected Product(string name, string subcategory,double price)
+        public Product(string name, string subcategory,double price)
         {
             Name = name;
             Price = price;

@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace PilotProject
+namespace PilotProject.Entities
 {
     internal class User
     {
@@ -14,12 +14,14 @@ namespace PilotProject
         public string Name { get; private set; }
         public string Email { get; private set; }
         public string Password { get; private set; }
-        
+        public double Balance { get; private set; } 
+
         public User(string name, string email, string password)
         {     
             Name = name;
             Email = email;
             Password = password;
+            Balance = 1000;
         }       
     }
 }

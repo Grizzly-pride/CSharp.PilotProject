@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PilotProject.Entities;
 using System.Threading.Tasks;
 using PilotProject.FoodMenu;
 using static System.Console;
@@ -51,12 +52,12 @@ namespace PilotProject.Pages
             }
             else
             {
-                var element = _orderBasket.GetProducts().ElementAt(_productIndex);
+                var element = _orderBasket.GetOrderItems().ElementAt(_productIndex);
                 Clear();
                 switch (selectedItem)
                 {
-                    case 0: PageItems.RemoveFromCart(element.Key); break;
-                    case 1: PageItems.ModifyCountInCart(element.Key, element.Value); break;
+                    case 0: PageItems.RemoveFromCart(element); break;
+                    case 1: PageItems.ModifyCountInCart(element, element.CountItem); break;
                 }              
                 _isShowTable = true;
                 Enter();
@@ -102,25 +103,19 @@ namespace PilotProject.Pages
                 table.AddMiddleLine()
             };
 
-
-            double totalPrice = default;
-
-            if (_orderBasket.GetProducts().Count != 0)
+            if (_orderBasket.GetOrderItems().Count != 0)
             {
                 _isEmptyTable = false;
 
-                foreach (var product in _orderBasket.GetProducts())
+                foreach (var orderItem in _orderBasket.GetOrderItems())
                 {
-                    double price = product.Value * product.Key.Price;
-                    totalPrice += price;
-
-                    if (product.Key is Pizza pizza)
+                    if (orderItem.Product is Pizza pizza)
                     {
-                        menu.ItemsMenu.Add(table.AddRow($"{pizza.Crust} crust pizza {pizza.Name} size {pizza.Size}cm.", product.Value, string.Format("{0:0.0}", price)));
+                        menu.ItemsMenu.Add(table.AddRow($"{pizza.Crust} crust pizza {pizza.Name} size {pizza.Size}cm.", orderItem.CountItem, string.Format("{0:0.0}", orderItem.PriceItem)));
                     }
-                    else if (product.Key is Drink drink)
+                    else if (orderItem.Product is Drink drink)
                     {
-                        menu.ItemsMenu.Add(table.AddRow($"Drink {drink.Name} valume {drink.Volume}l.", product.Value, string.Format("{0:0.0}", price)));
+                        menu.ItemsMenu.Add(table.AddRow($"Drink {drink.Name} valume {drink.Volume}l.", orderItem.CountItem, string.Format("{0:0.0}", orderItem.PriceItem)));
                     }
                 }
             }
@@ -130,8 +125,8 @@ namespace PilotProject.Pages
                 menu.ItemsMenu.Add(table.AddRow(" ", " ", " "));
             }
             menu.ItemsMenu.Add(table.AddCrossSmoothLine());
-            menu.ItemsMenu.Add(table.AddTextLine($"Total: {string.Format("{0:0.0}",totalPrice)} $", 20));
-            menu.ItemsMenu.Add(table.AddSmoothEndLine());           
+            menu.ItemsMenu.Add(table.AddTextLine($"Total: {string.Format("{0:0.0}", _orderBasket.GetOrderItems().Sum(x => x.PriceItem))} $", moveRight: 20));
+            menu.ItemsMenu.Add(table.AddSmoothEndLine());
         }
     }
 }

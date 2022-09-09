@@ -1,0 +1,75 @@
+{
+  "order id": "35e8ead9-113d-428a-a79e-ee74ebc79849",
+  "time": "09.09.2022 14:53:27 UTC",
+  "buyer name": "Alexander",
+  "delivery address": "Mazurova st., 12 - 61",
+  "total price": 359.4,
+  "order list": [
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 45,
+        "Name": "Greek",
+        "Price": 23.6,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 4,
+      "PriceItem": 94.4
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 49,
+        "Name": "Big Bonanza",
+        "Price": 37.3,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 3,
+      "PriceItem": 111.89999999999999
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 59,
+        "Name": "Margherita",
+        "Price": 23.6,
+        "Subcategory": "Veggie"
+      },
+      "CountItem": 5,
+      "PriceItem": 118
+    },
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 53,
+        "Name": "Rich - multifruit",
+        "Price": 4.9,
+        "Subcategory": "Juice"
+      },
+      "CountItem": 3,
+      "PriceItem": 14.700000000000001
+    },
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 55,
+        "Name": "Rich - tomato",
+        "Price": 4.9,
+        "Subcategory": "Juice"
+      },
+      "CountItem": 3,
+      "PriceItem": 14.700000000000001
+    },
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 60,
+        "Name": "Frost",
+        "Price": 1.9,
+        "Subcategory": "Water"
+      },
+      "CountItem": 3,
+      "PriceItem": 5.699999999999999
+    }
+  ]
+}

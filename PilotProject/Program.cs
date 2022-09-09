@@ -11,6 +11,10 @@ using PilotProject.Builders;
 using System.Collections;
 using System.Collections.Specialized;
 using PilotProject.Services;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using PilotProject.Entities;
+using System.Linq;
 //using System.Text.Json;
 
 
@@ -229,7 +233,7 @@ numeric.SetCursorVisible(false);
 numeric.RunNumeric(true);
 */
 
-Main.Run();
+//Main.Run();
 
 /*
 Drink soda1 = new("Sprite", "Soda", 0.5, 3.10);
@@ -330,3 +334,146 @@ Console.WriteLine(key.Name);
 //    await JsonSerializer.SerializeAsync<Letter>(fs, letter1);
 //    Console.WriteLine("Data has been saved to file");
 //}
+
+
+
+
+
+
+//string path = @"D:\IT Academy Project\PilotProject\DataJson\Test.json";
+
+//Drink soda1 = new("Sprite", "Soda", 0.5, 3.10);
+//Drink soda2 = new("Sprite", "Soda", 1, 3.80);
+//Drink soda3 = new("Coca-Cola", "Soda", 0.5, 3.10);
+//Pizza pizza4 = new Pizza("Big Bonanza", "Spice", "Traditional", 40, 53.80);
+//Pizza pizza333 = new Pizza("Big Bonanza", "Spice", "Thin", 30, 37.30);
+//Pizza pizza444 = new Pizza("Big Bonanza", "Spice", "Thin", 40, 53.80);
+
+//List<(Product, int)> Order = new();
+//Order.Add((soda1, 3));
+//Order.Add((soda2, 5));
+//Order.Add((soda3, 6));
+//Order.Add((pizza4, 1));
+//Order.Add((pizza333, 5));
+//Order.Add((pizza444, 26));
+
+//var modifyOrder = (Order[0].Item1, 7);
+
+//Order[0] = modifyOrder;
+
+
+//foreach (var item in Order)
+//{
+//    Console.WriteLine($"{item.Item1.Name}  {item.Item1.Price}  {item.Item2}");
+//}
+
+//NewtonFileService.SerilizationToFile<List<(Product, int)>>(path, Order);
+
+////List<(Product, int)> Order2 = JsonConvert.DeserializeObject<List<(Product, int)>>(File.ReadAllText(path));
+
+//Console.WriteLine(Order[0].Item1.Name);
+
+
+//==========================================================================================================================
+
+/*
+string path = @"D:\IT Academy Project\PilotProject\DataJson\Test.json";
+
+Drink soda1 = new("Sprite", "Soda", 0.5, 3.10);
+Drink soda2 = new("Sprite", "Soda", 1, 3.80);
+Drink soda3 = new("Coca-Cola", "Soda", 0.5, 3.10);
+Pizza pizza4 = new Pizza("Big Bonanza", "Spice", "Traditional", 40, 53.80);
+Pizza pizza5 = new Pizza("Big Bonanza", "Spice", "Thin", 30, 37.30);
+Pizza pizza6 = new Pizza("Big Bonanza", "Spice", "Thin", 40, 53.80);
+
+
+List<OrderItem> OrderList = new()
+{
+    new(soda1, 4),
+    new(soda2, 1),
+    new(soda3, 23),
+    new(pizza4, 4),
+    new(pizza5, 7),
+    new(pizza6, 1),
+    new(pizza6, 6)
+};
+
+
+NewtonFileService.SerilizationToFile(path, OrderList);
+
+
+List<OrderItem> OrderList2 = NewtonFileService.DeserializeFromFile<List<OrderItem>>(path);
+*/
+
+//Console.WriteLine(GC.GetTotalMemory(true));
+
+
+//Pizza pizza5 = new("Big Bonanza", "Spice", "Thin", 40, 37.30);
+//Pizza pizza6 = new("Big Bonanza", "Spice", "Thin", 40, 37.30);
+//Drink soda2 = new("Sprite", "Soda", 1, 3.80);
+//Drink soda3 = new("Coca-Cola", "Soda", 0.5, 3.10);
+
+
+//List<OrderItem> orderList = new()
+//{
+//    new(pizza5, 10),
+//    new(pizza6, 1),
+//    new(soda2, 1),
+//    new(soda3, 1),
+//};
+
+//orderList[0].CountItem = 1;
+
+
+//for (int i = 0; i < orderList.Count; i++)
+//{
+//    Console.WriteLine($"product name:{orderList[i].Product.Name} count:{orderList[i].CountItem} price:{orderList[i].PriceItem}");
+//};
+
+
+//Main.Run();
+
+
+//string address = "Mazur1ova st., 12 - 12";
+//string test = "Mazurova";
+
+//CheckDataService checker = new();
+
+//Console.WriteLine(checker.IsValidAddress(address));
+
+
+
+Main.Run();
+
+
+//Thread Shipping = new(ShippingProcess.Run);
+//Shipping.Start();
+
+
+
+//class Program
+//{
+//    static void Main()
+//    {
+//        ShippingProcess shipping = new ShippingProcess();
+//        shipping.DelivMessage += DisplayMessage;
+//        shipping.Run();
+
+//        void DisplayMessage(string message) => Console.WriteLine(message);
+//    }
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

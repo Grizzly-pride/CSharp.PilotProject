@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PilotProject.Entities;
 using PilotProject.Services;
 using static System.Console;
+using static PilotProject.Services.FilePathService;
 
 
 namespace PilotProject.Pages
@@ -13,7 +15,6 @@ namespace PilotProject.Pages
     {
         public override string TitlePage => "My Account";
         
-
         public MyAccountPage(PageController controller) : base(controller)
         {
             CreateWindow();
@@ -29,11 +30,13 @@ namespace PilotProject.Pages
         {
             base.UpdateMenu();
 
+
+
             switch (selectedItem)
             {
                 case 0: controller.TransitionToPage(Page.OrderBasket); break;
                 case 1: controller.TransitionToPage(Page.OrderNow); break;
-                case 2: _ = LeaveAccount(); controller.TransitionToPage(Page.Main); break; 
+                case 2: LeaveAccount(); controller.TransitionToPage(Page.Main); break; 
                 case 3: controller.TransitionToPage(Page.Main); break;
             }
         }
@@ -56,14 +59,14 @@ namespace PilotProject.Pages
             };
         }
 
-        private async Task LeaveAccount()
+        private void LeaveAccount()
         {
-            Session.GetStatic().Time = DateTime.UtcNow.ToString("MM/dd/yyyy HH:mm:ss UTC");
-            Session.GetStatic().Status = SessionStatus.LogOut.ToString();
-            SerializerFileService fd = new();
-            await fd.ObjectToJsonAsync(DataFile.Sessions, Session.GetStatic());
-
+            Task task = new (async() => await FileService.ObjectToJsonAsync(GetPathFile(Folder.DataJson, "SessionsData.json"), Session.GetStatic()));
+            task.Start();
+            Session.GetStatic().Time = DateTime.UtcNow;
+            Session.GetStatic().Status = SessionStatus.LogOut;
             PageItems.WriteText("You are leaving your account.", 11, 7, ConsoleColor.Blue);
+            task.Wait();
             ReadKey();  
         }
     }

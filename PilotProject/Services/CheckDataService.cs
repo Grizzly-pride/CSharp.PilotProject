@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 using PilotProject.Interfaces;
 using System.Text.RegularExpressions;
 using PilotProject.DBContext;
-using static System.Console;
 
 namespace PilotProject.Services
 {
-    internal sealed class RegistrationService : IRegistrationService
+    internal sealed class CheckDataService : ICheckDataService
     {
-        private ApplicationContext db = new();
+        private ApplicationContext _db = new();
         public bool IsUniqueEmailInDB(string email)
         {
-            var users = db.Users.Where(x => x.Email.Equals(email)).ToList();
+            var users = _db.Users.Where(x => x.Email.Equals(email)).ToList();
             return users.Count switch
             {
                 0 => true,
@@ -25,13 +24,27 @@ namespace PilotProject.Services
 
         public bool IsUniqueNameInDB(string name)
         {
-            var users = db.Users.Where(x => x.Name.Equals(name)).ToList();
+            var users = _db.Users.Where(x => x.Name.Equals(name)).ToList();
             return users.Count switch
             {
                 0 => true,
                 _ => false,
             };
         }
+
+        public bool IsValidAddress(string address)
+        {
+            string pattern = @"^(\w|\s)+\s\S+,\s+\d+\s+-\s+\d+$";
+            if (Regex.IsMatch(address, pattern, RegexOptions.IgnoreCase))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 
         public bool IsValidEmail(string email)
         {

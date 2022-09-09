@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PilotProject.Builders;
 using PilotProject.DBContext;
 using PilotProject.FoodMenu;
+using PilotProject.Entities;
 using static System.Console;
 
 
@@ -37,8 +38,7 @@ namespace PilotProject.Pages
         }
 
         public virtual void UpdateMenu()
-        {
-            
+        {           
             WriteLine($"{new String(' ', moveTitle)}~[{TitlePage}]~  user: {Session.GetStatic().GetUserName()}\n");
             selectedItem = menu.RunMenu();
         }
@@ -58,12 +58,5 @@ namespace PilotProject.Pages
         {
 
         }
-
-        /*
-        private Page GetThisValuePageCollection()
-        {
-            return controller.PageCollection.FirstOrDefault(x => x.Value == this).Key;
-        }
-        */
     }
 }

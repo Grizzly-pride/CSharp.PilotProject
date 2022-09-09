@@ -5,13 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PilotProject.Services;
+using static PilotProject.Services.FilePathService;
 
-namespace PilotProject
+
+namespace PilotProject.Entities
 {
     enum Template
     {
         Registration,
-        PlacedOrder
+        OrderPaid,
+        OrderDelivered,
+        OrderCompletion
     }
 
     internal sealed class Letter
@@ -21,10 +25,11 @@ namespace PilotProject
 
         public static Dictionary<Template, string> TemplateLetters = new()
         {
-            [Template.Registration] = @"D:\IT Academy Project\PilotProject\DataJson\TemplateMessages\Registering.json",
-            [Template.PlacedOrder] = @"blablabla"
+            [Template.Registration] = GetPathFile(Folder.TemplateMessages, "Registering.json"),
+            [Template.OrderPaid] = GetPathFile(Folder.TemplateMessages, "OrderPaid.json"),
+            [Template.OrderDelivered] = GetPathFile(Folder.TemplateMessages, "OrderDelivered.json"),
+            [Template.OrderCompletion] = GetPathFile(Folder.TemplateMessages, "OrderCompletion.json")
         };
-
 
 
         public Letter(string theme, string message)

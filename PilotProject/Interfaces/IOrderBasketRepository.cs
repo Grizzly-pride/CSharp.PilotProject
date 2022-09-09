@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PilotProject.Entities;
 using PilotProject.FoodMenu;
 
 namespace PilotProject.Interfaces
 {
-    internal interface IOrderBasketRepository<Tk,Tv> where Tk : Product
+    internal interface IOrderBasketRepository<T1> where T1 : OrderItem
     {
-        Dictionary<Tk,Tv> GetProducts();
-        void AddProduct(Tk product, Tv count);
-        void DeleteProduct(Tk product);
-        void ModifyCountProduct(Tk product, Tv count);
+        List<T1> GetOrderItems();
+        void AddOrderItem(T1 orderItem);
+        void DeleteOrderItem(T1 orderItem);
+        void ModifyCountOrderItem(T1 orderItem, int count);
     }
 }

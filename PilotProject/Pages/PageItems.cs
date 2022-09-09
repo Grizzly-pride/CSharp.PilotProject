@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PilotProject.Entities;
 using static System.Console;
 using PilotProject.Builders;
 using PilotProject.FoodMenu;
@@ -55,10 +56,11 @@ namespace PilotProject.Pages
         {
             WriteText($"How many {product.Name} {product.Category.ToLower()} to add to cart?", 7, 0, ConsoleColor.White);
             WriteText($"Add:", 7, 2, ConsoleColor.Green);
-            int count = EnterNumber(14, 2, true);
 
+            int count = EnterNumber(14, 2, true);
             OrderBasketRepository orderBasket = new();
-            orderBasket.AddProduct(product, count);
+
+            if(count > 0) {orderBasket.AddOrderItem(new(product, count));}
 
             if (product is Pizza pizza)
             {
@@ -66,7 +68,7 @@ namespace PilotProject.Pages
                 {
                     WriteText($"{count} {pizza.Crust.ToLower()} crust pizzas {pizza.Name} size {pizza.Size}сm. have been added to your cart.", 7, 4, ConsoleColor.Blue);
                 }
-                else
+                else if (count == 1)
                 {
                     WriteText($"{count} {pizza.Crust.ToLower()} crust pizza {pizza.Name} size {pizza.Size}сm. have been added to your cart.", 7, 4, ConsoleColor.Blue);
                 }
@@ -77,38 +79,39 @@ namespace PilotProject.Pages
                 {
                     WriteText($"{count} drinks {drink.Name} valume {drink.Volume}l. have been added to your cart.", 7, 4, ConsoleColor.Blue);
                 }
-                else
+                else if (count == 1)
                 {
                     WriteText($"{count} drink {drink.Name} valume {drink.Volume}l. have been added to your cart.", 7, 4, ConsoleColor.Blue);
                 }
             }
 
-            ReadKey();
+            if(count != 0) { ReadKey(); }
         }
 
-        public static void ModifyCountInCart(Product product, int currentCount)
+        public static void ModifyCountInCart(OrderItem orderItem, int currentCount)
         {
-            WriteText($"Modifying the count of {product.Name} {product.Category.ToLower()}s in the cart.", 7, 0, ConsoleColor.White);
+            WriteText($"Modifying the count of {orderItem.Product.Name} {orderItem.Product.Category.ToLower()}s in the cart.", 7, 0, ConsoleColor.White);
             WriteText($"Current count: {currentCount}", 7, 2, ConsoleColor.Green);
             WriteText($"New count:", 7, 3, ConsoleColor.Green);
 
             int count = EnterNumber(18, 3, true);
             OrderBasketRepository orderBasket = new();
-            orderBasket.ModifyCountProduct(product, count);
+
+            if(count > 0) { orderBasket.ModifyCountOrderItem(orderItem, count); }
 
             WriteText($"Count changed successfully.", 7, 5, ConsoleColor.Blue);
             ReadKey();
         }
 
-        public static void RemoveFromCart(Product product)
+        public static void RemoveFromCart(OrderItem orderItem)
         {
-            WriteText($"Are you sure you want to remove the {product.Name} {product.Category.ToLower()} from the cart?", 7, 0, ConsoleColor.White);
+            WriteText($"Are you sure you want to remove the {orderItem.Product.Name} {orderItem.Product.Category.ToLower()} from the cart?", 7, 0, ConsoleColor.White);
 
             if (YesOrNo(7,2))
             {
                 OrderBasketRepository orderBasket = new();
-                orderBasket.DeleteProduct(product);
-                WriteText($"The {product.Category.ToLower()} {product.Name} has been successfully removed from the cart.", 7, 5, ConsoleColor.Blue);
+                orderBasket.DeleteOrderItem(orderItem);
+                WriteText($"The {orderItem.Product.Category.ToLower()} {orderItem.Product.Name} has been successfully removed from the cart.", 7, 5, ConsoleColor.Blue);
                 ReadKey();
             }           
         }

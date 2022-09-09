@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using PilotProject.FoodMenu;
+using PilotProject.Services;
 
-
-namespace PilotProject
+namespace PilotProject.Entities
 {
     enum SessionStatus
     {
@@ -23,28 +23,23 @@ namespace PilotProject
 
         [JsonPropertyName("session id")]
         public Guid SessionId { get; set; }
+
         [JsonPropertyName("session status")]
-        public string? Status { get; set; }
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public SessionStatus Status { get; set; }
+
         [JsonPropertyName("time status change")]
-        public string? Time { get; set; }
+        [JsonConverter(typeof(DateTimeConverterService))]
+        public DateTime Time { get; set; }
+
         [JsonPropertyName("username")]
         public string? UserName { get; set; }
+
         [JsonPropertyName("email")]
         public string? Email { get; set; }
 
-        //-----------------test---------------------------------------------------
-        //private Dictionary<Product, int> _saveOrder;
-        //public List<KeyValuePair<Product, int>> SaveOrder
-        //{
-        //    get { return _saveOrder.ToList(); }
-        //    set { _saveOrder = value.ToDictionary(x => x.Key, x => x.Value); }
-        //}
-        //------------------------------------------------------------------------
-
         public static Session GetStatic() => _Instance;
-
         public string? GetUserName() => IsAuthorization() ? UserName : string.Empty;
-
-        public bool IsAuthorization() => Status == SessionStatus.LogIn.ToString();
+        public bool IsAuthorization() => Status == SessionStatus.LogIn;
     }
 }

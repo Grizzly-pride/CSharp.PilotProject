@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using PilotProject.DBContext;
 using PilotProject.Services;
+using PilotProject.Entities;
 using static System.Console;
 using static PilotProject.Pages.PageItems;
+using static PilotProject.Services.FilePathService;
 
 namespace PilotProject.Pages
 {
@@ -89,13 +91,11 @@ namespace PilotProject.Pages
                 if (user.Name.Equals(_name) && user.Password.Equals(_password))
                 {
                     Session.GetStatic().SessionId = Guid.NewGuid();
-                    Session.GetStatic().Status = SessionStatus.LogIn.ToString();
-                    Session.GetStatic().Time = DateTime.UtcNow.ToString("MM/dd/yyyy HH:mm:ss UTC");
+                    Session.GetStatic().Status = SessionStatus.LogIn;
+                    Session.GetStatic().Time = DateTime.UtcNow;
                     Session.GetStatic().UserName = user.Name;
-                    Session.GetStatic().Email = user.Email;
-                    
-                    SerializerFileService fd = new();
-                    await fd.ObjectToJsonAsync(DataFile.Sessions, Session.GetStatic());
+                    Session.GetStatic().Email = user.Email;                   
+                    await FileService.ObjectToJsonAsync(GetPathFile(Folder.DataJson, "SessionsData.json"), Session.GetStatic());
                     return true;
                 }
             }
