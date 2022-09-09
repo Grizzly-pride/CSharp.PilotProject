@@ -48,8 +48,8 @@ namespace PilotProject.Pages
 
         public override void CreateWindow()
         {
-            moveTitle = 11;
-            menu = new(10, 2, false);
+            //moveTitle = 11;
+            menu = new(menuPosX, menuPosY, false);
             menu.ItemsMenu = new()
             {
                 "Order basket",
@@ -61,10 +61,10 @@ namespace PilotProject.Pages
 
         private void LeaveAccount()
         {
-            Task task = new (async() => await FileService.ObjectToJsonAsync(GetPathFile(Folder.DataJson, "SessionsData.json"), Session.GetStatic()));
+            Task task = new (async() => await FileService.ObjectToJsonAsync(GetPathFile(Folder.DataJson, "SessionsData.json"), Session.Instance));
             task.Start();
-            Session.GetStatic().Time = DateTime.UtcNow;
-            Session.GetStatic().Status = SessionStatus.LogOut;
+            Session.Instance.Time = DateTime.UtcNow;
+            Session.Instance.Status = SessionStatus.LogOut;
             PageItems.WriteText("You are leaving your account.", 11, 7, ConsoleColor.Blue);
             task.Wait();
             ReadKey();  

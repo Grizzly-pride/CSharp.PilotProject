@@ -472,4 +472,614 @@
   "time status change": "09.09.2022 14:51:58 UTC",
   "username": "Alexander",
   "email": "medved1991alexander@gmail.com"
+}{
+  "session id": "7977b10e-5411-417d-8abc-5f189694bb95",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 16:01:09 UTC",
+  "username": "Alexander",
+  "email": "medved1991alexander@gmail.com"
+}{
+  "session id": "7977b10e-5411-417d-8abc-5f189694bb95",
+  "session status": "LogOut",
+  "time status change": "09.09.2022 16:02:20 UTC",
+  "username": "Alexander",
+  "email": "medved1991alexander@gmail.com"
+}{
+  "session id": "055dd8f9-a321-4f8b-8e00-f2816481cb40",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 16:02:44 UTC",
+  "username": "Lerka",
+  "email": "hina-ta@mail.ru"
+}{
+  "session id": "9006e6ff-ee06-4b42-9d1b-b6ac72403acd",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 16:03:46 UTC",
+  "username": "Lerka",
+  "email": "hina-ta@mail.ru"
+}{
+  "session id": "9006e6ff-ee06-4b42-9d1b-b6ac72403acd",
+  "session status": "LogOut",
+  "time status change": "09.09.2022 16:05:43 UTC",
+  "username": "Lerka",
+  "email": "hina-ta@mail.ru"
+}{
+  "session id": "30db47a6-b1df-43be-b01b-90579dc364c0",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 16:08:46 UTC",
+  "username": "Alexander",
+  "email": "medved1991alexander@gmail.com"
+}{
+  "session id": "d6da12fb-5219-4973-aec8-9dbbc2c698a8",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 16:09:22 UTC",
+  "username": "Alexander",
+  "email": "medved1991alexander@gmail.com"
+}{
+  "session id": "5eda315e-1fb5-47b9-b503-522042419895",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 16:18:17 UTC",
+  "username": "Alexander",
+  "email": "medved1991alexander@gmail.com"
+}{
+  "session id": "5eda315e-1fb5-47b9-b503-522042419895",
+  "session status": "LogOut",
+  "time status change": "09.09.2022 16:19:34 UTC",
+  "username": "Alexander",
+  "email": "medved1991alexander@gmail.com"
+}{
+  "session id": "6a1b0f8d-9206-484f-9e60-e8ec9307ae7c",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 16:36:52 UTC",
+  "username": "Alexander",
+  "email": "medved1991alexander@gmail.com"
+}{
+  "ActivaUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "55c4100f-d5fe-442f-b513-e0c0fafe909b",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 16:58:39 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "5389fda6-32a4-44f2-816f-c3a4e082a11b",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 17:26:14 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "b94db2f7-f226-4805-b43e-866012535049",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 17:46:08 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "020c5d93-cfad-4eb5-9358-e96406507d51",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 17:50:12 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "7c6a954f-d1c9-4713-8b8b-7d87aef1e91c",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 18:03:25 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "d104cdce-b72c-47d9-b030-df91d347b595",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 18:26:37 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "86dfc4ad-cdf7-4972-b74d-3ecc4cebae22",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 18:31:36 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "86dfc4ad-cdf7-4972-b74d-3ecc4cebae22",
+  "session status": "LogOut",
+  "time status change": "09.09.2022 18:33:54 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "3ae42776-1d62-4c30-af72-dc7ad3d1e69d",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 19:13:05 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "3ae42776-1d62-4c30-af72-dc7ad3d1e69d",
+  "session status": "LogOut",
+  "time status change": "09.09.2022 19:14:16 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "383e5fc9-448c-45b7-9cdd-0e0de44c70f2",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 19:56:45 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "d2796fbf-7b2e-4ce3-aee6-7b6b5edbcaac",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:08:59 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "dd065092-c2de-4148-9707-410a150df021",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:11:56 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "64e2bab9-270d-471a-a0af-69f3f29af91f",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:13:41 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "413281a8-9a76-493d-a6f7-4aed03775673",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:15:30 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "d7f0b03e-64fe-4706-bd7f-3e8a3fcaebda",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:17:41 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "7e05e2ab-f5ee-45ce-91b2-39361c824057",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:21:58 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "3a07ea27-d4db-4939-ad3c-59fc58315f9b",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:24:54 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "0320603d-0e0c-44ca-a99c-13c5733e0e9f",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:25:30 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "615276b8-833f-4f99-8b29-35d118ae62cf",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:27:16 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "f46793f7-a501-45ff-9ae7-9e4792e8be52",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:28:01 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "ccec85b8-2b6a-4194-85f2-6306d9fba2e7",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:29:44 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "f0c442ee-3120-4480-91ea-8f5e643a2cc2",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:32:36 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "36a6d28a-4ac1-4ee0-923f-500f09219d94",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:33:24 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "4d702be0-cf45-44f9-a570-0ddab5abb416",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:35:18 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "d9693639-42c8-410e-9503-5097c678a062",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:40:50 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "6bd7ddca-7e2b-4981-8491-6620941b75ff",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:45:42 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "84350a51-b9d3-463a-8d68-012045ea67ea",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:49:37 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "7b297e58-0ad9-4616-9066-3ccb861ff1a5",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:52:22 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "f54dd95b-efea-4058-a822-1e08ac0e4913",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:55:24 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "4a10c356-b6e3-422e-9907-5eb4d4634727",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 20:58:05 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "c74d6432-178d-4c46-8870-34f39b25f3d9",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 21:04:17 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "c98d8d79-6f65-47c5-8ba2-04f10a466078",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 21:08:17 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "bb7d6760-33ed-45e8-b188-30ef6103f404",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 21:10:25 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "5ccdbf7b-2fc1-48c0-b3f3-3ce8361769eb",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 21:11:08 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "321d1285-3c38-4ee7-a9b8-c1789fd8c0b2",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 21:12:35 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "8cc16750-2f2a-421a-ad53-cf5bb4888937",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 21:22:18 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "5f1b9cfe-9244-4678-ac90-c8fa2e49395e",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 21:25:58 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "69dd1506-3abe-40b1-a866-047006afa97b",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 21:27:36 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "0d720b2e-84a0-4295-a2e5-6319cdb75b0b",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 21:31:49 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "ed2d92e2-c195-45be-9d59-ed30610ae0e3",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 21:33:26 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "9df20485-ec6a-42ef-bb5b-b1a7917174d3",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 21:38:03 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "bebfac24-12ea-4aa0-8cae-20e1d3de8c54",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 21:47:02 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "00273cdd-838b-40c6-b735-75092f9414de",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 21:48:27 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "ea570152-67fb-46bb-8a69-5a11294da4b5",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 21:58:14 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "0671f035-9824-43e9-b4b7-1ea2c8444ca1",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 22:02:12 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "d0855332-d459-4a4e-b686-2d0d27e5aaab",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 22:12:01 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "ff8f941f-901e-4136-9c45-d115b1143351",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 22:14:21 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "9a745e5d-c67b-4668-b3ea-224e85ce1c9b",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 22:16:37 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "a46887f0-16a5-4751-9240-05d3964d1255",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 22:22:11 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "70b3dc49-d527-40f0-8960-c0bab346eef8",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 22:23:53 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "ca83a9da-2277-4b8c-b842-21f25bab1c06",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 22:24:40 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "4bfc25da-1264-46b4-8e3a-055c78929785",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 22:25:56 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "5f5a5806-beee-4d9d-bebe-90895aa408e5",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 22:27:20 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "76d7a6e8-5c16-4428-9157-faa0b97576cf",
+  "session status": "LogIn",
+  "time status change": "09.09.2022 22:28:53 UTC"
 }

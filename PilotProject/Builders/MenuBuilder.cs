@@ -43,7 +43,7 @@ namespace PilotProject.Builders
             {
                 ConsoleKeyInfo keyInfo = ReadKey(true);
                 ConsoleKey keyPressed = keyInfo.Key;
-
+                
                 if (keyPressed.Equals(ConsoleKey.UpArrow)) // move up
                 {
                     _selectedIndex--;
@@ -91,13 +91,10 @@ namespace PilotProject.Builders
                     pointer = '►';
                 }
 
-                WriteLine($"{pointer}  {ItemsMenu[i]}");
+                Write($"{pointer} {ItemsMenu[i]}");
                 pointer = ' ';
-
                 ResetColor();
-            }
-        
-        }
-        
+            }        
+        }        
     }
 }

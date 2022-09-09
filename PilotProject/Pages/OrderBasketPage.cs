@@ -77,8 +77,8 @@ namespace PilotProject.Pages
             }
             else
             {
-                moveTitle = 11;
-                menu = new(10,2,false);
+                //moveTitle = 11;
+                menu = new(menuPosX, menuPosY, false);
                 menu.ItemsMenu = new()
                 {
                     "Delete",
@@ -94,8 +94,8 @@ namespace PilotProject.Pages
             table.Headers = new string[] {"Product", "Count", "Price" };
             table.ColumnSizes = new int[] {-55, -5, -8 };
 
-            moveTitle = 25;
-            menu = new(1, 2, 3, 3, true);
+            //moveTitle = 25;
+            menu = new(tablePosX, tablePosY, 3, 3, true);
             menu.ItemsMenu = new()
             {
                 table.AddTopLine(),

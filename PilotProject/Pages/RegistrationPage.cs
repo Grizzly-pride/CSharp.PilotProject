@@ -8,7 +8,6 @@ using PilotProject.DBContext;
 using PilotProject.Services;
 using PilotProject.Entities;
 using static System.Console;
-using static PilotProject.Pages.PageItems;
 using static PilotProject.Services.FilePathService;
 
 
@@ -19,6 +18,7 @@ namespace PilotProject.Pages
         private string _name;
         private string _password;
         private string _email;
+        private int _lastLine;
 
         public override string TitlePage => "REGISTRATION";
 
@@ -40,7 +40,7 @@ namespace PilotProject.Pages
 
             for (int i = 0; i < itemsForm.Length; i++)
             {
-                Write($" {itemsForm[i]}: ");
+                PageItems.WriteText($"{itemsForm[i]}: ", menuPosX - 5, menuPosY + i, ConsoleColor.Green);
 
                 switch (i)
                 {
@@ -66,19 +66,18 @@ namespace PilotProject.Pages
                 dataBase.SaveChanges();
                 dataBase.Dispose();
 
-                WriteText("- Registration successful.", 5, 6,  ConsoleColor.Blue);
-                WriteText("- An email has been sent to your mail.", 5, 7, ConsoleColor.Blue);
+                PageItems.WriteText("Registration successful.", menuPosX - 5, 6,  ConsoleColor.Blue);
+                PageItems.WriteText("An email has been sent to your mail.", menuPosX - 5, 7, ConsoleColor.Blue);
                 ReadKey();
                 controller.TransitionToPage(Page.Authorization);                
             }
             else
             {
-                ReadKey();
-                Clear();
+                //ReadKey();
+                //Clear();
+                PageItems.WriteText("Do you want to try again?", menuPosX - 5, _lastLine + 1, ConsoleColor.White);
 
-                WriteText("Do you want to try again?", 5, ConsoleColor.White);
-
-                switch (YesOrNo(10, 2))
+                switch (PageItems.YesOrNo(menuPosX - 7, _lastLine + 3))
                 {
                     case true: Enter(); break;
                     case false: controller.TransitionToPage(Page.Authorization); break;
@@ -88,12 +87,12 @@ namespace PilotProject.Pages
 
         public override void CreateWindow()
         {
-            moveTitle = 11;
+            //moveTitle = 11;
             itemsForm = new string[]
             {
-                ReturnText("Name",5),
-                ReturnText("Email",5),
-                ReturnText("Password",5),
+                "Name",
+                "Email",
+                "Password"
             };
         }
 
@@ -102,40 +101,41 @@ namespace PilotProject.Pages
         private bool CheckData()
         {
             bool isValid = true;
-            int posX = 5;
+            int posX = menuPosX - 5;
             int posY = 6;
             CheckDataService authenticServ = new();
             
             if (!InputChecker(authenticServ.IsUniqueNameInDB, _name))
             {
-                WriteText("- Name taken! Please enter another name.", posX, posY, ConsoleColor.Red);
+                PageItems.WriteText("Name taken! Please enter another name.", posX, posY, ConsoleColor.Red);
                 isValid = false;
                 posY += 1;
             }
             if (!InputChecker(authenticServ.IsUniqueEmailInDB, _email))
             {
-                WriteText("- This email is used another user! Please enter another email.", posX, posY, ConsoleColor.Red);
+                PageItems.WriteText("This email is used another user! Please enter another email.", posX, posY, ConsoleColor.Red);
                 isValid = false;
                 posY += 1;
             }
             if (!InputChecker(authenticServ.IsValidName, _name))
             {
-                WriteText("- Invalid Name! Name not provided.", posX, posY, ConsoleColor.Red);
+                PageItems.WriteText("Invalid Name! Name not provided.", posX, posY, ConsoleColor.Red);
                 isValid = false;
                 posY += 1;
             }
             if (!InputChecker(authenticServ.IsValidEmail, _email))
             {
-                WriteText("- Invalid Email! example@mail.com", posX, posY, ConsoleColor.Red);
+                PageItems.WriteText("Invalid Email! example@mail.com", posX, posY, ConsoleColor.Red);
                 isValid = false;
                 posY += 1;
             }
             if (!InputChecker(authenticServ.IsValidPass, _password))
             {
-                WriteText("- Invalid Password! Password length is less than 7 symbols.", posX, posY, ConsoleColor.Red);
+                PageItems.WriteText("Invalid Password! Password length is less than 7 symbols.", posX, posY, ConsoleColor.Red);
                 isValid = false;
+                posY += 1;
             }
-            
+            _lastLine = posY;            
             return isValid;
         }
 

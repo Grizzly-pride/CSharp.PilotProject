@@ -10,6 +10,7 @@ namespace PilotProject.Builders
     public sealed class NumericBuilder : ControlHandlerBuilder
     {
         public Range ItemsRange { get; set; }
+        private int CleanSpace => ItemsRange.End.Value.ToString().Length;
 
         public NumericBuilder(int posX, int posY, bool quitOn) : base(posX, posY, quitOn)
         {           
@@ -81,8 +82,8 @@ namespace PilotProject.Builders
                 switch (i)
                 {
                     case 0: ForegroundColor = ConsoleColor.Green; WriteLine('▲'); break;
-                    case 1: ForegroundColor = ConsoleColor.Yellow; WriteLine($"{index}{new string(' ', BufferWidth)}"); break;
-                    case 2: ForegroundColor = ConsoleColor.Green; WriteLine('▼'); break;
+                    case 1: ForegroundColor = ConsoleColor.Yellow; WriteLine($"{index}{new string(' ', CleanSpace)}"); break;
+                    case 2: ForegroundColor = ConsoleColor.Green; Write('▼'); break;
                 }
 
             }
@@ -92,7 +93,8 @@ namespace PilotProject.Builders
         {
             SetCursorPosition(_posX, _posY);
             ForegroundColor = ConsoleColor.Green;
-            WriteLine($"{'◄'} {index} {'►'}{new string(' ', BufferWidth)}");
+            Write($"{'◄'} {index} {'►'}{new string(' ', CleanSpace)}");
+
         }      
     }
 }

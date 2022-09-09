@@ -10,8 +10,6 @@ using PilotProject.Builders;
 using PilotProject.Interfaces;
 using PilotProject.Entities;
 using static System.Console;
-using static PilotProject.Pages.PageItems;
-
 
 
 namespace PilotProject.Pages
@@ -62,24 +60,35 @@ namespace PilotProject.Pages
                 {
                     Product addProduct = _filterDrinks.ElementAt(selectedItem);
 
-                    Clear();
-                    WriteText($"Add {addProduct.Name} to cart?", 11, 0, ConsoleColor.White);
+                    //Clear();
+                    //PageItems.WriteText($"Add {addProduct.Name} to cart?", menuPosX, 0, ConsoleColor.White);
 
-                    if (YesOrNo(14, 2))
+                    if (Session.Instance.IsAuthorization())
                     {
-                        if (Session.GetStatic().IsAuthorization())
-                        {
-                            Clear();
-                            AddingToCart(addProduct);
-                        }
-                        else
-                        {
-                            Clear();
-                            WriteText("You must be logged in to add to cart.", 11, 0, ConsoleColor.Red);
-                            WriteText("Press enter to continue.", 15, 2, ConsoleColor.White);
-                            ReadKey();
-                        }
+                        //Clear();
+                        PageItems.AddingToCart(addProduct, 45, selectedItem + tablePosY + 3);
                     }
+                    else
+                    {
+                        PageItems.WriteText("You must be logged in to add to cart!", tablePosX + 2, 3, ConsoleColor.Red);
+                        ReadKey();
+                    }
+
+                    //if (YesOrNo(menuPosX, menuPosY))
+                    //{
+                    //    if (Session.Instance.IsAuthorization())
+                    //    {
+                    //        Clear();
+                    //        AddingToCart(addProduct);
+                    //    }
+                    //    else
+                    //    {
+                    //        Clear();
+                    //        PageItems.WriteText("You must be logged in to add to cart.", menuPosX - 7, 0, ConsoleColor.Red);
+                    //        PageItems.WriteText("Press enter to continue.", menuPosX - 4, 2, ConsoleColor.White);
+                    //        ReadKey();
+                    //    }
+                    //}
                     Enter();
                 }
             }
@@ -112,8 +121,7 @@ namespace PilotProject.Pages
             }
             else
             {
-                moveTitle = 11;
-                menu = new(10, 2, false);
+                menu = new(menuPosX, menuPosY, false);
                 menu.ItemsMenu = new()
                 {
                     "Soda",
@@ -130,10 +138,9 @@ namespace PilotProject.Pages
         {
             table = new(4);
             table.Headers = new string[] { "Name", "Value", "Price", "Category" };
-            table.ColumnSizes = new int[] { -17, -5, -5, -8 };
+            table.ColumnSizes = new int[] { -18, -5, -5, -8 };
 
-            moveTitle = 11;
-            menu = new(1, 2, 3, 1, true);
+            menu = new(tablePosX, tablePosY, 3, 1, true);
             menu.ItemsMenu = new()
             {
                 table.AddTopLine(),

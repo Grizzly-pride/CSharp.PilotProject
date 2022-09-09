@@ -15,7 +15,14 @@ namespace PilotProject.Pages
 {
     internal abstract class BasePage
     {
-        protected int moveTitle;
+        private readonly int _titlePosX;
+        private readonly int _titlePosY;
+        private readonly int _userDataPosX;
+        private readonly int _userDataPosY;
+        protected readonly int menuPosX;
+        protected readonly int menuPosY;
+        protected readonly int tablePosX;
+        protected readonly int tablePosY;
         protected int selectedItem;
         protected string[] itemsForm;
         protected MenuBuilder menu;
@@ -28,6 +35,14 @@ namespace PilotProject.Pages
         public BasePage(PageController controller)
         {
             this.controller = controller;
+            _titlePosX = 20;
+            _titlePosY = 0;
+            _userDataPosX = 41;
+            _userDataPosY = 0;
+            menuPosX = 18;
+            menuPosY = 2;
+            tablePosX = 1;
+            tablePosY = 4;
         }
 
         public virtual void Enter()
@@ -39,13 +54,17 @@ namespace PilotProject.Pages
 
         public virtual void UpdateMenu()
         {           
-            WriteLine($"{new String(' ', moveTitle)}~[{TitlePage}]~  user: {Session.GetStatic().GetUserName()}\n");
+            PageItems.WriteText($"~[{TitlePage}]~", _titlePosX, _titlePosY, ConsoleColor.White);
+            PageItems.WriteText($"user: {Session.Instance.GetUserName()}", _userDataPosX, _userDataPosY, ConsoleColor.Magenta);
+            PageItems.WriteText($"balance: {Session.Instance.GetUserBalance()}$", _userDataPosX, _userDataPosY + 1, ConsoleColor.Magenta);
             selectedItem = menu.RunMenu();
         }
 
         public virtual void UpdateForm()
-        {           
-            WriteLine($"{new String(' ', moveTitle)}~[{TitlePage}]~  user: {Session.GetStatic().GetUserName()}\n");
+        {
+            PageItems.WriteText($"~[{TitlePage}]~", _titlePosX, _titlePosY, ConsoleColor.White);
+            PageItems.WriteText($"user: {Session.Instance.GetUserName()}", _userDataPosX, _userDataPosY, ConsoleColor.Magenta);
+            PageItems.WriteText($"balance: {Session.Instance.GetUserBalance()}$", _userDataPosX, _userDataPosY + 1, ConsoleColor.Magenta);
             ForegroundColor = ConsoleColor.Green;
         }
 

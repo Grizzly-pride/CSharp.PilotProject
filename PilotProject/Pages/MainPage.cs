@@ -22,12 +22,12 @@ namespace PilotProject.Pages
             base.Enter();
 
             
-            if (Session.GetStatic().IsAuthorization() && menu.ItemsMenu.Contains("Authorization"))
+            if (Session.Instance.IsAuthorization() && menu.ItemsMenu.Contains("Authorization"))
             {
                 int index = menu.ItemsMenu.FindIndex(i => i.Equals("Authorization"));
                 menu.ItemsMenu[index] = "My Account";
             }
-            else if(!Session.GetStatic().IsAuthorization() && menu.ItemsMenu.Contains("My Account"))
+            else if(!Session.Instance.IsAuthorization() && menu.ItemsMenu.Contains("My Account"))
             {
                 int index = menu.ItemsMenu.FindIndex(i => i.Equals("My Account"));
                 menu.ItemsMenu[index] = "Authorization";
@@ -42,7 +42,7 @@ namespace PilotProject.Pages
         {
             base.UpdateMenu();
 
-            if (Session.GetStatic().IsAuthorization())
+            if (Session.Instance.IsAuthorization())
             {
                 switch (selectedItem)
                 {
@@ -71,8 +71,8 @@ namespace PilotProject.Pages
 
         public override void CreateWindow()
         {
-            moveTitle = 11;
-            menu = new(10, 2, false);
+            //moveTitle = 11;
+            menu = new(menuPosX, menuPosY, false);
             menu.ItemsMenu = new()
             {
                 "Authorization",

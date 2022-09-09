@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PilotProject.Entities;
 using PilotProject.Services;
 using PilotProject.FoodMenu;
+using static System.Console;
 
 
 
@@ -26,75 +27,75 @@ namespace PilotProject.Pages
         public override void Enter()
         {
             base.Enter();
-
-            if (orderBasket.GetOrderItems().Count.Equals(0))
-            {
-                PageItems.WriteText("Your shopping cart is empty", 11, 0, ConsoleColor.Red);
-                PageItems.WriteText("Press enter to continue.", 12, 2, ConsoleColor.White);
-                Console.ReadKey();
-                controller.TransitionToPage(Page.MyAccount);
-            }
-            else
-            {
-                Console.CursorVisible = true;
-                UpdateForm();
-            }
+            UpdateForm();
         }
 
         public override void UpdateForm()
         {
             base.UpdateForm();
 
-            for (int i = 0; i < itemsForm.Length; i++)
+            if (orderBasket.GetOrderItems().Count.Equals(0))
             {
-                Console.Write($" {itemsForm[i]}: ");
-
-                switch (i)
-                {
-                    case 0: _streat = Console.ReadLine(); break;
-                    case 1: _house = Console.ReadLine(); break;
-                    case 2: _roome = Console.ReadLine(); break;
-                }
-            }
-
-            string fullAddress = $"{_streat} st., {_house} - {_roome}";
-
-            CheckDataService check = new();
-
-            if (check.IsValidAddress(fullAddress))
-            {
-                Order newOrder = new(orderBasket.GetOrderItems(), buyer: Session.GetStatic().UserName, fullAddress);
-
-                Task task = new(async () =>
-                {
-                    await Messenger.SendMessage(Session.GetStatic().Email, new Letter("Your order", GetCheckoutletter(newOrder)));
-                    await FileService.ObjectToJsonAsync(FilePathService.GetPathFile(Folder.Orders, $"Order_{newOrder.Id}.json"), newOrder);
-                });
-                task.Start();
-
-                PageItems.WriteText("Your order is accepted. We sent messages to your email.", posX: 5, posY: 6, ConsoleColor.Blue);
-                Console.ReadKey();
-
-                task.Wait();
-
-                ShippingProcess shipping = new();
-                shipping.DelivMessage += Messenger.SendMessage;
-                Thread Shipping = new(shipping.Run);
-                Shipping.Start();
-
+                PageItems.WriteText("Your shopping cart is empty!", 12, 3, ConsoleColor.Red);
+                PageItems.WriteText("Press enter to continue.", 14, 5, ConsoleColor.White);
+                ReadKey();
                 controller.TransitionToPage(Page.MyAccount);
             }
             else
             {
-                PageItems.WriteText("- Incorrect address!", posX: 5, posY: 6, ConsoleColor.Red);
-                Console.ReadKey();
-                Console.Clear();
-                PageItems.WriteText("Do you want to try again?", 5, ConsoleColor.White);
-
-                switch (PageItems.YesOrNo(10, 2))
+                CursorVisible = true;
+                for (int i = 0; i < itemsForm.Length; i++)
                 {
-                    case true: Enter(); break;
-                    case false: controller.TransitionToPage(Page.MyAccount); break;
+                    PageItems.WriteText($" {itemsForm[i]}: ", menuPosX, menuPosY + i, ConsoleColor.Yellow);
+
+                    switch (i)
+                    {
+                        case 0: _streat = ReadLine(); break;
+                        case 1: _house = ReadLine(); break;
+                        case 2: _roome = ReadLine(); break;
+                    }
+                }
+
+                string fullAddress = $"{_streat} st., {_house} - {_roome}";
+
+                CheckDataService check = new();
+
+                if (check.IsValidAddress(fullAddress))
+                {
+                    Order newOrder = new(orderBasket.GetOrderItems(), buyer: Session.Instance.CurrentUser.Name, fullAddress);
+
+                    Task task = new(async () =>
+                    {
+                        await Messenger.SendMessage(Session.Instance.CurrentUser.Email, new Letter("Your order", GetCheckoutletter(newOrder)));
+                        await FileService.ObjectToJsonAsync(FilePathService.GetPathFile(Folder.Orders, $"Order_{newOrder.Id}.json"), newOrder);
+                    });
+                    task.Start();
+
+                    PageItems.WriteText("Your order is accepted. We sent messages to your email.", posX: 5, posY: 6, ConsoleColor.Blue);
+                    Console.ReadKey();
+
+                    task.Wait();
+
+                    ShippingProcess shipping = new();
+                    shipping.DelivMessage += Messenger.SendMessage;
+                    shipping.UserEmail = Session.Instance.CurrentUser.Email;
+                    Thread Shipping = new(shipping.Run);
+                    Shipping.Start();
+
+                    controller.TransitionToPage(Page.MyAccount);
+                }
+                else
+                {
+                    PageItems.WriteText("- Incorrect address!", posX: 5, posY: 6, ConsoleColor.Red);
+                    Console.ReadKey();
+                    Console.Clear();
+                    PageItems.WriteText("Do you want to try again?", 5, ConsoleColor.White);
+
+                    switch (PageItems.YesOrNo(menuPosX, menuPosY))
+                    {
+                        case true: Enter(); break;
+                        case false: controller.TransitionToPage(Page.MyAccount); break;
+                    }
                 }
             }
         }
@@ -106,12 +107,12 @@ namespace PilotProject.Pages
 
         public override void CreateWindow()
         {
-            moveTitle = 11;
+            //moveTitle = 11;
             itemsForm = new string[]
             {
-                PageItems.ReturnText("Streat", 5),
-                PageItems.ReturnText("Home", 5),
-                PageItems.ReturnText("Room", 5),
+                "Streat",
+                "Home",
+                "Room"
             };
         }
 

@@ -7,7 +7,6 @@ using PilotProject.DBContext;
 using PilotProject.Services;
 using PilotProject.Entities;
 using static System.Console;
-using static PilotProject.Pages.PageItems;
 using static PilotProject.Services.FilePathService;
 
 namespace PilotProject.Pages
@@ -33,7 +32,7 @@ namespace PilotProject.Pages
 
             for (int i = 0; i < itemsForm.Length; i++)
             {
-                Write($" {itemsForm[i]}: ");
+                PageItems.WriteText($"{itemsForm[i]}: ", menuPosX - 5, menuPosY + i, ConsoleColor.Green);
 
                 switch (i)
                 {
@@ -45,19 +44,16 @@ namespace PilotProject.Pages
 
             if (await Authentication())
             {
-                WriteText(" - Successful login", 5, 5, ConsoleColor.Blue);
+                PageItems.WriteText("Successful login", menuPosX - 5, 5, ConsoleColor.Blue);
                 ReadKey();
                 controller.TransitionToPage(Page.Main);
             }
             else
             {
-                WriteText("- Invalid password or username!", 5, 5, ConsoleColor.Red);
-                ReadKey();
-                Clear();
+                PageItems.WriteText("Invalid password or username!", menuPosX - 5, 5, ConsoleColor.Red);
+                PageItems.WriteText("Do you want to try again?", menuPosX - 5, 7, ConsoleColor.White);
 
-                WriteText("Do you want to try again?", 5, 0, ConsoleColor.White);
-
-                switch (YesOrNo(10, 2))
+                switch (PageItems.YesOrNo(menuPosX - 7, 9))
                 {
                     case true: Enter(); break;
                     case false: controller.TransitionToPage(Page.Authorization); break;
@@ -72,30 +68,29 @@ namespace PilotProject.Pages
 
         public override void CreateWindow()
         {
-            moveTitle = 11;
+            //moveTitle = 11;
             itemsForm = new string[]
             {
-                ReturnText("Name", 5),
-                ReturnText("Password", 5),
+                "Name",
+                "Password"
             };
         }
 
         private async Task<bool> Authentication()
         {
             dataBase = new();
-            List<User> users = dataBase.Users.ToList();
+            List<User> users = dataBase.Users.ToList();           
             dataBase.Dispose();
 
             foreach (var user in users)
             {
                 if (user.Name.Equals(_name) && user.Password.Equals(_password))
                 {
-                    Session.GetStatic().SessionId = Guid.NewGuid();
-                    Session.GetStatic().Status = SessionStatus.LogIn;
-                    Session.GetStatic().Time = DateTime.UtcNow;
-                    Session.GetStatic().UserName = user.Name;
-                    Session.GetStatic().Email = user.Email;                   
-                    await FileService.ObjectToJsonAsync(GetPathFile(Folder.DataJson, "SessionsData.json"), Session.GetStatic());
+                    Session.Instance.SessionId = Guid.NewGuid();
+                    Session.Instance.Status = SessionStatus.LogIn;
+                    Session.Instance.Time = DateTime.UtcNow;
+                    Session.Instance.CurrentUser = user;
+                    await FileService.ObjectToJsonAsync(GetPathFile(Folder.DataJson, "SessionsData.json"), Session.Instance);
                     return true;
                 }
             }
