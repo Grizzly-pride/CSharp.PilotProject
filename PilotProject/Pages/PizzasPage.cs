@@ -7,6 +7,7 @@ using PilotProject.DBContext;
 using PilotProject.FoodMenu;
 using PilotProject.Services;
 using PilotProject.Builders;
+using PilotProject.Entities;
 using PilotProject.Interfaces;
 using static System.Console;
 using static PilotProject.Pages.PageItems;
@@ -23,7 +24,7 @@ namespace PilotProject.Pages
         All
     }
 
-    internal sealed class PizzasPage : BasePage, IFilterProduct<Pizza, CategoryPizzas>
+    internal sealed class PizzasPage : BasePage, IFilterOrderItem<Pizza, CategoryPizzas>
     {
         private bool _isShowTable = false;
         private readonly List<Pizza> _pizzas;

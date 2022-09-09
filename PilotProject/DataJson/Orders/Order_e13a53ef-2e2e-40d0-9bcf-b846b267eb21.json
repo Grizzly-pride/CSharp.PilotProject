@@ -1,0 +1,97 @@
+{
+  "order id": "e13a53ef-2e2e-40d0-9bcf-b846b267eb21",
+  "time": "09.07.2022 14:11:43 UTC",
+  "buyer name": "Alexander",
+  "delivery address": "st. 12 Mazurova, apt. 61",
+  "total price": 188.89999999999998,
+  "order list": [
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 45,
+        "Name": "Greek",
+        "Price": 23.6,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 3,
+      "PriceItem": 70.80000000000001
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 49,
+        "Name": "Big Bonanza",
+        "Price": 37.3,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 1,
+      "PriceItem": 37.3
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 57,
+        "Name": "Margherita",
+        "Price": 23.6,
+        "Subcategory": "Veggie"
+      },
+      "CountItem": 1,
+      "PriceItem": 23.6
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 69,
+        "Name": "Alfredo",
+        "Price": 31.7,
+        "Subcategory": "Mushrooms"
+      },
+      "CountItem": 1,
+      "PriceItem": 31.7
+    },
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 59,
+        "Name": "BonAqua",
+        "Price": 1.9,
+        "Subcategory": "Water"
+      },
+      "CountItem": 1,
+      "PriceItem": 1.9
+    },
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 62,
+        "Name": "Red-Bull",
+        "Price": 4.7,
+        "Subcategory": "Energy"
+      },
+      "CountItem": 1,
+      "PriceItem": 4.7
+    },
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 63,
+        "Name": "Burn",
+        "Price": 4.2,
+        "Subcategory": "Energy"
+      },
+      "CountItem": 1,
+      "PriceItem": 4.2
+    },
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 53,
+        "Name": "Rich - multifruit",
+        "Price": 4.9,
+        "Subcategory": "Juice"
+      },
+      "CountItem": 3,
+      "PriceItem": 14.700000000000001
+    }
+  ]
+}

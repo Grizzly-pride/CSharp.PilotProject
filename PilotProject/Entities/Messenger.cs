@@ -7,7 +7,7 @@ using System.Net.Mail;
 using PilotProject.Services;
 using System.Net;
 
-namespace PilotProject
+namespace PilotProject.Entities
 {
     internal static class Messenger
     {
@@ -19,7 +19,6 @@ namespace PilotProject
 
         public static async Task SendMessage(string addressee, Letter letter)
         {
-
             MailSenderService MailSender = new();
             using (SmtpClient smtp = MailSender.CreateSmtp(_SmtpName, _Port))
             {

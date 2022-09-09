@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using PilotProject.FoodMenu;
+using PilotProject.Entities;
+using PilotProject.Services;
+using static PilotProject.Services.FilePathService;
 
 namespace PilotProject.DBContext
 {
     internal sealed class ApplicationContext : DbContext
     {
-        private string _dataBasePath = @"Data Source=D:\IT Academy Project\PilotProject\DataBase\dotnetpizza.db";
-
         public DbSet<User> Users => Set<User>();
         public DbSet<Drink> Drinks => Set<Drink>();
         public DbSet<Pizza> Pizzas => Set<Pizza>();
@@ -24,7 +25,7 @@ namespace PilotProject.DBContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(_dataBasePath);
+            optionsBuilder.UseSqlite($"Data Source={GetPathFile(Folder.DataBase, "dotnetpizza.db")}");
         }
     }
 }

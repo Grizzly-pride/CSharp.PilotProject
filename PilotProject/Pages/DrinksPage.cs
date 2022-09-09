@@ -8,6 +8,7 @@ using PilotProject.FoodMenu;
 using PilotProject.Services;
 using PilotProject.Builders;
 using PilotProject.Interfaces;
+using PilotProject.Entities;
 using static System.Console;
 using static PilotProject.Pages.PageItems;
 
@@ -24,7 +25,7 @@ namespace PilotProject.Pages
         All
     }
 
-    internal sealed class DrinksPage : BasePage, IFilterProduct<Drink, CategoryDrink>
+    internal sealed class DrinksPage : BasePage, IFilterOrderItem<Drink, CategoryDrink>
     {
         private bool _isShowTable = false;
         private readonly List<Drink> _drinks;
@@ -131,7 +132,7 @@ namespace PilotProject.Pages
             table.Headers = new string[] { "Name", "Value", "Price", "Category" };
             table.ColumnSizes = new int[] { -17, -5, -5, -8 };
 
-            moveTitle = 25;
+            moveTitle = 11;
             menu = new(1, 2, 3, 1, true);
             menu.ItemsMenu = new()
             {
@@ -157,7 +158,6 @@ namespace PilotProject.Pages
 
             menu.ItemsMenu.Add(table.AddEndLine());
         }
-
         public IEnumerable<Drink> CategorySearch(CategoryDrink category) => _drinks.Where(drink => drink.Subcategory.Equals(category.ToString(), StringComparison.OrdinalIgnoreCase));
     }
 }

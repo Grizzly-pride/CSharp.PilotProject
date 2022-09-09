@@ -1,0 +1,75 @@
+{
+  "order id": "f792dc15-3b5c-42c7-ad4f-51fc37dae24d",
+  "time": "09.07.2022 08:21:35 UTC",
+  "buyer name": "Alexander",
+  "delivery address": "st. 12 Mazurova, apt. 61",
+  "total price": 363,
+  "order list": [
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 45,
+        "Name": "Greek",
+        "Price": 23.6,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 1,
+      "PriceItem": 23.6
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 47,
+        "Name": "Greek",
+        "Price": 23.6,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 3,
+      "PriceItem": 70.80000000000001
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 56,
+        "Name": "Mexican",
+        "Price": 39.9,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 3,
+      "PriceItem": 119.69999999999999
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 57,
+        "Name": "Margherita",
+        "Price": 23.6,
+        "Subcategory": "Veggie"
+      },
+      "CountItem": 4,
+      "PriceItem": 94.4
+    },
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 53,
+        "Name": "Rich - multifruit",
+        "Price": 4.9,
+        "Subcategory": "Juice"
+      },
+      "CountItem": 4,
+      "PriceItem": 19.6
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 77,
+        "Name": "Meat Delight",
+        "Price": 34.9,
+        "Subcategory": "Meat"
+      },
+      "CountItem": 1,
+      "PriceItem": 34.9
+    }
+  ]
+}

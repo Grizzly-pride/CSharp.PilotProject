@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using static System.Console;
-using PilotProject.Services;
 using PilotProject.DBContext;
+using PilotProject.Services;
+using PilotProject.Entities;
+using static System.Console;
 using static PilotProject.Pages.PageItems;
+using static PilotProject.Services.FilePathService;
+
 
 namespace PilotProject.Pages
 {
@@ -53,17 +56,16 @@ namespace PilotProject.Pages
                 User newUser = new(_name, _email, _password);
 
                 Messenger.SendMessage(_email, Letter.GetTemplateLatter(Template.Registration));
-                
-                //SerializerFileService fd = new();
-                //string time = DateTime.UtcNow.ToString("MM/dd/yyyy HH:mm:ss UTC");
-                //await fd.ObjectToJsonAsync<String>(DataFile.RegistrationUser, time);
-                //await fd.ObjectToJsonAsync<User>(DataFile.RegistrationUser, newUser);
 
-                //dataBase = new();
-                //dataBase.Add(newUser);
-                //dataBase.SaveChanges();
-                //dataBase.Dispose();
-                
+                //string time = DateTime.UtcNow.ToString("MM/dd/yyyy HH:mm:ss UTC");
+                //await FileService.ObjectToJsonAsync<String>(GetPathFile(Folder.DataJson, "SessionsData.json"), time);
+                //await FileService.ObjectToJsonAsync<User>(GetPathFile(Folder.DataJson, "RegistrationUserData.json"), newUser);
+
+                dataBase = new();
+                dataBase.Add(newUser);
+                dataBase.SaveChanges();
+                dataBase.Dispose();
+
                 WriteText("- Registration successful.", 5, 6,  ConsoleColor.Blue);
                 WriteText("- An email has been sent to your mail.", 5, 7, ConsoleColor.Blue);
                 ReadKey();
@@ -95,7 +97,6 @@ namespace PilotProject.Pages
             };
         }
 
-
         private static bool InputChecker(Func<string, bool> checkingValidation, string str) => checkingValidation(str);
 
         private bool CheckData()
@@ -103,7 +104,7 @@ namespace PilotProject.Pages
             bool isValid = true;
             int posX = 5;
             int posY = 6;
-            RegistrationService authenticServ = new();
+            CheckDataService authenticServ = new();
             
             if (!InputChecker(authenticServ.IsUniqueNameInDB, _name))
             {

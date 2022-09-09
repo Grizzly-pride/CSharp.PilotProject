@@ -1,0 +1,20 @@
+{
+  "order id": "e2878397-27c4-4f04-a839-695b8f549341",
+  "time": "09.08.2022 12:45:09 UTC",
+  "buyer name": "Alexander",
+  "delivery address": "Mazurova st., 12 - 61",
+  "total price": 23.6,
+  "order list": [
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 45,
+        "Name": "Greek",
+        "Price": 23.6,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 1,
+      "PriceItem": 23.6
+    }
+  ]
+}
