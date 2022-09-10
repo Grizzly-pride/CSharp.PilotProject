@@ -431,7 +431,7 @@ List<OrderItem> OrderList2 = NewtonFileService.DeserializeFromFile<List<OrderIte
 //};
 
 
-//Main.Run();
+Main.Run();
 
 
 //string address = "Mazur1ova st., 12 - 12";
@@ -443,25 +443,11 @@ List<OrderItem> OrderList2 = NewtonFileService.DeserializeFromFile<List<OrderIte
 
 
 
-Main.Run();
-
-
-//Thread Shipping = new(ShippingProcess.Run);
-//Shipping.Start();
+//Main.Run();
 
 
 
-//class Program
-//{
-//    static void Main()
-//    {
-//        ShippingProcess shipping = new ShippingProcess();
-//        shipping.DelivMessage += DisplayMessage;
-//        shipping.Run();
 
-//        void DisplayMessage(string message) => Console.WriteLine(message);
-//    }
-//}
 
 
 

@@ -5,6 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Console;
 
+public enum Mod
+{
+    Vertical,
+    Horizontal,
+}
+
 namespace PilotProject.Builders
 {
     public sealed class NumericBuilder : ControlHandlerBuilder
@@ -19,15 +25,15 @@ namespace PilotProject.Builders
         public override void ResetSelectIndex() => _selectedIndex = ItemsRange.Start.Value;
 
 
-        public int RunNumeric(bool horizontalArrow)
+        public int RunNumeric(Mod mod)
         {
             ResetSelectIndex();
             bool IsChose = false;
 
-            switch (horizontalArrow)
+            switch (mod)
             {
-                case true: DrawNumericHotizontal(_selectedIndex); break;
-                case false: DrawNumericVertical(_selectedIndex); break;
+                case Mod.Horizontal: DrawNumericHotizontal(_selectedIndex); break;
+                case Mod.Vertical: DrawNumericVertical(_selectedIndex); break;
             }
 
             while (!IsChose)
@@ -35,7 +41,7 @@ namespace PilotProject.Builders
                 ConsoleKeyInfo keyInfo = ReadKey(true);
                 ConsoleKey keyPressed = keyInfo.Key;
 
-                if (keyPressed.Equals(horizontalArrow ? ConsoleKey.RightArrow : ConsoleKey.UpArrow))
+                if (keyPressed.Equals(mod.Equals(Mod.Horizontal) ? ConsoleKey.RightArrow : ConsoleKey.UpArrow))
                 {
                     _selectedIndex++;
 
@@ -45,7 +51,7 @@ namespace PilotProject.Builders
                     }
 
                 }
-                else if (keyPressed.Equals(horizontalArrow ? ConsoleKey.LeftArrow : ConsoleKey.DownArrow))
+                else if (keyPressed.Equals(mod.Equals(Mod.Horizontal) ? ConsoleKey.LeftArrow : ConsoleKey.DownArrow))
                 {
                     _selectedIndex--;
 
@@ -64,10 +70,10 @@ namespace PilotProject.Builders
                     IsChose = true;
                 }
 
-                switch (horizontalArrow)
+                switch (mod)
                 {
-                    case true: DrawNumericHotizontal(_selectedIndex); break;
-                    case false: DrawNumericVertical(_selectedIndex); break;
+                    case Mod.Horizontal: DrawNumericHotizontal(_selectedIndex); break;
+                    case Mod.Vertical: DrawNumericVertical(_selectedIndex); break;
                 }
             }
 

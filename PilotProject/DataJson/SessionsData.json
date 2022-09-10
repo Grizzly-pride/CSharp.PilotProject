@@ -1082,4 +1082,34 @@
   "session id": "76d7a6e8-5c16-4428-9157-faa0b97576cf",
   "session status": "LogIn",
   "time status change": "09.09.2022 22:28:53 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "8b75b7e5-5521-4012-ae3d-5464bd65785a",
+  "session status": "LogIn",
+  "time status change": "09.10.2022 03:43:02 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "bfa2daa3-e2f3-4933-ac54-3a3802d613fa",
+  "session status": "LogIn",
+  "time status change": "09.10.2022 04:10:55 UTC"
+}{
+  "CurrentUser": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  },
+  "session id": "88edbda7-8ba0-4d84-b3c0-3fe1f12a2ed7",
+  "session status": "LogIn",
+  "time status change": "09.10.2022 05:34:34 UTC"
 }

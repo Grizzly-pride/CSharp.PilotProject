@@ -33,12 +33,25 @@ namespace PilotProject.Pages
             ResetColor();
             CursorVisible = false;
 
-            MenuBuilder menu = new(posX, posY, false)
+            TextericBuilder texteric = new(posX, posY, false)
             {
-                ItemsMenu = new(2) { "Yes", "No" }
+                ItemsText = new(2) { "Yes", "No" }
             };
 
-            return menu.RunMenu() == 0;
+            return texteric.RunTexteric() == 0;
+        }
+
+        public static int ChangeOrDelete(int posX, int posY)
+        {
+            ResetColor();
+            CursorVisible = false;
+
+            TextericBuilder texteric = new(posX, posY, true)
+            {
+                ItemsText = new(2) { "change count", "delete" }
+            };
+
+            return texteric.RunTexteric();
         }
 
 
@@ -48,7 +61,7 @@ namespace PilotProject.Pages
             {
                 ItemsRange = new(1, int.MaxValue)
             };
-            return numeric.RunNumeric(false);
+            return numeric.RunNumeric(Mod.Vertical);
         }
 
 
