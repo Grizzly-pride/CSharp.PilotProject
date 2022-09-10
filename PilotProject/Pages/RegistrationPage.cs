@@ -77,7 +77,7 @@ namespace PilotProject.Pages
                 //Clear();
                 PageItems.WriteText("Do you want to try again?", menuPosX - 5, _lastLine + 1, ConsoleColor.White);
 
-                switch (PageItems.YesOrNo(menuPosX - 7, _lastLine + 3))
+                switch (PageItems.YesOrNo(menuPosX + 22, _lastLine))
                 {
                     case true: Enter(); break;
                     case false: controller.TransitionToPage(Page.Authorization); break;

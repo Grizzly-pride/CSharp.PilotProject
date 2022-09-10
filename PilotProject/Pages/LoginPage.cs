@@ -53,7 +53,7 @@ namespace PilotProject.Pages
                 PageItems.WriteText("Invalid password or username!", menuPosX - 5, 5, ConsoleColor.Red);
                 PageItems.WriteText("Do you want to try again?", menuPosX - 5, 7, ConsoleColor.White);
 
-                switch (PageItems.YesOrNo(menuPosX - 7, 9))
+                switch (PageItems.YesOrNo(menuPosX + 22, 6))
                 {
                     case true: Enter(); break;
                     case false: controller.TransitionToPage(Page.Authorization); break;
