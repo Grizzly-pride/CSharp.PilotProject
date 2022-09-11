@@ -1,0 +1,31 @@
+{
+  "order id": "fb142795-5c63-40cb-87e5-b87b4a4f2499",
+  "time": "09.10.2022 19:36:29 UTC",
+  "buyer name": "Alexander",
+  "delivery address": "Mazurova st., 12 - 61",
+  "total price": 328.1,
+  "order list": [
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 45,
+        "Name": "Greek",
+        "Price": 23.6,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 6,
+      "PriceItem": 141.60000000000002
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 49,
+        "Name": "Big Bonanza",
+        "Price": 37.3,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 5,
+      "PriceItem": 186.5
+    }
+  ]
+}

@@ -1,17 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PilotProject.Entities;
-using static System.Console;
+﻿using PilotProject.Entities;
 using PilotProject.Builders;
 using PilotProject.FoodMenu;
+using static System.Console;
+
 
 namespace PilotProject.Pages
 {
+    enum Graphic
+    {
+        Logo,
+        ThanksForWatching,
+        AuthorSlogan
+    }
+
     internal static class PageItems
     {
+        #region Data
+
+        private static string _logo = @"
+                _   _ ______ _______    _____ _
+               | \ | |  ____|__   __|  |  __ (_)             
+               |  \| | |__     | |     | |__) | __________ _ 
+               | . ` |  __|    | |     |  ___/ |_  /_  / _` |
+              _| |\  | |____   | |     | |   | |/ / / / (_| |
+             (_)_| \_|______|  |_|     |_|   |_/___/___\__,_|";
+
+        private static string _finalization = @"
+     ___                      ._                                       
+      |  |_   _. ._  |/  _   _|_  _  ._  \    / _. _|_  _ |_  o ._   _  
+      |  | | (_| | | |\ _\    |  (_) |    \/\/ (_|  |_ (_ | | | | | (_| 
+                                                                     _|";
+
+        private static string _authorSlogan = "Alexander Medved project for IT Academy";
+
+
+        private static Dictionary<Graphic, string> GraficBox = new()
+        {
+            [Graphic.Logo] = _logo,
+            [Graphic.ThanksForWatching] = _finalization,
+            [Graphic.AuthorSlogan] = _authorSlogan
+        };
+        #endregion
+
+        #region Tools
+        public static void CreateGraphic(Graphic graphItem, ConsoleColor color, int posX, int posY)
+        {
+            ForegroundColor = color;
+            SetCursorPosition(posX, posY);
+            WriteLine(GraficBox[graphItem]);
+        }
+
         public static void WriteText(string text, int posX, int posY, ConsoleColor color)
         {
             ForegroundColor = color;
@@ -19,14 +57,11 @@ namespace PilotProject.Pages
             Write(text);
         }
 
-        public static void WriteText(string text, int posX, ConsoleColor color)
+        public static void SpotСleaning(int posX, int posY, int cleaningRange)
         {
-            ForegroundColor = color;
-            Write($"{new string(' ', posX)} {text}");
+            SetCursorPosition(posX, posY);
+            Write(new string(' ', cleaningRange));
         }
-
-        public static string ReturnText(string text, int moveText) => $"{new string(' ', moveText)} {text}";
-
 
         public static bool YesOrNo(int posX, int posY)
         {
@@ -38,7 +73,7 @@ namespace PilotProject.Pages
                 ItemsText = new(2) { "Yes", "No" }
             };
 
-            return texteric.RunTexteric() == 0;
+            return texteric.RunTexteric(Mod.Horizontal) == 0;
         }
 
         public static int ChangeOrDelete(int posX, int posY)
@@ -51,9 +86,8 @@ namespace PilotProject.Pages
                 ItemsText = new(2) { "change count", "delete" }
             };
 
-            return texteric.RunTexteric();
+            return texteric.RunTexteric(Mod.Vertical);
         }
-
 
         public static int EnterNumber(int posX, int posY, bool quit)
         {
@@ -63,108 +97,82 @@ namespace PilotProject.Pages
             };
             return numeric.RunNumeric(Mod.Vertical);
         }
+        #endregion 
 
-
-        public static void AddingToCart(Product product)
+        #region Table methods
+        public static void ModifyCart(OrderItem orderItem, int posX, int posY)
         {
-            WriteText($"How many {product.Name} {product.Category.ToLower()} to add to cart?", 7, 0, ConsoleColor.White);
-            WriteText($"Add:", 7, 2, ConsoleColor.Green);
-
-            int count = EnterNumber(14, 2, true);
             OrderBasketRepository orderBasket = new();
 
-            if (count > 0) { orderBasket.AddOrderItem(new(product, count)); }
+            int result = ChangeOrDelete(posX, posY);
 
-            if (product is Pizza pizza)
+            for (int i = 0; i < 3; i++) //cleaning 3 lines
             {
-                if (count > 1)
-                {
-                    WriteText($"{count} {pizza.Crust.ToLower()} crust pizzas {pizza.Name} size {pizza.Size}сm. have been added to your cart.", 7, 4, ConsoleColor.Blue);
-                }
-                else if (count == 1)
-                {
-                    WriteText($"{count} {pizza.Crust.ToLower()} crust pizza {pizza.Name} size {pizza.Size}сm. have been added to your cart.", 7, 4, ConsoleColor.Blue);
-                }
-            }
-            else if (product is Drink drink)
-            {
-                if (count > 1)
-                {
-                    WriteText($"{count} drinks {drink.Name} valume {drink.Volume}l. have been added to your cart.", 7, 4, ConsoleColor.Blue);
-                }
-                else if (count == 1)
-                {
-                    WriteText($"{count} drink {drink.Name} valume {drink.Volume}l. have been added to your cart.", 7, 4, ConsoleColor.Blue);
-                }
+                SpotСleaning(posX, posY + i, 15);
             }
 
-            if (count != 0) { ReadKey(); }
+            WriteText("new count:", posX, posY + 1, ConsoleColor.Yellow);
+
+            if (result.Equals(0)) //change
+            {
+                int count = EnterNumber(posX + 11, posY, true);
+
+                if (count > 0) { orderBasket.ModifyCountOrderItem(orderItem, count); }
+            }
+            else if (result.Equals(1)) //delete
+            {
+                orderBasket.DeleteOrderItem(orderItem);
+            }
         }
-
 
         public static void AddingToCart(Product product, int posX, int posY)
         {
             CursorVisible = false;
 
-            WriteText($"Add:", posX, posY, ConsoleColor.Green);
+            WriteText($"add:", posX, posY, ConsoleColor.Yellow);
             int count = EnterNumber(posX + 5, posY - 1, true);
 
             OrderBasketRepository orderBasket = new();
-            if (count > 0) { orderBasket.AddOrderItem(new(product, count)); }
+            if (count > 0) { orderBasket.AddOrderItem(new OrderItem(product, count)); }
 
             if (product is Pizza pizza)
             {
                 if (count > 1)
                 {
-                    WriteText($"{count} {pizza.Crust.ToLower()} crust pizzas {pizza.Name} size {pizza.Size}сm. have been added to your cart.", 1, 3, ConsoleColor.Blue);
+                    WriteText($"Added {count} {pizza.Crust.ToLower()} crust pizzas {pizza.Name}" +
+                        $" size {pizza.Size}сm.",
+                        5, 12, ConsoleColor.Blue);
                 }
                 else if (count == 1)
                 {
-                    WriteText($"{count} {pizza.Crust.ToLower()} crust pizza {pizza.Name} size {pizza.Size}сm. have been added to your cart.", 1, 3, ConsoleColor.Blue);
+                    WriteText($"Added {count} {pizza.Crust.ToLower()} crust pizza {pizza.Name}" +
+                        $" size {pizza.Size}сm.",
+                        5, 12, ConsoleColor.Blue);
                 }
             }
             else if (product is Drink drink)
             {
                 if (count > 1)
                 {
-                    WriteText($"{count} drinks {drink.Name} valume {drink.Volume}l. have been added to your cart.", 1, 3, ConsoleColor.Blue);
+                    WriteText($"Added {count} drinks {drink.Name} valume {drink.Volume}l.",
+                        5, 12, ConsoleColor.Blue);
                 }
                 else if (count == 1)
                 {
-                    WriteText($"{count} drink {drink.Name} valume {drink.Volume}l. have been added to your cart.", 1, 3, ConsoleColor.Blue);
+                    WriteText($"Added {count} drink {drink.Name} valume {drink.Volume}l.",
+                        5, 12, ConsoleColor.Blue);
                 }
             }
 
             if (count != 0) { ReadKey(); }
         }
+        #endregion
 
-
-        public static void ModifyCountInCart(OrderItem orderItem, int currentCount)
+        public static void Gratitude()
         {
-            WriteText($"Modifying the count of {orderItem.Product.Name} {orderItem.Product.Category.ToLower()}s in the cart.", 7, 0, ConsoleColor.White);
-            WriteText($"Current count: {currentCount}", 7, 2, ConsoleColor.Green);
-            WriteText($"New count:", 7, 3, ConsoleColor.Green);
-
-            int count = EnterNumber(18, 3, true);
-            OrderBasketRepository orderBasket = new();
-
-            if(count > 0) { orderBasket.ModifyCountOrderItem(orderItem, count); }
-
-            WriteText($"Count changed successfully.", 7, 5, ConsoleColor.Blue);
+            CreateGraphic(Graphic.ThanksForWatching, ConsoleColor.Blue, 0, 17);
+            CreateGraphic(Graphic.AuthorSlogan, ConsoleColor.Blue, 6, 22);
             ReadKey();
-        }
-
-        public static void RemoveFromCart(OrderItem orderItem)
-        {
-            WriteText($"Are you sure you want to remove the {orderItem.Product.Name} {orderItem.Product.Category.ToLower()} from the cart?", 7, 0, ConsoleColor.White);
-
-            if (YesOrNo(7,2))
-            {
-                OrderBasketRepository orderBasket = new();
-                orderBasket.DeleteOrderItem(orderItem);
-                WriteText($"The {orderItem.Product.Category.ToLower()} {orderItem.Product.Name} has been successfully removed from the cart.", 7, 5, ConsoleColor.Blue);
-                ReadKey();
-            }           
         }
     }
 }

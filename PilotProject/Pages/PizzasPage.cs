@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PilotProject.DBContext;
-using PilotProject.FoodMenu;
-using PilotProject.Services;
-using PilotProject.Builders;
+﻿using PilotProject.FoodMenu;
 using PilotProject.Entities;
 using PilotProject.Interfaces;
 using static System.Console;
@@ -25,7 +17,7 @@ namespace PilotProject.Pages
 
     internal sealed class PizzasPage : BasePage, IFilterOrderItem<Pizza, CategoryPizzas>
     {
-        private bool _isShowTable = false;
+        private bool _isUpdateTable = false;
         private readonly List<Pizza> _pizzas;
         private IEnumerable<Pizza> _filterPizzas;
         private CategoryPizzas _filter;
@@ -49,47 +41,33 @@ namespace PilotProject.Pages
         {
             base.UpdateMenu();
 
-            if (_isShowTable)
+            if (_isUpdateTable)
             {
                 if (selectedItem == -1)
                 {
-                    _isShowTable = false;
+                    _isUpdateTable = false;
                     Enter();
                 }
                 else
                 {
                     Product addProduct = _filterPizzas.ElementAt(selectedItem);
 
-                    //Clear();
-                    //WriteText($"Add {addProduct.Name} to cart?", 11, 0, ConsoleColor.White);
-
                     if (Session.Instance.IsAuthorization())
                     {
-                        //Clear();
-                        PageItems.AddingToCart(addProduct, 61, selectedItem + tablePosY + 3);
+                        PageItems.AddingToCart(addProduct,
+                            tablePosX + 62,
+                            selectedItem + tablePosY + 3);
                     }
                     else
                     {
-                        PageItems.WriteText("You must be logged in to add to cart!", tablePosX + 2, 3, ConsoleColor.Red);
+                        PageItems.WriteText("You must be logged in to add to cart!",
+                            tablePosX + 2,
+                            tablePosY - 1,
+                            ConsoleColor.Red);
+
                         ReadKey();
                     }
 
-
-                    //if (YesOrNo(14, 2))
-                    //{
-                    //    if (Session.Instance.IsAuthorization())
-                    //    {
-                    //        Clear();
-                    //        AddingToCart(addProduct);
-                    //    }
-                    //    else
-                    //    {
-                    //        Clear();
-                    //        WriteText("You must be logged in to add to cart.", 11, 0, ConsoleColor.Red);
-                    //        WriteText("Press enter to continue.", 15, 2, ConsoleColor.White);
-                    //        ReadKey();
-                    //    }
-                    //}
                     Enter();
                 }
             }
@@ -104,7 +82,7 @@ namespace PilotProject.Pages
                     case 4: _filter = CategoryPizzas.All; break;
                     case 5: controller.TransitionToPage(Page.Main); break;
                 }
-                _isShowTable = true;
+                _isUpdateTable = true;
                 Enter();
             }
         }
@@ -116,7 +94,7 @@ namespace PilotProject.Pages
 
         public override void CreateWindow()
         {
-            if (_isShowTable)
+            if (_isUpdateTable)
             {
                 CreateTable();
             }
@@ -139,7 +117,7 @@ namespace PilotProject.Pages
         {
             table = new(5);
             table.Headers = new string[] { "Name", "Size/cm", "Crust", "Price", "Category" };
-            table.ColumnSizes = new int[] { -18, -7, -11, -5, -10 };
+            table.ColumnSizes = new int[] { -20, -7, -11, -5, -10 };
 
             menu = new(tablePosX, tablePosY, 3, 1, true);
             menu.ItemsMenu = new()
@@ -167,6 +145,8 @@ namespace PilotProject.Pages
             menu.ItemsMenu.Add(table.AddEndLine());
         }
 
-        public IEnumerable<Pizza> CategorySearch(CategoryPizzas category) => _pizzas.Where(pizza => pizza.Subcategory.Equals(category.ToString(), StringComparison.OrdinalIgnoreCase));
+        public IEnumerable<Pizza> CategorySearch(CategoryPizzas category) =>
+            _pizzas.Where(pizza => pizza.Subcategory
+            .Equals(category.ToString(), StringComparison.OrdinalIgnoreCase));
     }
 }

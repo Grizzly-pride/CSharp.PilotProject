@@ -19,18 +19,23 @@ namespace PilotProject.Builders
         public override void ResetSelectIndex() => _selectedIndex = 0;
 
 
-        public int RunTexteric()
+        public int RunTexteric(Mod mod)
         {
             bool IsChose = false;
             ResetSelectIndex();
-            DrawTexteric(_selectedIndex);
+
+            switch (mod)
+            {
+                case Mod.Vertical: DrawTextericVertical(_selectedIndex); break;
+                case Mod.Horizontal: DrawTextericHotizontal(_selectedIndex); break;
+            }
 
             while (!IsChose)
             {
                 ConsoleKeyInfo keyInfo = ReadKey(true);
                 ConsoleKey keyPressed = keyInfo.Key;
 
-                if (keyPressed.Equals(ConsoleKey.UpArrow))
+                if (keyPressed.Equals(mod.Equals(Mod.Horizontal) ? ConsoleKey.RightArrow : ConsoleKey.UpArrow))
                 {
                     _selectedIndex++;
 
@@ -40,7 +45,7 @@ namespace PilotProject.Builders
                     }
 
                 }
-                else if (keyPressed.Equals(ConsoleKey.DownArrow))
+                else if (keyPressed.Equals(mod.Equals(Mod.Horizontal) ? ConsoleKey.LeftArrow : ConsoleKey.DownArrow))
                 {
                     _selectedIndex--;
 
@@ -59,13 +64,21 @@ namespace PilotProject.Builders
                     IsChose = true;
                 }
 
-                if (_selectedIndex >= 0) { DrawTexteric(_selectedIndex); }
+                if(_selectedIndex >= 0)
+                {
+                    switch (mod)
+                    {
+                        case Mod.Vertical: DrawTextericVertical(_selectedIndex); break;
+                        case Mod.Horizontal: DrawTextericHotizontal(_selectedIndex); break;
+                    }
+                }
+
             }
 
             return _selectedIndex;
         }
 
-        private void DrawTexteric(int index)
+        private void DrawTextericVertical(int index)
         {            
 
             for (int i = 0; i < 3; i++)
@@ -77,8 +90,15 @@ namespace PilotProject.Builders
                     case 1: ForegroundColor = ConsoleColor.Yellow; WriteLine($"{ItemsText[index]}{new string(' ', CleanSpace)}"); break;
                     case 2: ForegroundColor = ConsoleColor.Green; Write('▼'); break;
                 }
-
             }
+        }
+
+        private void DrawTextericHotizontal(int index)
+        {
+            SetCursorPosition(_posX, _posY);
+            ForegroundColor = ConsoleColor.Green;
+            Write($"{'◄'} {ItemsText[index]} {'►'}{new string(' ', CleanSpace)}");
+
         }
     }
 }

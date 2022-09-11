@@ -1,0 +1,31 @@
+{
+  "order id": "abeef538-f9d5-4549-9d0d-a2e51b5dab07",
+  "time": "09.11.2022 22:35:22 UTC",
+  "buyer name": "Alexander",
+  "delivery address": "Mazurova st., 12 - 61",
+  "total price": 49.699999999999996,
+  "order list": [
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 49,
+        "Name": "Big Bonanza",
+        "Price": 37.3,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 1,
+      "PriceItem": 37.3
+    },
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 43,
+        "Name": "Sprite",
+        "Price": 3.1,
+        "Subcategory": "Soda"
+      },
+      "CountItem": 4,
+      "PriceItem": 12.4
+    }
+  ]
+}

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PilotProject.Services
+﻿namespace PilotProject.Services
 {
     enum Folder
     {
@@ -27,7 +21,6 @@ namespace PilotProject.Services
             [Folder.Orders] = Path.Combine(BasePath, "DataJson", "Orders"),
             [Folder.SaveOrderList] = Path.Combine(BasePath, "SaveOrderList"),
             [Folder.TemplateMessages] = Path.Combine(BasePath, "DataJson", "TemplateMessages")
-
         };
 
         public static string GetPathFile(Folder folder, string fileName) => Path.Combine(_listFolders[folder], fileName);

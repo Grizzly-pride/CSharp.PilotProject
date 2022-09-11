@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PilotProject.Entities;
+﻿using PilotProject.Entities;
 using PilotProject.Services;
 using static System.Console;
-using static PilotProject.Services.FilePathService;
 
 
 namespace PilotProject.Pages
@@ -30,8 +24,6 @@ namespace PilotProject.Pages
         {
             base.UpdateMenu();
 
-
-
             switch (selectedItem)
             {
                 case 0: controller.TransitionToPage(Page.OrderBasket); break;
@@ -48,7 +40,6 @@ namespace PilotProject.Pages
 
         public override void CreateWindow()
         {
-            //moveTitle = 11;
             menu = new(menuPosX, menuPosY, false);
             menu.ItemsMenu = new()
             {
@@ -61,12 +52,22 @@ namespace PilotProject.Pages
 
         private void LeaveAccount()
         {
-            Task task = new (async() => await FileService.ObjectToJsonAsync(GetPathFile(Folder.DataJson, "SessionsData.json"), Session.Instance));
+            Task task = new (async() => await
+            FileService.ObjectToJsonAsync
+            (FilePathService.GetPathFile(Folder.DataJson, "SessionsData.json"),
+            Session.Instance));
+
             task.Start();
+
             Session.Instance.Time = DateTime.UtcNow;
             Session.Instance.Status = SessionStatus.LogOut;
-            PageItems.WriteText("You are leaving your account.", 11, 7, ConsoleColor.Blue);
+            PageItems.WriteText("You are leaving your account.",
+                menuPosX - 5,
+                menuPosY + 6,
+                ConsoleColor.Blue);
+
             task.Wait();
+
             ReadKey();  
         }
     }

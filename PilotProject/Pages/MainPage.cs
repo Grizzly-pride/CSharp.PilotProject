@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using PilotProject.Entities;
-using System.Threading.Tasks;
+﻿using PilotProject.Entities;
 using static System.Console;
+
 
 namespace PilotProject.Pages
 {
@@ -33,7 +29,6 @@ namespace PilotProject.Pages
                 menu.ItemsMenu[index] = "Authorization";
             }
             
-
             CursorVisible = false;
             UpdateMenu();
         }
@@ -49,7 +44,7 @@ namespace PilotProject.Pages
                     case 0: controller.TransitionToPage(Page.MyAccount); break;
                     case 1: controller.TransitionToPage(Page.Pizzas); break;
                     case 2: controller.TransitionToPage(Page.Drinks); break;
-                    case 3: Environment.Exit(0); break;
+                    case 3: PageItems.Gratitude(); Environment.Exit(0); break;
                 }
             }
             else
@@ -59,7 +54,7 @@ namespace PilotProject.Pages
                     case 0: controller.TransitionToPage(Page.Authorization); break;
                     case 1: controller.TransitionToPage(Page.Pizzas); break;
                     case 2: controller.TransitionToPage(Page.Drinks); break;
-                    case 3: Environment.Exit(0); break;
+                    case 3: PageItems.Gratitude(); Environment.Exit(0); break;
                 }
             }
         }
@@ -71,7 +66,6 @@ namespace PilotProject.Pages
 
         public override void CreateWindow()
         {
-            //moveTitle = 11;
             menu = new(menuPosX, menuPosY, false);
             menu.ItemsMenu = new()
             {

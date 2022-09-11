@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using PilotProject.FoodMenu;
 using PilotProject.Entities;
 using PilotProject.Services;
-using static PilotProject.Services.FilePathService;
+//using System.Globalization;
 
 namespace PilotProject.DBContext
 {
@@ -25,7 +25,22 @@ namespace PilotProject.DBContext
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite($"Data Source={GetPathFile(Folder.DataBase, "dotnetpizza.db")}");
+            optionsBuilder.UseSqlite($"Data Source={FilePathService.GetPathFile(Folder.DataBase, "dotnetpizza.db")}");
+        }
+
+        public async Task ChangeUserBalance(double changeBalance, int UserId)
+        {
+            string strBalance = string.Format("{0:0.0}", changeBalance).Replace(",", ".");
+            string sqlExpression = $"UPDATE Users SET Balance={strBalance} WHERE Id='{UserId}'";
+
+            using (var connection = new SqliteConnection($"Data Source={FilePathService.GetPathFile(Folder.DataBase, "dotnetpizza.db")}"))
+            {
+                connection.Open();
+
+                SqliteCommand command = new(sqlExpression, connection);
+
+                await command.ExecuteReaderAsync();
+            }       
         }
     }
 }

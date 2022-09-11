@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using PilotProject.FoodMenu;
+﻿using System.Text.Json.Serialization;
 using PilotProject.Services;
+
 
 namespace PilotProject.Entities
 {
@@ -22,32 +15,25 @@ namespace PilotProject.Entities
         private static readonly Session _Instance = new();
         public static Session Instance => _Instance;
 
-        public User? CurrentUser { get; set; }
-
         [JsonPropertyName("session id")]
         public Guid SessionId { get; set; }
 
-        [JsonPropertyName("session status")]
+
         [JsonConverter(typeof(JsonStringEnumConverter))]
+        [JsonPropertyName("session status")]
         public SessionStatus Status { get; set; }
 
-        [JsonPropertyName("time status change")]
+
         [JsonConverter(typeof(DateTimeConverterService))]
+        [JsonPropertyName("time status change")]
         public DateTime Time { get; set; }
 
-        //[JsonPropertyName("username")]
-        //public string? UserName { get; set; }
-
-        //[JsonPropertyName("email")]
-        //public string? Email { get; set; }
-
-        //[JsonIgnore]
-        //public double BalanceUser { get; set; }
-
-        //public string? GetUserName() => IsAuthorization() ? UserName : string.Empty;
+        [JsonPropertyName("user")]
+        public User? CurrentUser { get; set; }  
 
         public string? GetUserName() => IsAuthorization() ? CurrentUser?.Name : new string("login");
-        public string? GetUserBalance() => IsAuthorization() ? CurrentUser?.Balance.ToString() : new string("0");
+        public string? GetUserBalance() => IsAuthorization() ? string.Format("{0:0.0}", CurrentUser?.Balance) : new string("0");
         public bool IsAuthorization() => Status == SessionStatus.LogIn;
+
     }
 }

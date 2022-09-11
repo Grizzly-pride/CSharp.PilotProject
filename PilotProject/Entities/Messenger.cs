@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.Mail;
+﻿using System.Net.Mail;
 using PilotProject.Services;
-using System.Net;
+
 
 namespace PilotProject.Entities
 {
     internal static class Messenger
     {
-        static string _Name = "DotNet Pizza";
-        static string _Email = "dotnetpizza@mail.ru";
-        static string _Password = "mipDMdBya0ZKPdYNfYRL";
-        static string _SmtpName = "smtp.mail.ru";
-        static int _Port = 2525;
+        static readonly string _Name = "DotNet Pizza";
+        static readonly string _Email = "dotnetpizza@mail.ru";
+        static readonly string _Password = "mipDMdBya0ZKPdYNfYRL";
+        static readonly string _SmtpName = "smtp.mail.ru";
+        static readonly int _Port = 2525;
 
         public static async Task SendMessage(string addressee, Letter letter)
         {

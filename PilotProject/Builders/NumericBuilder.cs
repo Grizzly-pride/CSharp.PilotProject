@@ -91,7 +91,6 @@ namespace PilotProject.Builders
                     case 1: ForegroundColor = ConsoleColor.Yellow; WriteLine($"{index}{new string(' ', CleanSpace)}"); break;
                     case 2: ForegroundColor = ConsoleColor.Green; Write('▼'); break;
                 }
-
             }
         }
 

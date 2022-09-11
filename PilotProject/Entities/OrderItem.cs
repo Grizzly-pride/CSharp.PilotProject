@@ -1,9 +1,5 @@
 ﻿using PilotProject.FoodMenu;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace PilotProject.Entities
 {
@@ -15,7 +11,6 @@ namespace PilotProject.Entities
         {
             get { return CountItem * Product.Price; }
         }
-
 
         public OrderItem(Product product, int count)
         {
