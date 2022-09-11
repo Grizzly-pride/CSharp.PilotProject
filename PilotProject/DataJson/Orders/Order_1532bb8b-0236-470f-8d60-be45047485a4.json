@@ -1,0 +1,64 @@
+{
+  "order id": "1532bb8b-0236-470f-8d60-be45047485a4",
+  "time": "09.11.2022 14:15:43 UTC",
+  "buyer name": "Alexander",
+  "delivery address": "Mazurova st., 12 - 61",
+  "total price": 545.4,
+  "order list": [
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 50,
+        "Name": "Big Bonanza",
+        "Price": 53.8,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 6,
+      "PriceItem": 322.79999999999995
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 56,
+        "Name": "Mexican",
+        "Price": 39.9,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 3,
+      "PriceItem": 119.69999999999999
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 69,
+        "Name": "Alfredo",
+        "Price": 31.7,
+        "Subcategory": "Mushrooms"
+      },
+      "CountItem": 3,
+      "PriceItem": 95.1
+    },
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 43,
+        "Name": "Sprite",
+        "Price": 3.1,
+        "Subcategory": "Soda"
+      },
+      "CountItem": 1,
+      "PriceItem": 3.1
+    },
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 62,
+        "Name": "Red-Bull",
+        "Price": 4.7,
+        "Subcategory": "Energy"
+      },
+      "CountItem": 1,
+      "PriceItem": 4.7
+    }
+  ]
+}

@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PilotProject.Builders;
+﻿using PilotProject.Builders;
 using PilotProject.DBContext;
-using PilotProject.FoodMenu;
 using PilotProject.Entities;
 using static System.Console;
-
 
 
 namespace PilotProject.Pages
 {
     internal abstract class BasePage
     {
+        private readonly int _logoPosX;
+        private readonly int _logoPosY;
         private readonly int _titlePosX;
         private readonly int _titlePosY;
         private readonly int _userDataPosX;
@@ -35,14 +30,16 @@ namespace PilotProject.Pages
         public BasePage(PageController controller)
         {
             this.controller = controller;
-            _titlePosX = 20;
-            _titlePosY = 0;
-            _userDataPosX = 41;
-            _userDataPosY = 0;
-            menuPosX = 18;
-            menuPosY = 2;
-            tablePosX = 1;
-            tablePosY = 4;
+            _logoPosX = 0;
+            _logoPosY = 0;
+            _titlePosX = 24;
+            _titlePosY = 9;
+            _userDataPosX = 45;
+            _userDataPosY = 9;
+            menuPosX = 23;
+            menuPosY = 11;
+            tablePosX = 3;
+            tablePosY = 13;
         }
 
         public virtual void Enter()
@@ -53,29 +50,37 @@ namespace PilotProject.Pages
         }
 
         public virtual void UpdateMenu()
-        {           
+        {
+            PageItems.CreateGraphic(Graphic.Logo, ConsoleColor.Magenta, _logoPosX, _logoPosY);
+
+            PageItems.WriteText($"user: {Session.Instance.GetUserName()}",
+                _userDataPosX, _userDataPosY, ConsoleColor.DarkCyan);
+
+            PageItems.WriteText($"balance: {Session.Instance.GetUserBalance()}$",
+                _userDataPosX, _userDataPosY + 1, ConsoleColor.DarkYellow);
+
             PageItems.WriteText($"~[{TitlePage}]~", _titlePosX, _titlePosY, ConsoleColor.White);
-            PageItems.WriteText($"user: {Session.Instance.GetUserName()}", _userDataPosX, _userDataPosY, ConsoleColor.Magenta);
-            PageItems.WriteText($"balance: {Session.Instance.GetUserBalance()}$", _userDataPosX, _userDataPosY + 1, ConsoleColor.Magenta);
+
             selectedItem = menu.RunMenu();
         }
 
         public virtual void UpdateForm()
         {
+            PageItems.CreateGraphic(Graphic.Logo, ConsoleColor.Magenta, _logoPosX, _logoPosY);
+
+            PageItems.WriteText($"user: {Session.Instance.GetUserName()}",
+                _userDataPosX, _userDataPosY, ConsoleColor.DarkCyan);
+
+            PageItems.WriteText($"balance: {Session.Instance.GetUserBalance()}$",
+                _userDataPosX, _userDataPosY + 1, ConsoleColor.DarkYellow);
+           
             PageItems.WriteText($"~[{TitlePage}]~", _titlePosX, _titlePosY, ConsoleColor.White);
-            PageItems.WriteText($"user: {Session.Instance.GetUserName()}", _userDataPosX, _userDataPosY, ConsoleColor.Magenta);
-            PageItems.WriteText($"balance: {Session.Instance.GetUserBalance()}$", _userDataPosX, _userDataPosY + 1, ConsoleColor.Magenta);
+
             ForegroundColor = ConsoleColor.Green;
         }
 
-        public virtual void CreateWindow()
-        {
+        public virtual void CreateWindow() { }
 
-        }
-
-        public virtual void Exit()
-        {
-
-        }
+        public virtual void Exit() { }
     }
 }

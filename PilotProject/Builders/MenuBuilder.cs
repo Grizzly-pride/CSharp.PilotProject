@@ -81,6 +81,7 @@ namespace PilotProject.Builders
         {
             char pointer = ' ';
 
+
             for (int i = 0; i < ItemsMenu.Count; i++)
             {
                 SetCursorPosition(_posX, _posY + i);

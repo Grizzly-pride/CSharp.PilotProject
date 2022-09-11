@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PilotProject.DBContext;
-using PilotProject.Services;
+﻿using PilotProject.Services;
 using PilotProject.Entities;
 using static System.Console;
-using static PilotProject.Services.FilePathService;
+
 
 namespace PilotProject.Pages
 {
@@ -40,20 +34,19 @@ namespace PilotProject.Pages
                     case 1: _password = ReadLine(); break;
                 }
             }
-            WriteLine();
 
             if (await Authentication())
             {
-                PageItems.WriteText("Successful login", menuPosX - 5, 5, ConsoleColor.Blue);
+                PageItems.WriteText("Successful login", menuPosX - 5, menuPosY + 4, ConsoleColor.Blue);
                 ReadKey();
                 controller.TransitionToPage(Page.Main);
             }
             else
             {
-                PageItems.WriteText("Invalid password or username!", menuPosX - 5, 5, ConsoleColor.Red);
-                PageItems.WriteText("Do you want to try again?", menuPosX - 5, 7, ConsoleColor.White);
+                PageItems.WriteText("Invalid password or username!", menuPosX - 5, menuPosY + 4, ConsoleColor.Red);
+                PageItems.WriteText("Do you want to try again?", menuPosX - 5, menuPosY + 6, ConsoleColor.White);
 
-                switch (PageItems.YesOrNo(menuPosX + 22, 6))
+                switch (PageItems.YesOrNo(menuPosX + 22, menuPosY + 6))
                 {
                     case true: Enter(); break;
                     case false: controller.TransitionToPage(Page.Authorization); break;
@@ -61,14 +54,10 @@ namespace PilotProject.Pages
             }
         }
 
-        public override void Exit()
-        {
-
-        }
+        public override void Exit() { }
 
         public override void CreateWindow()
         {
-            //moveTitle = 11;
             itemsForm = new string[]
             {
                 "Name",
@@ -90,7 +79,10 @@ namespace PilotProject.Pages
                     Session.Instance.Status = SessionStatus.LogIn;
                     Session.Instance.Time = DateTime.UtcNow;
                     Session.Instance.CurrentUser = user;
-                    await FileService.ObjectToJsonAsync(GetPathFile(Folder.DataJson, "SessionsData.json"), Session.Instance);
+                    await FileService.ObjectToJsonAsync
+                        (FilePathService.GetPathFile
+                        (Folder.DataJson, "SessionsData.json"),
+                        Session.Instance);
                     return true;
                 }
             }

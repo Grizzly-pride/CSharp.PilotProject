@@ -1,0 +1,53 @@
+{
+  "order id": "3042780d-6a52-41b9-a277-7d896d699f18",
+  "time": "09.11.2022 19:34:19 UTC",
+  "buyer name": "Lerka",
+  "delivery address": "Gintovta st., 36 - 172",
+  "total price": 433,
+  "order list": [
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 45,
+        "Name": "Greek",
+        "Price": 23.6,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 5,
+      "PriceItem": 118
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 48,
+        "Name": "Greek",
+        "Price": 36.3,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 3,
+      "PriceItem": 108.89999999999999
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 51,
+        "Name": "Big Bonanza",
+        "Price": 37.3,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 5,
+      "PriceItem": 186.5
+    },
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 54,
+        "Name": "Rich - cherry",
+        "Price": 4.9,
+        "Subcategory": "Juice"
+      },
+      "CountItem": 4,
+      "PriceItem": 19.6
+    }
+  ]
+}

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PilotProject.Pages
+﻿namespace PilotProject.Pages
 {
     enum Page
     {
@@ -37,7 +31,6 @@ namespace PilotProject.Pages
                 [Page.Pizzas] = new PizzasPage(this),
                 [Page.MyAccount] = new MyAccountPage(this),
                 [Page.OrderNow] = new OrderNowPage(this),
-
             };
         }
 

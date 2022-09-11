@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using PilotProject.DBContext;
-using PilotProject.Services;
+﻿using PilotProject.Services;
 using PilotProject.Entities;
 using static System.Console;
-using static PilotProject.Services.FilePathService;
 
 
 namespace PilotProject.Pages
@@ -55,29 +47,34 @@ namespace PilotProject.Pages
             {                
                 User newUser = new(_name, _email, _password);
 
-                Messenger.SendMessage(_email, Letter.GetTemplateLatter(Template.Registration));
-
-                //string time = DateTime.UtcNow.ToString("MM/dd/yyyy HH:mm:ss UTC");
-                //await FileService.ObjectToJsonAsync<String>(GetPathFile(Folder.DataJson, "SessionsData.json"), time);
-                //await FileService.ObjectToJsonAsync<User>(GetPathFile(Folder.DataJson, "RegistrationUserData.json"), newUser);
+                Task task = new(async () =>
+                await Messenger.SendMessage(_email, Letter.GetTemplateLatter(Template.Registration)));
+                task.Start();
 
                 dataBase = new();
                 dataBase.Add(newUser);
                 dataBase.SaveChanges();
                 dataBase.Dispose();
 
-                PageItems.WriteText("Registration successful.", menuPosX - 5, 6,  ConsoleColor.Blue);
-                PageItems.WriteText("An email has been sent to your mail.", menuPosX - 5, 7, ConsoleColor.Blue);
+                PageItems.WriteText("Registration successful.",
+                    menuPosX - 5, menuPosY + 5,
+                    ConsoleColor.Blue);
+                PageItems.WriteText("An email has been sent to your mail.",
+                    menuPosX - 5, menuPosY + 6,
+                    ConsoleColor.Blue);
+
                 ReadKey();
+
+                task.Wait();
                 controller.TransitionToPage(Page.Authorization);                
             }
             else
             {
-                //ReadKey();
-                //Clear();
-                PageItems.WriteText("Do you want to try again?", menuPosX - 5, _lastLine + 1, ConsoleColor.White);
+                PageItems.WriteText("Do you want to try again?",
+                    menuPosX - 5, _lastLine + 1,
+                    ConsoleColor.White);
 
-                switch (PageItems.YesOrNo(menuPosX + 22, _lastLine))
+                switch (PageItems.YesOrNo(menuPosX + 22, _lastLine + 1))
                 {
                     case true: Enter(); break;
                     case false: controller.TransitionToPage(Page.Authorization); break;
@@ -87,7 +84,6 @@ namespace PilotProject.Pages
 
         public override void CreateWindow()
         {
-            //moveTitle = 11;
             itemsForm = new string[]
             {
                 "Name",
@@ -102,36 +98,51 @@ namespace PilotProject.Pages
         {
             bool isValid = true;
             int posX = menuPosX - 5;
-            int posY = 6;
+            int posY = menuPosY + 5;
             CheckDataService authenticServ = new();
             
             if (!InputChecker(authenticServ.IsUniqueNameInDB, _name))
             {
-                PageItems.WriteText("Name taken! Please enter another name.", posX, posY, ConsoleColor.Red);
+                PageItems.WriteText("Name taken! Please enter another name.",
+                    posX, posY,
+                    ConsoleColor.Red);
+
                 isValid = false;
                 posY += 1;
             }
             if (!InputChecker(authenticServ.IsUniqueEmailInDB, _email))
             {
-                PageItems.WriteText("This email is used another user! Please enter another email.", posX, posY, ConsoleColor.Red);
+                PageItems.WriteText("This email is used another user! Please enter another email.",
+                    posX, posY,
+                    ConsoleColor.Red);
+
                 isValid = false;
                 posY += 1;
             }
             if (!InputChecker(authenticServ.IsValidName, _name))
             {
-                PageItems.WriteText("Invalid Name! Name not provided.", posX, posY, ConsoleColor.Red);
+                PageItems.WriteText("Invalid Name! Name not provided.",
+                    posX, posY,
+                    ConsoleColor.Red);
+
                 isValid = false;
                 posY += 1;
             }
             if (!InputChecker(authenticServ.IsValidEmail, _email))
             {
-                PageItems.WriteText("Invalid Email! example@mail.com", posX, posY, ConsoleColor.Red);
+                PageItems.WriteText("Invalid Email! example@mail.com",
+                    posX, posY,
+                    ConsoleColor.Red);
+
                 isValid = false;
                 posY += 1;
             }
             if (!InputChecker(authenticServ.IsValidPass, _password))
             {
-                PageItems.WriteText("Invalid Password! Password length is less than 7 symbols.", posX, posY, ConsoleColor.Red);
+                PageItems.WriteText("Invalid Password! Password length is less than 7 symbols.",
+                    posX, posY,
+                    ConsoleColor.Red);
+
                 isValid = false;
                 posY += 1;
             }
@@ -139,9 +150,6 @@ namespace PilotProject.Pages
             return isValid;
         }
 
-        public override void Exit()
-        {
-            
-        }
+        public override void Exit() { }
     }
 }

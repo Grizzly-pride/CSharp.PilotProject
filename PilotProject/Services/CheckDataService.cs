@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PilotProject.Interfaces;
+﻿using PilotProject.Interfaces;
 using System.Text.RegularExpressions;
 using PilotProject.DBContext;
+
 
 namespace PilotProject.Services
 {
@@ -44,7 +40,6 @@ namespace PilotProject.Services
                 return false;
             }
         }
-
 
         public bool IsValidEmail(string email)
         {

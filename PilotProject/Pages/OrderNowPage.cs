@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using PilotProject.Entities;
 using PilotProject.Services;
 using PilotProject.FoodMenu;
 using static System.Console;
 
 
-
 namespace PilotProject.Pages
 {
-    internal class OrderNowPage : BasePage
+    internal sealed class OrderNowPage : BasePage
     {
         private string _streat;
         private string _house;
@@ -36,17 +31,26 @@ namespace PilotProject.Pages
 
             if (orderBasket.GetOrderItems().Count.Equals(0))
             {
-                PageItems.WriteText("Your shopping cart is empty!", 12, 3, ConsoleColor.Red);
-                PageItems.WriteText("Press enter to continue.", 14, 5, ConsoleColor.White);
+                PageItems.WriteText("Your shopping cart is empty!",
+                    menuPosX - 5,
+                    menuPosY + 2,
+                    ConsoleColor.Red);
+
+                PageItems.WriteText("Press enter to continue.",
+                    menuPosX - 3,
+                    menuPosY + 4,
+                    ConsoleColor.White);
+
                 ReadKey();
                 controller.TransitionToPage(Page.MyAccount);
             }
             else
             {
                 CursorVisible = true;
+
                 for (int i = 0; i < itemsForm.Length; i++)
                 {
-                    PageItems.WriteText($" {itemsForm[i]}: ", menuPosX, menuPosY + i, ConsoleColor.Yellow);
+                    PageItems.WriteText($" {itemsForm[i]}: ", menuPosX - 5, menuPosY + i, ConsoleColor.Green);
 
                     switch (i)
                     {
@@ -59,39 +63,63 @@ namespace PilotProject.Pages
                 string fullAddress = $"{_streat} st., {_house} - {_roome}";
 
                 CheckDataService check = new();
-
                 if (check.IsValidAddress(fullAddress))
                 {
-                    Order newOrder = new(orderBasket.GetOrderItems(), buyer: Session.Instance.CurrentUser.Name, fullAddress);
+                    User? buyer = Session.Instance.CurrentUser;
+                    Order newOrder = new(orderBasket.GetOrderItems(), buyer.Name, fullAddress);
 
-                    Task task = new(async () =>
+                    Session.Instance.CurrentUser.Notyfication += Messenger.SendMessage;
+                    Task.Run(async () => await Session.Instance.CurrentUser.Pay(newOrder.TotalPrice));
+
+                    if (buyer.Balance >= newOrder.TotalPrice)
                     {
-                        await Messenger.SendMessage(Session.Instance.CurrentUser.Email, new Letter("Your order", GetCheckoutletter(newOrder)));
-                        await FileService.ObjectToJsonAsync(FilePathService.GetPathFile(Folder.Orders, $"Order_{newOrder.Id}.json"), newOrder);
-                    });
-                    task.Start();
+                        Task task = new(async () =>
+                        {                        
+                            await Messenger.SendMessage(buyer.Email, new Letter("Your order", GetCheckoutletter(newOrder)));
+                            await FileService.ObjectToJsonAsync(FilePathService.GetPathFile(Folder.Orders, $"Order_{newOrder.Id}.json"), newOrder);                            
+                        });
+                        task.Start();
 
-                    PageItems.WriteText("Your order is accepted. We sent messages to your email.", posX: 5, posY: 6, ConsoleColor.Blue);
-                    Console.ReadKey();
+                        PageItems.WriteText("Your order is accepted. We sent messages to your email.",
+                            menuPosX - 5,
+                            menuPosY + 5,
+                            ConsoleColor.Blue);
 
-                    task.Wait();
+                        ReadKey();
 
-                    ShippingProcess shipping = new();
-                    shipping.DelivMessage += Messenger.SendMessage;
-                    shipping.UserEmail = Session.Instance.CurrentUser.Email;
-                    Thread Shipping = new(shipping.Run);
-                    Shipping.Start();
+                        task.Wait();
+                        
+                        ShippingProcess shipping = new();
+                        shipping.DelivMessage += Messenger.SendMessage;
+                        shipping.UserEmail = buyer.Email;
+                        Thread ShippThread = new(shipping.Run);
+                        ShippThread.Start();
+                    }
+                    else
+                    {
+                        PageItems.WriteText("Insufficient funds on the account!",
+                            menuPosX - 5,
+                            menuPosY + 5,
+                            ConsoleColor.Red);
+
+                        ReadKey();
+                    }
 
                     controller.TransitionToPage(Page.MyAccount);
                 }
                 else
                 {
-                    PageItems.WriteText("- Incorrect address!", posX: 5, posY: 6, ConsoleColor.Red);
-                    Console.ReadKey();
-                    Console.Clear();
-                    PageItems.WriteText("Do you want to try again?", 5, ConsoleColor.White);
+                    PageItems.WriteText("Incorrect address!",
+                        menuPosX - 5,
+                        menuPosY + 5,
+                        ConsoleColor.Red);
 
-                    switch (PageItems.YesOrNo(menuPosX, menuPosY))
+                    PageItems.WriteText("Do you want to try again?",
+                        menuPosX - 5,
+                        menuPosY + 7,
+                        ConsoleColor.White);
+
+                    switch (PageItems.YesOrNo(menuPosX + 22, menuPosY + 7))
                     {
                         case true: Enter(); break;
                         case false: controller.TransitionToPage(Page.MyAccount); break;
@@ -100,14 +128,10 @@ namespace PilotProject.Pages
             }
         }
 
-        public override void Exit()
-        {
-            base.Exit();
-        }
+        public override void Exit() { }
 
         public override void CreateWindow()
         {
-            //moveTitle = 11;
             itemsForm = new string[]
             {
                 "Streat",
@@ -115,8 +139,7 @@ namespace PilotProject.Pages
                 "Room"
             };
         }
-
-        
+       
         private string GetCheckoutletter(Order order)
         {
             StringBuilder sb = new();
@@ -126,7 +149,7 @@ namespace PilotProject.Pages
 
             sb.Append("<ul> <li>" + $"Order number: {order.Id}" + "</li>");
             sb.Append("<li>" + $"Order time: {order.Time:MM/dd/yyyy HH:mm:ss UTC}" + "</li>");
-            sb.Append("<li>" + $"Payment: cash" + "</li>");
+            sb.Append("<li>" + $"Payment: online" + "</li>");
             sb.Append("<li>" + $"Delivery address: {order.DeliveryAddress}" + "</li> </ul> <br>");
 
             sb.Append("<table border = \"1\">");

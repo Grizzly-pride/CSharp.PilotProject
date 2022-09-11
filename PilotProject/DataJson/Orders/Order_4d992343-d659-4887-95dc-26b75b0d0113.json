@@ -1,0 +1,53 @@
+{
+  "order id": "4d992343-d659-4887-95dc-26b75b0d0113",
+  "time": "09.10.2022 20:25:41 UTC",
+  "buyer name": "Alexander",
+  "delivery address": "Mazurova st., 12 - 61",
+  "total price": 230.7,
+  "order list": [
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 43,
+        "Name": "Sprite",
+        "Price": 3.1,
+        "Subcategory": "Soda"
+      },
+      "CountItem": 4,
+      "PriceItem": 12.4
+    },
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 47,
+        "Name": "Coca-Cola Vanila",
+        "Price": 3.1,
+        "Subcategory": "Soda"
+      },
+      "CountItem": 6,
+      "PriceItem": 18.6
+    },
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 60,
+        "Name": "Frost",
+        "Price": 1.9,
+        "Subcategory": "Water"
+      },
+      "CountItem": 5,
+      "PriceItem": 9.5
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 69,
+        "Name": "Alfredo",
+        "Price": 31.7,
+        "Subcategory": "Mushrooms"
+      },
+      "CountItem": 6,
+      "PriceItem": 190.2
+    }
+  ]
+}

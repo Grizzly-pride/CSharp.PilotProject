@@ -1,0 +1,42 @@
+{
+  "order id": "82ae91df-f2dd-47f6-96b0-f2ea2ec457e0",
+  "time": "09.10.2022 18:44:15 UTC",
+  "buyer name": "Alexander",
+  "delivery address": "Mazurova st., 12 - 61",
+  "total price": 262.1,
+  "order list": [
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 45,
+        "Name": "Greek",
+        "Price": 23.6,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 3,
+      "PriceItem": 70.80000000000001
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 54,
+        "Name": "Mexican",
+        "Price": 39.9,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 4,
+      "PriceItem": 159.6
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 69,
+        "Name": "Alfredo",
+        "Price": 31.7,
+        "Subcategory": "Mushrooms"
+      },
+      "CountItem": 1,
+      "PriceItem": 31.7
+    }
+  ]
+}
