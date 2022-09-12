@@ -34,8 +34,8 @@ namespace PilotProject.Pages
             {
                 if (!_isEmptyTable)
                 {
-                    PageItems.ModifyCart(_orderBasket.GetOrderItems().
-                        ElementAt(selectedItem), tablePosX + 70, selectedItem + tablePosY + 2);
+                    PageItems.ModifyCart(_orderBasket.GetOrderItems()
+                        .ElementAt(selectedItem), tablePosX + 70, selectedItem + tablePosY + 2);
                 }
                 Enter();
             }

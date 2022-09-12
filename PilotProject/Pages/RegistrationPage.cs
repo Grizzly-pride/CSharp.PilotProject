@@ -57,10 +57,12 @@ namespace PilotProject.Pages
                 dataBase.Dispose();
 
                 PageItems.WriteText("Registration successful.",
-                    menuPosX - 5, menuPosY + 5,
+                    menuPosX - 5,
+                    menuPosY + 5,
                     ConsoleColor.Blue);
                 PageItems.WriteText("An email has been sent to your mail.",
-                    menuPosX - 5, menuPosY + 6,
+                    menuPosX - 5,
+                    menuPosY + 6,
                     ConsoleColor.Blue);
 
                 ReadKey();
@@ -71,7 +73,8 @@ namespace PilotProject.Pages
             else
             {
                 PageItems.WriteText("Do you want to try again?",
-                    menuPosX - 5, _lastLine + 1,
+                    menuPosX - 5,
+                    _lastLine + 1,
                     ConsoleColor.White);
 
                 switch (PageItems.YesOrNo(menuPosX + 22, _lastLine + 1))

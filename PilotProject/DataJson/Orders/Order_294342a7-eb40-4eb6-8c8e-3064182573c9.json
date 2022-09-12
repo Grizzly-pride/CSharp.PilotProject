@@ -1,0 +1,75 @@
+{
+  "order id": "294342a7-eb40-4eb6-8c8e-3064182573c9",
+  "time": "09.12.2022 09:18:35 UTC",
+  "buyer name": "Alexander",
+  "delivery address": "23423423 st., 23423 - 234",
+  "total price": 355.8,
+  "order list": [
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 47,
+        "Name": "Coca-Cola Vanila",
+        "Price": 3.1,
+        "Subcategory": "Soda"
+      },
+      "CountItem": 2,
+      "PriceItem": 6.2
+    },
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 52,
+        "Name": "Fanta",
+        "Price": 3.8,
+        "Subcategory": "Soda"
+      },
+      "CountItem": 3,
+      "PriceItem": 11.399999999999999
+    },
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 56,
+        "Name": "Rich - mango",
+        "Price": 4.9,
+        "Subcategory": "Juice"
+      },
+      "CountItem": 5,
+      "PriceItem": 24.5
+    },
+    {
+      "Product": {
+        "Category": "Drink",
+        "Id": 62,
+        "Name": "Red-Bull",
+        "Price": 4.7,
+        "Subcategory": "Energy"
+      },
+      "CountItem": 12,
+      "PriceItem": 56.400000000000006
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 75,
+        "Name": "Ham and Mushrooms",
+        "Price": 23.6,
+        "Subcategory": "Mushrooms"
+      },
+      "CountItem": 3,
+      "PriceItem": 70.80000000000001
+    },
+    {
+      "Product": {
+        "Category": "Pizza",
+        "Id": 51,
+        "Name": "Big Bonanza",
+        "Price": 37.3,
+        "Subcategory": "Spice"
+      },
+      "CountItem": 5,
+      "PriceItem": 186.5
+    }
+  ]
+}

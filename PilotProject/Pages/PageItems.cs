@@ -25,13 +25,14 @@ namespace PilotProject.Pages
               _| |\  | |____   | |     | |   | |/ / / / (_| |
              (_)_| \_|______|  |_|     |_|   |_/___/___\__,_|";
 
-        private static string _finalization = @"
-     ___                      ._                                       
-      |  |_   _. ._  |/  _   _|_  _  ._  \    / _. _|_  _ |_  o ._   _  
-      |  | | (_| | | |\ _\    |  (_) |    \/\/ (_|  |_ (_ | | | | | (_| 
-                                                                     _|";
+        private static string _finalization = @"                                                                            
+ _____ _           _          ___                      _       _   _         
+|_   _| |_ ___ ___| |_ ___   |  _|___ ___    _ _ _ ___| |_ ___| |_|_|___ ___ 
+  | | |   | .'|   | '_|_ -|  |  _| . |  _|  | | | | .'|  _|  _|   | |   | . |
+  |_| |_|_|__,|_|_|_,_|___|  |_| |___|_|    |_____|__,|_| |___|_|_|_|_|_|_  |
+                                                                        |___|";                                                                            
 
-        private static string _authorSlogan = "Alexander Medved project for IT Academy";
+        private static string _authorSlogan = "Project for IT Academy by Alexander Medved";
 
 
         private static Dictionary<Graphic, string> GraficBox = new()
@@ -170,8 +171,10 @@ namespace PilotProject.Pages
 
         public static void Gratitude()
         {
-            CreateGraphic(Graphic.ThanksForWatching, ConsoleColor.Blue, 0, 17);
-            CreateGraphic(Graphic.AuthorSlogan, ConsoleColor.Blue, 6, 22);
+            Clear();
+            CreateGraphic(Graphic.Logo, ConsoleColor.DarkMagenta, 0, 0);
+            CreateGraphic(Graphic.ThanksForWatching, ConsoleColor.Magenta, 0, 9);
+            CreateGraphic(Graphic.AuthorSlogan, ConsoleColor.White, 16, 8);
             ReadKey();
         }
     }

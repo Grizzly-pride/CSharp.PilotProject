@@ -508,4 +508,44 @@
     "Password": "12qwaszx",
     "Balance": 950.3
   }
+}{
+  "session id": "3a3ca52f-4f0b-465b-8d4d-adeadf59a49e",
+  "session status": "LogIn",
+  "time status change": "09.12.2022 09:12:20 UTC",
+  "user": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  }
+}{
+  "session id": "3a3ca52f-4f0b-465b-8d4d-adeadf59a49e",
+  "session status": "LogOut",
+  "time status change": "09.12.2022 09:13:10 UTC",
+  "user": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  }
+}{
+  "session id": "ced0d5ba-fda9-41b6-a76f-bd216fd0ccf2",
+  "session status": "LogIn",
+  "time status change": "09.12.2022 09:13:18 UTC",
+  "user": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 1000
+  }
+}{
+  "session id": "ced0d5ba-fda9-41b6-a76f-bd216fd0ccf2",
+  "session status": "LogOut",
+  "time status change": "09.12.2022 09:20:45 UTC",
+  "user": {
+    "Name": "Alexander",
+    "Email": "medved1991alexander@gmail.com",
+    "Password": "12qwaszx",
+    "Balance": 644.2
+  }
 }
