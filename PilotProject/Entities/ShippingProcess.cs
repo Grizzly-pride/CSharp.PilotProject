@@ -9,10 +9,10 @@
 
         public void Run()
         {
-            Thread.Sleep(60000);
+            Thread.Sleep(30000);
             DelivMessage?.Invoke(UserEmail, Letter.GetTemplateLatter(Template.OrderCompletion));
 
-            Thread.Sleep(60000);
+            Thread.Sleep(30000);
             DelivMessage?.Invoke(UserEmail, Letter.GetTemplateLatter(Template.OrderDelivered));
         }
     }
