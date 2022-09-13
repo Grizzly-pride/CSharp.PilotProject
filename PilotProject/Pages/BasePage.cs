@@ -27,7 +27,7 @@ namespace PilotProject.Pages
 
         public abstract string TitlePage { get; }
         
-        public BasePage(PageController controller)
+        protected BasePage(PageController controller)
         {
             this.controller = controller;
             _logoPosX = 0;

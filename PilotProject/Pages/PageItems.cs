@@ -173,8 +173,9 @@ namespace PilotProject.Pages
         {
             Clear();
             CreateGraphic(Graphic.Logo, ConsoleColor.DarkMagenta, 0, 0);
-            CreateGraphic(Graphic.ThanksForWatching, ConsoleColor.Magenta, 0, 9);
             CreateGraphic(Graphic.AuthorSlogan, ConsoleColor.White, 16, 8);
+            CreateGraphic(Graphic.ThanksForWatching, ConsoleColor.Magenta, 0, 9);
+            ResetColor();
             ReadKey();
         }
     }

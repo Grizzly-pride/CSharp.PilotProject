@@ -134,7 +134,7 @@ namespace PilotProject.Pages
         {
             itemsForm = new string[]
             {
-                "Streat",
+                "Street",
                 "Home",
                 "Room"
             };

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text;
+﻿using System.Text;
 using static System.Console;
 using static System.String;
 using static PilotProject.Extensions.StringExtension;
@@ -77,7 +72,6 @@ namespace PilotProject.Builders
             _sb.Capacity = Math.Abs(_columnSizes.Sum());
         }
 
-        #region Return string
         public string AddHeader()
         {
             _sb.Clear();
@@ -136,51 +130,6 @@ namespace PilotProject.Builders
             _sb.Append(VerticalLine);
             return _sb.ToString();
         }
-        #endregion
-
-        #region Print           
-        public void PrintHeader()
-        {
-            WriteLine(AddTopLine(), "\n");
-
-            for (int head = 0; head < _headers.Length; head++)
-            {
-                string text = head switch
-                {
-                    int i when i == 0 => Concat(VerticalLine, Format("{0," + _columnSizes[head] + "}",
-                    _headers[head].StringCut(Math.Abs(_columnSizes[head]))), VerticalLine),
-
-                    int i when i == _headers.Length -1 => Concat(Format("{0," + _columnSizes[head] + "}",
-                    _headers[head]).StringCut(Math.Abs(_columnSizes[head])), VerticalLine, "\n"),
-
-                    _ => Concat(Format("{0," + _columnSizes[head] + "}",
-                    _headers[head].StringCut(Math.Abs(_columnSizes[head]))), VerticalLine)
-                };
-                Write(text);
-            }
-
-            WriteLine(AddMiddleLine());
-        }
-
-        public void PrintRow(params object[] items)
-        {
-            for (int item = 0; item < items.Length; item++)
-            {
-                string text = item switch
-                {
-                    int i when i == 0 => Concat(VerticalLine, Format("{0," + _columnSizes[item] + "}",
-                    items[item]).StringCut(Math.Abs(_columnSizes[item])), VerticalLine),
-
-                    int i when i == _headers.Length - 1 => Concat(Format("{0," + _columnSizes[item] + "}",
-                    items[item]).StringCut(Math.Abs(_columnSizes[item])), VerticalLine, "\n"),
-
-                    _ => Concat(Format("{0," + _columnSizes[item] + "}",
-                    items[item]).StringCut(Math.Abs(_columnSizes[item])), VerticalLine)
-                };
-                Write(text);
-            }           
-        }
-        #endregion
 
         private string Line(string leftJoint, string midleJoint, string rightJoint)
         {
