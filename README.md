@@ -1,4 +1,5 @@
 # CSharp.PilotProgect
 Final project on course "Base C#". Console application for ordering pizzas and drinks. In the project, I used the state machine pattern. Developed a table constructor and graphical menu tools.
 
-![dotNetPizza](https://user-images.githubusercontent.com/35379801/189976907-f4199169-e995-408f-aba2-4ec6f135ffb4.jpg)
+
+![dotNetPizzaImage](https://user-images.githubusercontent.com/35379801/189980806-1c20f676-5db8-4ae2-a295-756c997ebf7f.jpg)
